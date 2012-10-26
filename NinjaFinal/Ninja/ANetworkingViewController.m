@@ -18,8 +18,8 @@
         // withOwner:self];
         // Custom initialization
         
-        livePlayers = 0;
-        died = FALSE;
+        [AppModel sharedAppModel].livePlayers = 0;
+        [AppModel sharedAppModel].playerHasDied = FALSE;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerLost) name:@"PlayerLost" object:nil];
         for (int i = 0; i < 8; i++) {
             colorAvailability[i] = TRUE;
@@ -69,7 +69,7 @@
 
 - (void)reset
 {
-    died = FALSE;
+    [AppModel sharedAppModel].playerHasDied = FALSE;
     [game dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -81,8 +81,8 @@
 //Only used by servers
 - (void)killPlayer:(unsigned char) index
 {
-    livePlayers--;
-    if (livePlayers == 0) {
+    [AppModel sharedAppModel].livePlayers--;
+    if ([AppModel sharedAppModel].livePlayers == 0) {
         NSLog(@"winner found");
         [self endGame:0];
     }
@@ -99,7 +99,7 @@
 - (void)announceWinner:(int)index
 {
     NSLog(@"announceWinner Method");
-    if (!died) {
+    if (![AppModel sharedAppModel].playerHasDied) {
         
         [game hasWonGame];
     }

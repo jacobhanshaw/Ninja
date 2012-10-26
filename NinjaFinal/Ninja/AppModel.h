@@ -10,9 +10,17 @@
 
 @interface AppModel : NSObject {
     BOOL isServer;
+    
+    int originalPlayers;
+    int livePlayers;
+    
+    BOOL playerHasDied;
 }
 
 @property(readwrite) BOOL isServer;
+@property(readwrite) int originalPlayers;
+@property(readwrite) int livePlayers;
+@property(readwrite) BOOL playerHasDied;
 
 + (AppModel *)sharedAppModel;
 

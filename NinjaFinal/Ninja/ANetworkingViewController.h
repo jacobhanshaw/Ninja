@@ -10,6 +10,7 @@
 #import <GameKit/GameKit.h>
 //#import "ColorSelector.h"
 #import "GameViewController.h"
+#import "AppModel.h"
 
 #define ninjaSessionID @"ninjaBitches"
 #define MAX_PLAYERS 7
@@ -27,8 +28,6 @@ typedef enum packetTypes {
     
     UILabel *clientInstructions;
     
-    int livePlayers;
-    int originalPlayers;
     GKSession *thisSession; //Created in subclass
     NSString *myPeerID; //Created here
     NSMutableArray *peersInGroup; //Created in subclass
@@ -38,7 +37,6 @@ typedef enum packetTypes {
     
     int colorIndex; //Created here
     BOOL playerAlive[8];
-    BOOL died;
     BOOL colorAvailability[8];
     
     UIView *colorPicker, *serverPicker;
