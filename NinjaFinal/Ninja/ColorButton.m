@@ -26,6 +26,7 @@
         self.titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
         self.titleLabel.font = [UIFont systemFontOfSize:12.0];
         self.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
+        [self.layer setCornerRadius:9.0];
         
     }
     return self;
@@ -41,6 +42,7 @@
     CGRect textFrame = CGRectMake(0, (self.frame.size.height-10), self.frame.size.width, 10);
     self.titleLabel.frame = textFrame;
 }
+
 
 
 /*

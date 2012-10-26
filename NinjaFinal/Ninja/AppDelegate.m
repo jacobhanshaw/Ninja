@@ -58,12 +58,10 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    RootViewController *rootViewController = [[RootViewController alloc] init];
-    
     if([self.window respondsToSelector:@selector(setRootViewController:)])
-        [self.window setRootViewController:rootViewController];
+        [self.window setRootViewController:[RootViewController sharedRootViewController]];
     else
-        [self.window addSubview:rootViewController.view];
+        [self.window addSubview:[RootViewController sharedRootViewController].view];
     
     return YES;
 }

@@ -2,58 +2,27 @@
 //  NetworkingViewController.h
 //  Ninja
 //
-//  Created by Transition on 10/20/12.
+//  Created by Jacob Hanshaw on 10/26/12.
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
-#import "ColorSelector.h"
+//#import "ColorSelector.h"
 #import "GameViewController.h"
 
-#define ninjaSessionID @"ninjaBitches"
-#define MAX_PLAYERS 7
+#define ninjaSessionID @"ninjaBitches" //If we plan on making a solid API, shouldn't this be a variable with a timestamp to allow multiple sessions in the same area
+#define MAX_PLAYERS 7 //Same for this
 
 typedef enum packetTypes {
     IveDied = 0,
     GameOver = 1,
     StartGame = 2,
     AssignColor = 3
-    }packetTypes;
+}packetTypes;
 
-@interface NetworkingViewController : UIViewController <GKSessionDelegate>
-
-{
+@interface NetworkingViewController : UIViewController <GKSessionDelegate> {
     
-    UILabel *clientInstructions;
-    
-    int livePlayers;
-    int originalPlayers;
-    GKSession *thisSession; //Created in subclass
-    NSString *myPeerID; //Created here
-    NSMutableArray *peersInGroup; //Created in subclass
-    GKSessionMode myMode; //Created in subclass
-    GameViewController *game;
-    
-    
-    int colorIndex; //Created here
-    BOOL playerAlive[8];
-    BOOL died;
-    BOOL colorAvailability[8];
-    
-    UIView *colorPicker, *serverPicker;
 }
-- (void)receiveData:(NSData *)data fromPeer:(NSString *)peer inSession:(GKSession *)session context:(void *)context;
 
-- (void)sendData:(void *)data;
-- (void)startGame;
-//- (void)selectColor;
-- (void)assignColor:(unsigned char)color;
-- (void)colorSelected:(id)sender;
-- (void)startSelected:(id)sender;
-- (void)initiateGameStart;
-- (void)announceWinner:(int)index;
-- (void)playerLost;//:(int)index;
-- (void)killPlayer:(unsigned char) index;
-- (void)connected;
 @end

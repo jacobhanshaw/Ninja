@@ -86,12 +86,12 @@
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error
 {
-    //FUCK YOU error methods
+    NSLog(@"Session Fail with Error: %@", [error localizedDescription]);
 }
 
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
 {
-    //Code to handle failed connection
+     NSLog(@"Connection with Peer Failed with Error: %@", [error localizedDescription]);
 }
 
 

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppModel.h"
 #import "GameViewController.h"
 #import "NetworkServerViewController.h"
 #import "NetworkClientViewController.h"
+#import "ColorSelector.h"
 
 @interface RootViewController : UIViewController{
     
@@ -24,5 +26,7 @@
 @property(nonatomic) IBOutlet UIButton *find;
 @property(nonatomic) NetworkServerViewController *networkServerController;
 @property(nonatomic) NetworkClientViewController *networkClientController;
+
++ (RootViewController *)sharedRootViewController;
 
 @end
