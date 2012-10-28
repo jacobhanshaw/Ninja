@@ -17,11 +17,6 @@
     
     GKSession *bluetoothSession; //the bluetooth connection session
     
-    NSString *sessionID;         //unique string identifying session
-    NSString *name;              //unique string identifying the individual device within the session
-    GKSessionMode mode;          //GKSessionModeServer, GKSessionModeClient, or GKSessionModePeer
-                                 //which makes this device a server, client, or both
-    
     NSData * dataReceived;        //the data received
     NSString *originOfData;       //the sender of the notification
     GKSession *sessionReceived;   //the bluetooth session that is that has received data
@@ -41,10 +36,6 @@
 }
 
 @property (nonatomic) GKSession *bluetoothSession;
-
-@property (nonatomic) NSString *sessionID;
-@property (nonatomic) NSString *name;
-@property (nonatomic) GKSessionMode mode;
 
 @property (nonatomic) NSData * dataReceived;
 @property (nonatomic) NSString *originOfData;

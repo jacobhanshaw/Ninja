@@ -10,7 +10,7 @@
 
 @implementation BluetoothServices
 
-@synthesize bluetoothSession, sessionID, name, mode, dataReceived, originOfData, sessionReceived, context, peersInGroup, peersInSession;
+@synthesize bluetoothSession, dataReceived, originOfData, sessionReceived, context, peersInGroup, peersInSession;
 
 + (id)sharedBluetoothServices
 {
@@ -24,16 +24,17 @@
 }
 
 
+//SessionID - unique string identifying session
+//Name - unique string identifying the individual device within the session
+//Mode - GKSessionModeServer, GKSessionModeClient, or GKSessionModePeer
+//which makes this device a server, client, or both
+
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext {
     
-    self.mode = inputMode;
-    self.sessionID = inputSessionID;
-    self.name = inputName;
-    
-    peersInSession = [[NSMutableArray alloc] init];
+    self.peersInSession = [[NSMutableArray alloc] init];
     self.peersInGroup = [[NSMutableArray alloc] init];
     
-    self.bluetoothSession = [[GKSession alloc] initWithSessionID:self.sessionID displayName:self.name sessionMode:self.mode];
+    self.bluetoothSession = [[GKSession alloc] initWithSessionID:inputSessionID displayName:inputName sessionMode:inputMode];
     self.bluetoothSession.delegate = self;
     [self.bluetoothSession setDataReceiveHandler:self withContext:inputContext];
     
