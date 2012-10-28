@@ -10,7 +10,7 @@
 
 @implementation BluetoothServices
 
-@synthesize bluetoothSession, receiveData, peer, session, context;
+@synthesize bluetoothSession, sessionID, name, mode, dataReceived, originOfData, sessionReceived, context, peersInGroup, peersInSession;
 
 + (id)sharedBluetoothServices
 {
@@ -20,31 +20,49 @@
         _sharedObject = [[self alloc] init]; // or some other init method
     });
     
-    
-    myMode = GKSessionModeClient;
-    peersInGroup = [[NSMutableArray alloc] init]; //Holds the list of available servers
-    thisSession = [[GKSession alloc] initWithSessionID:ninjaSessionID displayName:myPeerID sessionMode:GKSessionModeClient];
-    thisSession.delegate = self;
-    [thisSession setDataReceiveHandler:self withContext:NULL];
-    
     return _sharedObject;
 }
 
-- (void)sendData:(void *)data
-{
-    NSData *packet = [NSData dataWithBytes:data length:sizeof(unsigned char)];
+
+-(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext {
     
-    [session sendDataToAllPeers:packet withDataMode:GKSendDataReliable error:nil];
+    self.mode = inputMode;
+    self.sessionID = inputSessionID;
+    self.name = inputName;
+    
+    peersInSession = [[NSMutableArray alloc] init];
+    self.peersInGroup = [[NSMutableArray alloc] init];
+    
+    self.bluetoothSession = [[GKSession alloc] initWithSessionID:self.sessionID displayName:self.name sessionMode:self.mode];
+    self.bluetoothSession.delegate = self;
+    [self.bluetoothSession setDataReceiveHandler:self withContext:inputContext];
+    
+    [self.bluetoothSession setAvailable:TRUE]; //don't forget to set to false later
 }
 
-- (void)receiveData:(NSData *)data fromPeer:(NSString *)inputPeer inSession:(GKSession *)inputSession context:(void *)inputContext {
 
-    self.receiveData = data;
-    self.peer = inputPeer;
-    self.session = inputSession;
-    self.context = inputContext;
+
+- (void) sendData:(void *)data toAll:(BOOL)shouldSendToAll
+{
+    NSData *packet = [NSData dataWithBytes:data length:sizeof(unsigned char)];
+    NSError *dataSendingError;
     
-    //BluetoothObject *receivedInformation = [[BluetoothObject alloc] initWithReceiveData:data peer:peer session:inputSession context:context];
+    if(shouldSendToAll){
+    if(![self.bluetoothSession sendDataToAllPeers:packet withDataMode:GKSendDataReliable error:nil])
+        NSLog(@"BluetoothServices: SendingDataToAllPeers Failed with Error Message: %@", [dataSendingError localizedDescription]);
+    }
+    else{
+        if(![self.bluetoothSession sendData: packet toPeers:self.peersInGroup withDataMode:GKSendDataReliable error:nil])
+            NSLog(@"BluetoothServices: SendingDataToAllPeers Failed with Error Message: %@", [dataSendingError localizedDescription]);
+    }
+}
+
+- (void) receiveData:(NSData *)inputData fromPeer:(NSString *)inputPeer inSession:(GKSession *)inputSession context:(void *)inputContext {
+
+    self.dataReceived = inputData;
+    self.originOfData = inputPeer;
+    self.sessionReceived = inputSession;
+    self.context = inputContext;
     
     NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"NewDataReceived" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
@@ -53,7 +71,9 @@
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YOURMEHTODNAMEHERE) name:@"NewDataReceived" object:[BluetoothServices sharedBluetoothServices]];
     
 }
-
-
+/*
+-(NSMutableArray *) getPeersInSession{
+    return peersInSession;
+}*/
 
 @end

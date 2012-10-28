@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define SESSION_ID @"ninja" //PUT YOUR UNIQUE SESSION ID HERE
+#define MAX_PLAYERS 7
+
 @interface AppModel : NSObject {
     BOOL isServer;
     
