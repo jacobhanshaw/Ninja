@@ -1,0 +1,594 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AD21EE621632D849009A9D4F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD21EE611632D849009A9D4F /* GameKit.framework */; };
+		AD7DFE4B1632DB0E00268CE7 /* NetworkClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */; };
+		AD7DFE4C1632DB0E00268CE7 /* ANetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE481632DB0E00268CE7 /* ANetworkingViewController.m */; };
+		AD7DFE4D1632DB0E00268CE7 /* NetworkServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE4A1632DB0E00268CE7 /* NetworkServerViewController.m */; };
+		AD7DFE551632DB7500268CE7 /* ColorSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE541632DB7500268CE7 /* ColorSelector.m */; };
+		AD7DFE6416331A9800268CE7 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD7DFE6316331A9700268CE7 /* RootViewController.xib */; };
+		DDC0018D163CEA410004AC36 /* BluetoothObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC0018C163CEA410004AC36 /* BluetoothObject.m */; };
+		DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F3D163B05DA00D91401 /* BluetoothServices.m */; };
+		DDC47F42163B11C000D91401 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F41163B11C000D91401 /* AppModel.m */; };
+		DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F47163B18EF00D91401 /* NetworkingViewController.m */; };
+		DDC47F4A163B18EF00D91401 /* NetworkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */; };
+		DDCEF7891632556B0003EEB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7881632556B0003EEB2 /* UIKit.framework */; };
+		DDCEF78B1632556B0003EEB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78A1632556B0003EEB2 /* Foundation.framework */; };
+		DDCEF78D1632556B0003EEB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78C1632556B0003EEB2 /* CoreGraphics.framework */; };
+		DDCEF78F1632556B0003EEB2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78E1632556B0003EEB2 /* CoreData.framework */; };
+		DDCEF7951632556B0003EEB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDCEF7931632556B0003EEB2 /* InfoPlist.strings */; };
+		DDCEF7971632556B0003EEB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7961632556B0003EEB2 /* main.m */; };
+		DDCEF79D1632556B0003EEB2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCEF79C1632556B0003EEB2 /* Default.png */; };
+		DDCEF79F1632556B0003EEB2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCEF79E1632556B0003EEB2 /* Default@2x.png */; };
+		DDCEF7A11632556B0003EEB2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCEF7A01632556B0003EEB2 /* Default-568h@2x.png */; };
+		DDCEF7A41632556B0003EEB2 /* Ninja.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7A21632556B0003EEB2 /* Ninja.xcdatamodeld */; };
+		DDCEF7AC1632556C0003EEB2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7AB1632556C0003EEB2 /* SenTestingKit.framework */; };
+		DDCEF7AD1632556C0003EEB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7881632556B0003EEB2 /* UIKit.framework */; };
+		DDCEF7AE1632556C0003EEB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78A1632556B0003EEB2 /* Foundation.framework */; };
+		DDCEF7AF1632556C0003EEB2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78E1632556B0003EEB2 /* CoreData.framework */; };
+		DDCEF7B71632556C0003EEB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDCEF7B51632556C0003EEB2 /* InfoPlist.strings */; };
+		DDCEF7BA1632556C0003EEB2 /* NinjaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7B91632556C0003EEB2 /* NinjaTests.m */; };
+		DDCEF7CA1632559A0003EEB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7C41632559A0003EEB2 /* AppDelegate.m */; };
+		DDCEF7CB1632559A0003EEB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7C41632559A0003EEB2 /* AppDelegate.m */; };
+		DDCEF7D01632559A0003EEB2 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7C91632559A0003EEB2 /* GameViewController.m */; };
+		DDCEF7D11632559A0003EEB2 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7C91632559A0003EEB2 /* GameViewController.m */; };
+		DDCEF7D3163255A60003EEB2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7D2163255A60003EEB2 /* AudioToolbox.framework */; };
+		DDCEF7D6163257B90003EEB2 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7D4163255AC0003EEB2 /* CoreMotion.framework */; };
+		DDCEF7DF163276D60003EEB2 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7DD163276D60003EEB2 /* RootViewController.m */; };
+		DDCEF7EB163296620003EEB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7EA163296620003EEB2 /* AVFoundation.framework */; };
+		DDCEF7F816329BE00003EEB2 /* ColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7F716329BE00003EEB2 /* ColorButton.m */; };
+		DDCEF8041632AC310003EEB2 /* TablePopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF8031632AC310003EEB2 /* TablePopUp.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DDCEF7B01632556C0003EEB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDCEF77B1632556B0003EEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDCEF7831632556B0003EEB2;
+			remoteInfo = Ninja;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AD21EE611632D849009A9D4F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		AD7DFE451632DB0E00268CE7 /* NetworkClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkClientViewController.h; sourceTree = "<group>"; };
+		AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkClientViewController.m; sourceTree = "<group>"; };
+		AD7DFE471632DB0E00268CE7 /* ANetworkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANetworkingViewController.h; sourceTree = "<group>"; };
+		AD7DFE481632DB0E00268CE7 /* ANetworkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANetworkingViewController.m; sourceTree = "<group>"; };
+		AD7DFE491632DB0E00268CE7 /* NetworkServerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkServerViewController.h; sourceTree = "<group>"; };
+		AD7DFE4A1632DB0E00268CE7 /* NetworkServerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkServerViewController.m; sourceTree = "<group>"; };
+		AD7DFE531632DB7500268CE7 /* ColorSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSelector.h; sourceTree = "<group>"; };
+		AD7DFE541632DB7500268CE7 /* ColorSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSelector.m; sourceTree = "<group>"; };
+		AD7DFE6316331A9700268CE7 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		DDC0018B163CEA400004AC36 /* BluetoothObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothObject.h; sourceTree = "<group>"; };
+		DDC0018C163CEA410004AC36 /* BluetoothObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothObject.m; sourceTree = "<group>"; };
+		DDC47F3C163B05DA00D91401 /* BluetoothServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothServices.h; sourceTree = "<group>"; };
+		DDC47F3D163B05DA00D91401 /* BluetoothServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothServices.m; sourceTree = "<group>"; };
+		DDC47F40163B11C000D91401 /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		DDC47F41163B11C000D91401 /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
+		DDC47F46163B18EF00D91401 /* NetworkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingViewController.h; sourceTree = "<group>"; };
+		DDC47F47163B18EF00D91401 /* NetworkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkingViewController.m; sourceTree = "<group>"; };
+		DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkingViewController.xib; sourceTree = "<group>"; };
+		DDCEF7841632556B0003EEB2 /* Ninja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ninja.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDCEF7881632556B0003EEB2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DDCEF78A1632556B0003EEB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DDCEF78C1632556B0003EEB2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DDCEF78E1632556B0003EEB2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		DDCEF7921632556B0003EEB2 /* Ninja-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ninja-Info.plist"; sourceTree = "<group>"; };
+		DDCEF7941632556B0003EEB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DDCEF7961632556B0003EEB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DDCEF7981632556B0003EEB2 /* Ninja-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ninja-Prefix.pch"; sourceTree = "<group>"; };
+		DDCEF79C1632556B0003EEB2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		DDCEF79E1632556B0003EEB2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		DDCEF7A01632556B0003EEB2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DDCEF7A31632556B0003EEB2 /* Ninja.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ninja.xcdatamodel; sourceTree = "<group>"; };
+		DDCEF7AA1632556C0003EEB2 /* NinjaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NinjaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDCEF7AB1632556C0003EEB2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		DDCEF7B41632556C0003EEB2 /* NinjaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NinjaTests-Info.plist"; sourceTree = "<group>"; };
+		DDCEF7B61632556C0003EEB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DDCEF7B81632556C0003EEB2 /* NinjaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NinjaTests.h; sourceTree = "<group>"; };
+		DDCEF7B91632556C0003EEB2 /* NinjaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NinjaTests.m; sourceTree = "<group>"; };
+		DDCEF7C31632559A0003EEB2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DDCEF7C41632559A0003EEB2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DDCEF7C81632559A0003EEB2 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		DDCEF7C91632559A0003EEB2 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		DDCEF7D2163255A60003EEB2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DDCEF7D4163255AC0003EEB2 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		DDCEF7DC163276D60003EEB2 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		DDCEF7DD163276D60003EEB2 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		DDCEF7EA163296620003EEB2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DDCEF7F616329BE00003EEB2 /* ColorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorButton.h; sourceTree = "<group>"; };
+		DDCEF7F716329BE00003EEB2 /* ColorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorButton.m; sourceTree = "<group>"; };
+		DDCEF8021632AC310003EEB2 /* TablePopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TablePopUp.h; sourceTree = "<group>"; };
+		DDCEF8031632AC310003EEB2 /* TablePopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TablePopUp.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DDCEF7811632556B0003EEB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD21EE621632D849009A9D4F /* GameKit.framework in Frameworks */,
+				DDCEF7EB163296620003EEB2 /* AVFoundation.framework in Frameworks */,
+				DDCEF7D6163257B90003EEB2 /* CoreMotion.framework in Frameworks */,
+				DDCEF7D3163255A60003EEB2 /* AudioToolbox.framework in Frameworks */,
+				DDCEF7891632556B0003EEB2 /* UIKit.framework in Frameworks */,
+				DDCEF78B1632556B0003EEB2 /* Foundation.framework in Frameworks */,
+				DDCEF78D1632556B0003EEB2 /* CoreGraphics.framework in Frameworks */,
+				DDCEF78F1632556B0003EEB2 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDCEF7A61632556C0003EEB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDCEF7AC1632556C0003EEB2 /* SenTestingKit.framework in Frameworks */,
+				DDCEF7AD1632556C0003EEB2 /* UIKit.framework in Frameworks */,
+				DDCEF7AE1632556C0003EEB2 /* Foundation.framework in Frameworks */,
+				DDCEF7AF1632556C0003EEB2 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DDC47F43163B130800D91401 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7C31632559A0003EEB2 /* AppDelegate.h */,
+				DDCEF7C41632559A0003EEB2 /* AppDelegate.m */,
+				DDC47F40163B11C000D91401 /* AppModel.h */,
+				DDC47F41163B11C000D91401 /* AppModel.m */,
+				DDC47F3C163B05DA00D91401 /* BluetoothServices.h */,
+				DDC47F3D163B05DA00D91401 /* BluetoothServices.m */,
+				DDC0018B163CEA400004AC36 /* BluetoothObject.h */,
+				DDC0018C163CEA410004AC36 /* BluetoothObject.m */,
+				AD7DFE471632DB0E00268CE7 /* ANetworkingViewController.h */,
+				AD7DFE481632DB0E00268CE7 /* ANetworkingViewController.m */,
+				DDC47F46163B18EF00D91401 /* NetworkingViewController.h */,
+				DDC47F47163B18EF00D91401 /* NetworkingViewController.m */,
+				DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */,
+				AD7DFE451632DB0E00268CE7 /* NetworkClientViewController.h */,
+				AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */,
+				AD7DFE491632DB0E00268CE7 /* NetworkServerViewController.h */,
+				AD7DFE4A1632DB0E00268CE7 /* NetworkServerViewController.m */,
+				DDCEF7DC163276D60003EEB2 /* RootViewController.h */,
+				DDCEF7DD163276D60003EEB2 /* RootViewController.m */,
+				AD7DFE6316331A9700268CE7 /* RootViewController.xib */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		DDC47F44163B131F00D91401 /* Empty Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7F616329BE00003EEB2 /* ColorButton.h */,
+				DDCEF7F716329BE00003EEB2 /* ColorButton.m */,
+				AD7DFE531632DB7500268CE7 /* ColorSelector.h */,
+				AD7DFE541632DB7500268CE7 /* ColorSelector.m */,
+				DDCEF8021632AC310003EEB2 /* TablePopUp.h */,
+				DDCEF8031632AC310003EEB2 /* TablePopUp.m */,
+			);
+			name = "Empty Views";
+			sourceTree = "<group>";
+		};
+		DDC47F45163B135900D91401 /* Game Mode Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7C81632559A0003EEB2 /* GameViewController.h */,
+				DDCEF7C91632559A0003EEB2 /* GameViewController.m */,
+			);
+			name = "Game Mode Views";
+			sourceTree = "<group>";
+		};
+		DDCEF7791632556B0003EEB2 = {
+			isa = PBXGroup;
+			children = (
+				AD21EE611632D849009A9D4F /* GameKit.framework */,
+				DDCEF7EA163296620003EEB2 /* AVFoundation.framework */,
+				DDCEF7D4163255AC0003EEB2 /* CoreMotion.framework */,
+				DDCEF7D2163255A60003EEB2 /* AudioToolbox.framework */,
+				DDCEF7901632556B0003EEB2 /* Ninja */,
+				DDCEF7B21632556C0003EEB2 /* NinjaTests */,
+				DDCEF7871632556B0003EEB2 /* Frameworks */,
+				DDCEF7851632556B0003EEB2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DDCEF7851632556B0003EEB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7841632556B0003EEB2 /* Ninja.app */,
+				DDCEF7AA1632556C0003EEB2 /* NinjaTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DDCEF7871632556B0003EEB2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7881632556B0003EEB2 /* UIKit.framework */,
+				DDCEF78A1632556B0003EEB2 /* Foundation.framework */,
+				DDCEF78C1632556B0003EEB2 /* CoreGraphics.framework */,
+				DDCEF78E1632556B0003EEB2 /* CoreData.framework */,
+				DDCEF7AB1632556C0003EEB2 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DDCEF7901632556B0003EEB2 /* Ninja */ = {
+			isa = PBXGroup;
+			children = (
+				DDC47F43163B130800D91401 /* Core */,
+				DDC47F45163B135900D91401 /* Game Mode Views */,
+				DDC47F44163B131F00D91401 /* Empty Views */,
+				DDCEF7A21632556B0003EEB2 /* Ninja.xcdatamodeld */,
+				DDCEF7911632556B0003EEB2 /* Supporting Files */,
+			);
+			path = Ninja;
+			sourceTree = "<group>";
+		};
+		DDCEF7911632556B0003EEB2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7921632556B0003EEB2 /* Ninja-Info.plist */,
+				DDCEF7931632556B0003EEB2 /* InfoPlist.strings */,
+				DDCEF7961632556B0003EEB2 /* main.m */,
+				DDCEF7981632556B0003EEB2 /* Ninja-Prefix.pch */,
+				DDCEF79C1632556B0003EEB2 /* Default.png */,
+				DDCEF79E1632556B0003EEB2 /* Default@2x.png */,
+				DDCEF7A01632556B0003EEB2 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DDCEF7B21632556C0003EEB2 /* NinjaTests */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7B81632556C0003EEB2 /* NinjaTests.h */,
+				DDCEF7B91632556C0003EEB2 /* NinjaTests.m */,
+				DDCEF7B31632556C0003EEB2 /* Supporting Files */,
+			);
+			path = NinjaTests;
+			sourceTree = "<group>";
+		};
+		DDCEF7B31632556C0003EEB2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7B41632556C0003EEB2 /* NinjaTests-Info.plist */,
+				DDCEF7B51632556C0003EEB2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DDCEF7831632556B0003EEB2 /* Ninja */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDCEF7BD1632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Ninja" */;
+			buildPhases = (
+				DDCEF7801632556B0003EEB2 /* Sources */,
+				DDCEF7811632556B0003EEB2 /* Frameworks */,
+				DDCEF7821632556B0003EEB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ninja;
+			productName = Ninja;
+			productReference = DDCEF7841632556B0003EEB2 /* Ninja.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DDCEF7A91632556C0003EEB2 /* NinjaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDCEF7C01632556C0003EEB2 /* Build configuration list for PBXNativeTarget "NinjaTests" */;
+			buildPhases = (
+				DDCEF7A51632556C0003EEB2 /* Sources */,
+				DDCEF7A61632556C0003EEB2 /* Frameworks */,
+				DDCEF7A71632556C0003EEB2 /* Resources */,
+				DDCEF7A81632556C0003EEB2 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DDCEF7B11632556C0003EEB2 /* PBXTargetDependency */,
+			);
+			name = NinjaTests;
+			productName = NinjaTests;
+			productReference = DDCEF7AA1632556C0003EEB2 /* NinjaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DDCEF77B1632556B0003EEB2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Jacob Hanshaw";
+			};
+			buildConfigurationList = DDCEF77E1632556B0003EEB2 /* Build configuration list for PBXProject "Ninja" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DDCEF7791632556B0003EEB2;
+			productRefGroup = DDCEF7851632556B0003EEB2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DDCEF7831632556B0003EEB2 /* Ninja */,
+				DDCEF7A91632556C0003EEB2 /* NinjaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DDCEF7821632556B0003EEB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDCEF7951632556B0003EEB2 /* InfoPlist.strings in Resources */,
+				DDCEF79D1632556B0003EEB2 /* Default.png in Resources */,
+				DDCEF79F1632556B0003EEB2 /* Default@2x.png in Resources */,
+				DDCEF7A11632556B0003EEB2 /* Default-568h@2x.png in Resources */,
+				AD7DFE6416331A9800268CE7 /* RootViewController.xib in Resources */,
+				DDC47F4A163B18EF00D91401 /* NetworkingViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDCEF7A71632556C0003EEB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDCEF7B71632556C0003EEB2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DDCEF7A81632556C0003EEB2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DDCEF7801632556B0003EEB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDCEF7971632556B0003EEB2 /* main.m in Sources */,
+				DDCEF7A41632556B0003EEB2 /* Ninja.xcdatamodeld in Sources */,
+				DDCEF7CA1632559A0003EEB2 /* AppDelegate.m in Sources */,
+				DDCEF7D01632559A0003EEB2 /* GameViewController.m in Sources */,
+				DDCEF7DF163276D60003EEB2 /* RootViewController.m in Sources */,
+				DDCEF7F816329BE00003EEB2 /* ColorButton.m in Sources */,
+				DDCEF8041632AC310003EEB2 /* TablePopUp.m in Sources */,
+				AD7DFE4B1632DB0E00268CE7 /* NetworkClientViewController.m in Sources */,
+				AD7DFE4C1632DB0E00268CE7 /* ANetworkingViewController.m in Sources */,
+				AD7DFE4D1632DB0E00268CE7 /* NetworkServerViewController.m in Sources */,
+				AD7DFE551632DB7500268CE7 /* ColorSelector.m in Sources */,
+				DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */,
+				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
+				DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */,
+				DDC0018D163CEA410004AC36 /* BluetoothObject.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDCEF7A51632556C0003EEB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDCEF7BA1632556C0003EEB2 /* NinjaTests.m in Sources */,
+				DDCEF7CB1632559A0003EEB2 /* AppDelegate.m in Sources */,
+				DDCEF7D11632559A0003EEB2 /* GameViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DDCEF7B11632556C0003EEB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDCEF7831632556B0003EEB2 /* Ninja */;
+			targetProxy = DDCEF7B01632556C0003EEB2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DDCEF7931632556B0003EEB2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDCEF7941632556B0003EEB2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DDCEF7B51632556C0003EEB2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDCEF7B61632556C0003EEB2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DDCEF7BB1632556C0003EEB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DDCEF7BC1632556C0003EEB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DDCEF7BE1632556C0003EEB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
+				INFOPLIST_FILE = "Ninja/Ninja-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DDCEF7BF1632556C0003EEB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
+				INFOPLIST_FILE = "Ninja/Ninja-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		DDCEF7C11632556C0003EEB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Ninja.app/Ninja";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
+				INFOPLIST_FILE = "NinjaTests/NinjaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		DDCEF7C21632556C0003EEB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Ninja.app/Ninja";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
+				INFOPLIST_FILE = "NinjaTests/NinjaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DDCEF77E1632556B0003EEB2 /* Build configuration list for PBXProject "Ninja" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDCEF7BB1632556C0003EEB2 /* Debug */,
+				DDCEF7BC1632556C0003EEB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDCEF7BD1632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Ninja" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDCEF7BE1632556C0003EEB2 /* Debug */,
+				DDCEF7BF1632556C0003EEB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDCEF7C01632556C0003EEB2 /* Build configuration list for PBXNativeTarget "NinjaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDCEF7C11632556C0003EEB2 /* Debug */,
+				DDCEF7C21632556C0003EEB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DDCEF7A21632556B0003EEB2 /* Ninja.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DDCEF7A31632556B0003EEB2 /* Ninja.xcdatamodel */,
+			);
+			currentVersion = DDCEF7A31632556B0003EEB2 /* Ninja.xcdatamodel */;
+			path = Ninja.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DDCEF77B1632556B0003EEB2 /* Project object */;
+}
