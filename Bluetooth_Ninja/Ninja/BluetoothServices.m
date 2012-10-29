@@ -11,7 +11,7 @@
 @implementation BluetoothServices
 
 @synthesize bluetoothSession, dataReceived, originOfData, sessionReceived, context, peersInGroup;
-// peersInSession;
+//, peersInSession;
 
 + (id)sharedBluetoothSession
 {
@@ -61,11 +61,11 @@
     NSError *dataSendingError;
     
     if(shouldSendToAll){
-    if(![self.bluetoothSession sendDataToAllPeers:packet withDataMode:GKSendDataReliable error:nil])
+    if(![self.bluetoothSession sendDataToAllPeers:packet withDataMode:GKSendDataReliable error:&dataSendingError])
         NSLog(@"BluetoothServices: SendingDataToAllPeers Failed with Error Message: %@", [dataSendingError localizedDescription]);
     }
     else{
-        if(![self.bluetoothSession sendData: packet toPeers:self.peersInGroup withDataMode:GKSendDataReliable error:nil])
+        if(![self.bluetoothSession sendData: packet toPeers:self.peersInGroup withDataMode:GKSendDataReliable error:&dataSendingError])
             NSLog(@"BluetoothServices: SendingDataToAllPeers Failed with Error Message: %@", [dataSendingError localizedDescription]);
     }
 }
@@ -87,7 +87,7 @@
 
 -(NSMutableArray *) getPeersInSession{
     return peersInSession;
-}
+} 
 
 
 #pragma mark GKSessionDelegate Methods
@@ -95,82 +95,49 @@
 // we've gotten a state change in the session
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
     
-    if(state == GKPeerStateDisconnected) {
-        // We've been disconnected from the other peers.
+    if (state == GKPeerStateConnected) {
+        [peersInSession addObject:peerID];
         
-        // Update user alert or throw alert if it isn't already up
-        NSString *message = [NSString stringWithFormat:@"Could not reconnect with %@.", [session displayNameForPeer:peerID]];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lost Connection" message:message delegate:self cancelButtonTitle:@"End Game" otherButtonTitles:nil];
-        [alert show];
+       // unsigned char connect[1];
+       // connect[0] = 5;
         
-        // go back to start mode
-       
+      //  [self updateMembersLabel];
+        
+       // [self sendData:connect];
+    }
+    else if (state == GKPeerStateDisconnected) {
+        [peersInSession removeObject:peerID];
+      //  if ([peersInSession count] < MAX_PLAYERS)
+        //    [self.bluetoothSession setAvailable:TRUE];
     }
 }
 
-#pragma mark GKPeerPickerControllerDelegate Methods
-
--(void)startPicker {
-    GKPeerPickerController *picker = [[GKPeerPickerController alloc] init]; // note: picker is released in various picker delegate methods when picker use is done.
-    picker.delegate = self;
-    [picker show]; // show the Peer Picker
-}
-
-- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker {
-    // Peer Picker automatically dismisses on user cancel. No need to programmatically dismiss.
-    
-    // autorelease the picker.
-    //picker.delegate = nil;
-    
-    //if(self.bluetoothSession) [self invalidateSession];
-}
-
-/*
- *  Note: No need to implement -peerPickerController:didSelectConnectionType: delegate method since this app does not support multiple connection types.
- *      - see reference documentation for this delegate method and the GKPeerPickerController's connectionTypesMask property.
- */
-
-//
-// Provide a custom session that has a custom session ID. This is also an opportunity to provide a session with a custom display name.
-//
-- (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type {
-    if(!self.bluetoothSession){
-        GKSession *defaultSession = [[GKSession alloc] initWithSessionID:definedSessionID displayName:nil sessionMode:GKSessionModePeer];
-        self.bluetoothSession = defaultSession;
-        peersInSession = [[NSMutableArray alloc] init];
-        self.peersInGroup = [[NSMutableArray alloc] init];
-        
-        self.bluetoothSession.delegate = self;
-        [self.bluetoothSession setDataReceiveHandler:self withContext:nil];
-        
-        [self.bluetoothSession setAvailable:TRUE]; //don't forget to set to false later
+//Should have more logic, prompt user?
+- (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
+{
+    //Called when a client tries to connect to a server
+    if (![peersInSession containsObject:peerID]) {
+        NSError *acceptConnectionError;
+        if(![self.bluetoothSession acceptConnectionFromPeer:peerID error:&acceptConnectionError])
+            NSLog(@"Session Fail with Error: %@", [acceptConnectionError localizedDescription]);
+     //   if ([peersInSession count] == MAX_PLAYERS) {
+      //      [thisSession setAvailable:FALSE];
+       // }
     }
-    return self.bluetoothSession; // peer picker retains a reference, so autorelease ours so we don't leak.
-}
-
-- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session {
-    
-    [peersInSession addObject:peerID];
-    
-    // Done with the Peer Picker so dismiss it.
-    //[picker dismiss];
-    
-}
-
-#pragma mark -
-#pragma mark UIAlertViewDelegate Methods
-
-// Called when an alert button is tapped.
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    // 0 index is "End Game" button
-    if(buttonIndex == 0) {
-        //Reattempt to Connect
+    else {
+        [self.bluetoothSession denyConnectionFromPeer:peerID];
     }
 }
 
+- (void)session:(GKSession *)session didFailWithError:(NSError *)error
+{
+    NSLog(@"Session Fail with Error: %@", [error localizedDescription]);
+}
 
-
-
+- (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
+{
+    NSLog(@"Connection with Peer Failed with Error: %@", [error localizedDescription]);
+}
 
 
 @end

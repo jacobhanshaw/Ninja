@@ -6,6 +6,13 @@
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
+#import <GameKit/GameKit.h>
+#import "GameViewController.h"
+#import "AppModel.h"
+
+#define ninjaSessionID @"ninja"
+#define MAX_PLAYERS 7 //Same for this
+
 typedef enum packetTypes {
     IveDied = 0,
     GameOver = 1,

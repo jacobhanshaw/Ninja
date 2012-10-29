@@ -29,13 +29,7 @@
     NSMutableArray *peersInSession; //all other devices in the session
     NSMutableArray *peersInGroup;   //list of devices to send data to
     
-    
-    
   //  UILabel *clientInstructions;
-    
-  //  NSString *myPeerID; //Created here
-  //  NSMutableArray *peersInGroup; //Created in subclass
-   // GKSessionMode myMode; //Created in subclass
     
 }
 
