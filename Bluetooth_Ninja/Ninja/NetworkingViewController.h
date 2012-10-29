@@ -22,7 +22,7 @@ typedef enum packetTypes {
     AssignColor = 3
 }packetTypes;
 
-@interface NetworkingViewController : UIViewController <GKSessionDelegate> {
+@interface NetworkingViewController : UIViewController <GKSessionDelegate, GKPeerPickerControllerDelegate> {
     
 }
 

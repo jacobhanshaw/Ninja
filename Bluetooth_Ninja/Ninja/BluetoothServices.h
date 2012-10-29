@@ -8,12 +8,16 @@
 // IMPORTANT!
 // Please see:
 // http://developer.apple.com/library/ios/#documentation/GameKit/Reference/GKSession_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40008258
+// and
+// http://developer.apple.com/library/ios/#DOCUMENTATION/GameKit/Reference/GKPeerPickerControllerDelegate_Protocol/Reference/Reference.html
 // for Apple's documentation
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-@interface BluetoothServices : NSObject <GKSessionDelegate> {
+#define definedSessionID @"ninja"
+
+@interface BluetoothServices : NSObject <GKSessionDelegate, GKPeerPickerControllerDelegate> {
     
     GKSession *bluetoothSession; //the bluetooth connection session
     
@@ -42,16 +46,16 @@
 @property (nonatomic) GKSession *sessionReceived;
 @property (nonatomic) void *context;
 
-@property (nonatomic) NSMutableArray *peersInSession;
+//@property (nonatomic) NSMutableArray *peersInSession;
 @property (nonatomic) NSMutableArray *peersInGroup;
 
 
-+ (BluetoothServices *)sharedBluetoothServices;
++ (BluetoothServices *)sharedBluetoothSession;
 
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext;
 
 - (void) sendData:(void *)data toAll:(BOOL)shouldSendToAll;
 
-//-(NSMutableArray *) getPeersInSession;
+-(NSMutableArray *) getPeersInSession;
 
 @end
