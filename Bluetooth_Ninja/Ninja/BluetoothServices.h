@@ -12,10 +12,12 @@
 // http://developer.apple.com/library/ios/#DOCUMENTATION/GameKit/Reference/GKPeerPickerControllerDelegate_Protocol/Reference/Reference.html
 // for Apple's documentation
 
+
+
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-#define definedSessionID @"ninja"
+//#define definedSessionID @"ninja"
 
 @interface BluetoothServices : NSObject <GKSessionDelegate, GKPeerPickerControllerDelegate> {
     
@@ -27,9 +29,7 @@
     void *context;                //data associated with the session upon set-up
     
     NSMutableArray *peersInSession; //all other devices in the session
-    NSMutableArray *peersInGroup;   //list of devices to send data to
-    
-  //  UILabel *clientInstructions;
+    NSMutableArray *peersInGroup;   //list of devices to send data toß
     
 }
 
