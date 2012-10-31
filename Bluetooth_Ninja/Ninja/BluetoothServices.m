@@ -57,15 +57,14 @@
 
 - (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll
 {
-    NSData *packet = [NSData dataWithBytes:data length:sizeof(data)];
     NSError *dataSendingError;
     
     if(shouldSendToAll){
-    if(![self.bluetoothSession sendDataToAllPeers:packet withDataMode:GKSendDataReliable error:&dataSendingError])
+    if(![self.bluetoothSession sendDataToAllPeers: data withDataMode:GKSendDataReliable error:&dataSendingError])
         NSLog(@"BluetoothServices: SendingDataToAllPeers Failed with Error Message: %@", [dataSendingError localizedDescription]);
     }
     else{
-        if(![self.bluetoothSession sendData: packet toPeers:self.peersInGroup withDataMode:GKSendDataReliable error:&dataSendingError])
+        if(![self.bluetoothSession sendData: data toPeers:self.peersInGroup withDataMode:GKSendDataReliable error:&dataSendingError])
             NSLog(@"BluetoothServices: SendingDataToAllPeers Failed with Error Message: %@", [dataSendingError localizedDescription]);
     }
 }
