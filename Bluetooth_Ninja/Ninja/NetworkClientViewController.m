@@ -75,7 +75,7 @@
     unsigned char deathPacket[2];
     deathPacket[0] = 0;
     deathPacket[1] = colorIndex;
-    died = TRUE;
+  //  died = TRUE;
     [self sendData:deathPacket];
 }
 

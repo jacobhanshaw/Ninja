@@ -48,7 +48,7 @@
 
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext;
 
-- (void) sendData:(void *)data toAll:(BOOL)shouldSendToAll;
+- (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll;
 
 -(NSMutableArray *) getPeersInSession;
 

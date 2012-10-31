@@ -18,6 +18,8 @@
 		DDC47F42163B11C000D91401 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F41163B11C000D91401 /* AppModel.m */; };
 		DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F47163B18EF00D91401 /* NetworkingViewController.m */; };
 		DDC47F4A163B18EF00D91401 /* NetworkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */; };
+		DDC495E11640825600D4C063 /* NewUIExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC495DF1640825600D4C063 /* NewUIExampleViewController.m */; };
+		DDC495E21640825600D4C063 /* NewUIExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC495E01640825600D4C063 /* NewUIExampleViewController.xib */; };
 		DDCEF7891632556B0003EEB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7881632556B0003EEB2 /* UIKit.framework */; };
 		DDCEF78B1632556B0003EEB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78A1632556B0003EEB2 /* Foundation.framework */; };
 		DDCEF78D1632556B0003EEB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78C1632556B0003EEB2 /* CoreGraphics.framework */; };
@@ -76,6 +78,9 @@
 		DDC47F46163B18EF00D91401 /* NetworkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingViewController.h; sourceTree = "<group>"; };
 		DDC47F47163B18EF00D91401 /* NetworkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkingViewController.m; sourceTree = "<group>"; };
 		DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkingViewController.xib; sourceTree = "<group>"; };
+		DDC495DE1640825600D4C063 /* NewUIExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUIExampleViewController.h; sourceTree = "<group>"; };
+		DDC495DF1640825600D4C063 /* NewUIExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUIExampleViewController.m; sourceTree = "<group>"; };
+		DDC495E01640825600D4C063 /* NewUIExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUIExampleViewController.xib; sourceTree = "<group>"; };
 		DDCEF7841632556B0003EEB2 /* Ninja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ninja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCEF7881632556B0003EEB2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DDCEF78A1632556B0003EEB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -160,6 +165,9 @@
 				AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */,
 				AD7DFE491632DB0E00268CE7 /* NetworkServerViewController.h */,
 				AD7DFE4A1632DB0E00268CE7 /* NetworkServerViewController.m */,
+				DDC495DE1640825600D4C063 /* NewUIExampleViewController.h */,
+				DDC495DF1640825600D4C063 /* NewUIExampleViewController.m */,
+				DDC495E01640825600D4C063 /* NewUIExampleViewController.xib */,
 				DDCEF7DC163276D60003EEB2 /* RootViewController.h */,
 				DDCEF7DD163276D60003EEB2 /* RootViewController.m */,
 				AD7DFE6316331A9700268CE7 /* RootViewController.xib */,
@@ -346,6 +354,7 @@
 				DDCEF7A11632556B0003EEB2 /* Default-568h@2x.png in Resources */,
 				AD7DFE6416331A9800268CE7 /* RootViewController.xib in Resources */,
 				DDC47F4A163B18EF00D91401 /* NetworkingViewController.xib in Resources */,
+				DDC495E21640825600D4C063 /* NewUIExampleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +404,7 @@
 				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
 				DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */,
 				DDC0018D163CEA410004AC36 /* BluetoothObject.m in Sources */,
+				DDC495E11640825600D4C063 /* NewUIExampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

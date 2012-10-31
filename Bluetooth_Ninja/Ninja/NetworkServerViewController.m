@@ -35,7 +35,7 @@
     }
     return self;
 }
-
+/*
 - (void)newGame
 {
     if (livePlayers == 0) {
@@ -136,17 +136,17 @@
 }
 
 
-
+*/ /*
 -(void) colorSelected:(id)sender{
     NSLog(@"colorSelected");
-    /*UIButton *button = (UIButton*)sender;
+    *//*UIButton *button = (UIButton*)sender;
     int playerNumber = button.tag;
     *
     colorIndex = playerNumber;
     [button setTitle:myPeerID forState:UIControlStateNormal];
     [button setBackgroundColor:[UIColor grayColor]];
     */
-    colorIndex = 0;
+  /*  colorIndex = 0;
     colorAvailability[colorIndex] = FALSE;
     [thisSession setAvailable:TRUE];
     [self.view addSubview:membersInGame];
@@ -170,7 +170,7 @@
         [self killPlayer:colorIndex];
     }
     
-}
+} */
 
 - (void)viewDidLoad
 {

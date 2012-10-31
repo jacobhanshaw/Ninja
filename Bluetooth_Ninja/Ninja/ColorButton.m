@@ -26,6 +26,7 @@
         self.titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
         self.titleLabel.font = [UIFont systemFontOfSize:12.0];
         self.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
+        [self.solidColorView.layer setCornerRadius:9.0];
         [self.layer setCornerRadius:9.0];
         
     }

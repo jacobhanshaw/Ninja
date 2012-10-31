@@ -67,8 +67,10 @@
     self.networkClientController = networkClientControllerA;
     [self presentViewController:self.networkClientController animated:YES completion:nil];
      */
-    ColorSelector *tempColor = [[ColorSelector alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:tempColor];
+    //ColorSelector *tempColor = [[ColorSelector alloc] initWithFrame:self.view.frame];
+    //[self.view addSubview:tempColor];
+    NewUIExampleViewController *test = [[NewUIExampleViewController alloc] init];
+    [self presentViewController:test animated:YES completion:nil];
 }
 
 

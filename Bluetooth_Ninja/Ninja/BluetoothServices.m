@@ -55,9 +55,9 @@
 }
 
 
-- (void) sendData:(void *)data toAll:(BOOL)shouldSendToAll
+- (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll
 {
-    NSData *packet = [NSData dataWithBytes:data length:sizeof(unsigned char)];
+    NSData *packet = [NSData dataWithBytes:data length:sizeof(data)];
     NSError *dataSendingError;
     
     if(shouldSendToAll){
