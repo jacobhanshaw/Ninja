@@ -19,7 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    namesCreated = 0;
+    /*namesCreated = 0;
     
     names[0] = @"James";
     names[1] = @"Billy";
@@ -43,7 +43,7 @@
     [self.view setBackgroundColor:[UIColor purpleColor]];
     nameView = [[NameInputView alloc] initWithFrame:CGRectMake(40, 60, self.view.frame.size.width - 80, self.view.frame.size.height - 120) andDefaultName:[[UIDevice currentDevice] name]];
     nameView.delegate = self;
-    [self.view addSubview:nameView];
+    [self.view addSubview:nameView];*/
 }
 
 - (void)nameSelected:(NSString *)finalName

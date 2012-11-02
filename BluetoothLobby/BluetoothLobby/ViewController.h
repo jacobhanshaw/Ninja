@@ -12,10 +12,14 @@
 
 #import "LobbyView.h"
 #import "LobbyProtocol.h"
+#import "NameEntryViewController.h"
+
 
 @interface ViewController : UIViewController <NameInputProtocol, LobbyProtocol>
 
 {
+    NameEntryViewController *testController;
+    
     NameInputView *nameView;
     LobbyView *lobbyView;
     

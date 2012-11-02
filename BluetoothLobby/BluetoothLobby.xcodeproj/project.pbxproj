@@ -19,6 +19,8 @@
 		AD1F83681642A1B9008A0C1C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1F83671642A1B9008A0C1C /* ViewController.m */; };
 		AD1F83761642A4E7008A0C1C /* NameInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1F83751642A4E7008A0C1C /* NameInputView.m */; };
 		AD1F837A1642B29E008A0C1C /* LobbyView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1F83791642B29E008A0C1C /* LobbyView.m */; };
+		AD9C2C7516447EA70021372D /* NameEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9C2C7316447EA70021372D /* NameEntryViewController.m */; };
+		AD9C2C7616447EA70021372D /* NameEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD9C2C7416447EA70021372D /* NameEntryViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,9 @@
 		AD1F83781642B29E008A0C1C /* LobbyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobbyView.h; sourceTree = "<group>"; };
 		AD1F83791642B29E008A0C1C /* LobbyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobbyView.m; sourceTree = "<group>"; };
 		AD1F837B1642B607008A0C1C /* LobbyProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LobbyProtocol.h; sourceTree = "<group>"; };
+		AD9C2C7216447EA70021372D /* NameEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEntryViewController.h; sourceTree = "<group>"; };
+		AD9C2C7316447EA70021372D /* NameEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryViewController.m; sourceTree = "<group>"; };
+		AD9C2C7416447EA70021372D /* NameEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEntryViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +103,9 @@
 				AD1F83771642AF06008A0C1C /* NameInputProtocol.h */,
 				AD1F83781642B29E008A0C1C /* LobbyView.h */,
 				AD1F83791642B29E008A0C1C /* LobbyView.m */,
+				AD9C2C7216447EA70021372D /* NameEntryViewController.h */,
+				AD9C2C7316447EA70021372D /* NameEntryViewController.m */,
+				AD9C2C7416447EA70021372D /* NameEntryViewController.xib */,
 				AD1F837B1642B607008A0C1C /* LobbyProtocol.h */,
 				AD1F83551642A1B9008A0C1C /* Supporting Files */,
 			);
@@ -173,6 +181,7 @@
 				AD1F83611642A1B9008A0C1C /* Default.png in Resources */,
 				AD1F83631642A1B9008A0C1C /* Default@2x.png in Resources */,
 				AD1F83651642A1B9008A0C1C /* Default-568h@2x.png in Resources */,
+				AD9C2C7616447EA70021372D /* NameEntryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +197,7 @@
 				AD1F83681642A1B9008A0C1C /* ViewController.m in Sources */,
 				AD1F83761642A4E7008A0C1C /* NameInputView.m in Sources */,
 				AD1F837A1642B29E008A0C1C /* LobbyView.m in Sources */,
+				AD9C2C7516447EA70021372D /* NameEntryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +310,7 @@
 				AD1F83731642A1B9008A0C1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
