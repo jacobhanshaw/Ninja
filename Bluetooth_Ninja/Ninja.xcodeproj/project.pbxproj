@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AD21EE621632D849009A9D4F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD21EE611632D849009A9D4F /* GameKit.framework */; };
+		AD5870F41644BD7A004CC04A /* NetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5870F21644BD79004CC04A /* NetworkViewController.m */; };
+		AD5870F71644BF31004CC04A /* NetworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5870F31644BD7A004CC04A /* NetworkViewController.xib */; };
 		AD7DFE4B1632DB0E00268CE7 /* NetworkClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */; };
 		AD7DFE4C1632DB0E00268CE7 /* ANetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE481632DB0E00268CE7 /* ANetworkingViewController.m */; };
 		AD7DFE4D1632DB0E00268CE7 /* NetworkServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE4A1632DB0E00268CE7 /* NetworkServerViewController.m */; };
@@ -21,8 +23,6 @@
 		DDBDDBC21644AC7A00006DD0 /* PopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBC11644AC7A00006DD0 /* PopOverView.m */; };
 		DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F3D163B05DA00D91401 /* BluetoothServices.m */; };
 		DDC47F42163B11C000D91401 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F41163B11C000D91401 /* AppModel.m */; };
-		DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F47163B18EF00D91401 /* NetworkingViewController.m */; };
-		DDC47F4A163B18EF00D91401 /* NetworkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */; };
 		DDC495E11640825600D4C063 /* NewUIExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC495DF1640825600D4C063 /* NewUIExampleViewController.m */; };
 		DDC495E21640825600D4C063 /* NewUIExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC495E01640825600D4C063 /* NewUIExampleViewController.xib */; };
 		DDCEF7891632556B0003EEB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7881632556B0003EEB2 /* UIKit.framework */; };
@@ -65,6 +65,9 @@
 
 /* Begin PBXFileReference section */
 		AD21EE611632D849009A9D4F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		AD5870F11644BD79004CC04A /* NetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkViewController.h; sourceTree = "<group>"; };
+		AD5870F21644BD79004CC04A /* NetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkViewController.m; sourceTree = "<group>"; };
+		AD5870F31644BD7A004CC04A /* NetworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkViewController.xib; sourceTree = "<group>"; };
 		AD7DFE451632DB0E00268CE7 /* NetworkClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkClientViewController.h; sourceTree = "<group>"; };
 		AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkClientViewController.m; sourceTree = "<group>"; };
 		AD7DFE471632DB0E00268CE7 /* ANetworkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANetworkingViewController.h; sourceTree = "<group>"; };
@@ -74,7 +77,6 @@
 		AD7DFE531632DB7500268CE7 /* ColorSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSelector.h; sourceTree = "<group>"; };
 		AD7DFE541632DB7500268CE7 /* ColorSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSelector.m; sourceTree = "<group>"; };
 		AD7DFE6316331A9700268CE7 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
-		AD9C2CD71644B3830021372D /* NetworkingViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingViewControllerDelegate.h; sourceTree = "<group>"; };
 		DDBDDBAA1644961800006DD0 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DDBDDBAB1644961800006DD0 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DDBDDBAC1644961800006DD0 /* NameInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameInputView.h; sourceTree = "<group>"; };
@@ -91,9 +93,6 @@
 		DDC47F3D163B05DA00D91401 /* BluetoothServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothServices.m; sourceTree = "<group>"; };
 		DDC47F40163B11C000D91401 /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		DDC47F41163B11C000D91401 /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
-		DDC47F46163B18EF00D91401 /* NetworkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingViewController.h; sourceTree = "<group>"; };
-		DDC47F47163B18EF00D91401 /* NetworkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkingViewController.m; sourceTree = "<group>"; };
-		DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkingViewController.xib; sourceTree = "<group>"; };
 		DDC495DE1640825600D4C063 /* NewUIExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUIExampleViewController.h; sourceTree = "<group>"; };
 		DDC495DF1640825600D4C063 /* NewUIExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUIExampleViewController.m; sourceTree = "<group>"; };
 		DDC495E01640825600D4C063 /* NewUIExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUIExampleViewController.xib; sourceTree = "<group>"; };
@@ -168,10 +167,6 @@
 				DDC47F3D163B05DA00D91401 /* BluetoothServices.m */,
 				AD7DFE471632DB0E00268CE7 /* ANetworkingViewController.h */,
 				AD7DFE481632DB0E00268CE7 /* ANetworkingViewController.m */,
-				DDC47F46163B18EF00D91401 /* NetworkingViewController.h */,
-				DDC47F47163B18EF00D91401 /* NetworkingViewController.m */,
-				DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */,
-				AD9C2CD71644B3830021372D /* NetworkingViewControllerDelegate.h */,
 				AD7DFE451632DB0E00268CE7 /* NetworkClientViewController.h */,
 				AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */,
 				AD7DFE491632DB0E00268CE7 /* NetworkServerViewController.h */,
@@ -189,6 +184,9 @@
 				DDBDDBAF1644961800006DD0 /* LobbyView.h */,
 				DDBDDBB01644961800006DD0 /* LobbyView.m */,
 				DDBDDBB11644961800006DD0 /* LobbyProtocol.h */,
+				AD5870F11644BD79004CC04A /* NetworkViewController.h */,
+				AD5870F21644BD79004CC04A /* NetworkViewController.m */,
+				AD5870F31644BD7A004CC04A /* NetworkViewController.xib */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -391,12 +389,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD5870F71644BF31004CC04A /* NetworkViewController.xib in Resources */,
 				DDCEF7951632556B0003EEB2 /* InfoPlist.strings in Resources */,
 				DDCEF79D1632556B0003EEB2 /* Default.png in Resources */,
 				DDCEF79F1632556B0003EEB2 /* Default@2x.png in Resources */,
 				DDCEF7A11632556B0003EEB2 /* Default-568h@2x.png in Resources */,
 				AD7DFE6416331A9800268CE7 /* RootViewController.xib in Resources */,
-				DDC47F4A163B18EF00D91401 /* NetworkingViewController.xib in Resources */,
 				DDC495E21640825600D4C063 /* NewUIExampleViewController.xib in Resources */,
 				DDBDDBB81644A70B00006DD0 /* UIButtonBarRefresh@2x.png in Resources */,
 				DDBDDBB91644A70B00006DD0 /* UIButtonBarRefresh.png in Resources */,
@@ -447,12 +445,12 @@
 				AD7DFE551632DB7500268CE7 /* ColorSelector.m in Sources */,
 				DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */,
 				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
-				DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */,
 				DDC495E11640825600D4C063 /* NewUIExampleViewController.m in Sources */,
 				DDBDDBB21644961800006DD0 /* ViewController.m in Sources */,
 				DDBDDBB31644961800006DD0 /* NameInputView.m in Sources */,
 				DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */,
 				DDBDDBC21644AC7A00006DD0 /* PopOverView.m in Sources */,
+				AD5870F41644BD7A004CC04A /* NetworkViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

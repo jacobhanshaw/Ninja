@@ -1,21 +1,24 @@
 //
-//  NetworkingViewController.h
+//  NetworkViewController.h
 //  Ninja
 //
-//  Created by Jacob Hanshaw on 10/26/12.
+//  Created by Michael on 11/2/12.
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface NetworkingViewController : UIViewController {
-    IBOutlet UILabel *label;
+@interface NetworkViewController : UIViewController
+{
+IBOutlet UILabel *label;
 
-    IBOutlet UIButton *leave, *start;
-    IBOutlet UITableView *peers;
-    
-    IBOutlet UIActivityIndicatorView *refreshIndicator;
-    IBOutlet UIImageView *refreshIcon;
+IBOutlet UIButton *leave, *start;
+IBOutlet UITableView *peers;
+
+IBOutlet UIActivityIndicatorView *refreshIndicator;
+IBOutlet UIImageView *refreshIcon;
+
+IBOutlet UIView *view;
 }
 
 @property (nonatomic) IBOutlet UILabel *label;
@@ -24,7 +27,9 @@
 @property (nonatomic) IBOutlet UITableView *peers;
 @property (nonatomic) IBOutlet UIActivityIndicatorView *refreshIndicator;
 @property (nonatomic) IBOutlet UIImageView *refreshIcon;
+@property (nonatomic) IBOutlet UIView *view;
 
 - (void)setValue:(id)value forKey:(NSString *)key;
 
 @end
+
