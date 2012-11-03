@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface PopOverView : UIView {
-    
+        UILabel     *groupNameLabel;
+        UITextField *groupNameInput;
+        UILabel     *nameLabel;
+        UITextField *nameInput;
+        UIButton    *startGroup;
 }
 
 @end
