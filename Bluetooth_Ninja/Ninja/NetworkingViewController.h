@@ -7,17 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
+    //Start View Outlets
+    IBOutlet UIView      *startView;
+    IBOutlet UIButton    *startGroupButton;
+    IBOutlet UIButton    *joinGroupButton;
+    IBOutlet UIButton    *editProfileButton;
+    //End Start View Outlets
+    
     //Pop Over Outlets
+    IBOutlet UIView      *semiTransparentOverlay;
+    IBOutlet UIView      *hostPopOver;
+    IBOutlet UIView      *clientPopOver;
     IBOutlet UILabel     *groupNameLabel;
     IBOutlet UITextField *groupNameInput;
     IBOutlet UILabel     *nameLabelHost;
     IBOutlet UITextField *nameInputHost;
     IBOutlet UILabel     *nameLabelClient;
     IBOutlet UITextField *nameInputClient;
-    IBOutlet UIButton    *startGroup;
+    IBOutlet UIButton    *hostGo;
     IBOutlet UIButton    *clientGo;
     //End Pop Over Outlets
     
@@ -26,7 +37,7 @@
     IBOutlet UITableView *peerTable;
     IBOutlet UIButton *leave, *start;
     
-    IBOutlet UIActivityIndicatorView *refreshIndicator;
+    IBOutlet UIActivityIndicatorView *refreshIndicator; //NOT SET UP PROPERLY
     IBOutlet UIImageView *refreshIcon;
     //End peer table view outlets
     
@@ -35,14 +46,24 @@
     NSArray *tableViewInfo;
 }
 
+//Start View Outlets
+@property (nonatomic) IBOutlet UIView      *startView;
+@property (nonatomic) IBOutlet UIButton    *startGroupButton;
+@property (nonatomic) IBOutlet UIButton    *joinGroupButton;
+@property (nonatomic) IBOutlet UIButton    *editProfileButton;
+//End Start View Outlets
+
 //Pop Over Outlets
+@property (nonatomic) IBOutlet UIView      *semiTransparentOverlay;
+@property (nonatomic) IBOutlet UIView      *hostPopOver;
+@property (nonatomic) IBOutlet UIView      *clientPopOver;
 @property (nonatomic) IBOutlet UILabel     *groupNameLabel;
 @property (nonatomic) IBOutlet UITextField *groupNameInput;
 @property (nonatomic) IBOutlet UILabel     *nameLabelHost;
 @property (nonatomic) IBOutlet UITextField *nameInputHost;
 @property (nonatomic) IBOutlet UILabel     *nameLabelClient;
 @property (nonatomic) IBOutlet UITextField *nameInputClient;
-@property (nonatomic) IBOutlet UIButton    *startGroup;
+@property (nonatomic) IBOutlet UIButton    *hostGo;
 @property (nonatomic) IBOutlet UIButton    *clientGo;
 //End Pop Over Outlets
 
@@ -58,7 +79,7 @@
 
 @property (nonatomic) id delegate;
 
-- (void)startViewWith:(BOOL) host;
+- (void)showPopOver:(BOOL) host;
 - (void)updatePeersList:(NSArray *)peersList;
 
 @end

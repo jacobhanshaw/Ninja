@@ -14,7 +14,9 @@
 
 @implementation NetworkingViewController
 
-@synthesize groupNameInput, groupNameLabel, nameInputHost, nameLabelHost, nameInputClient, nameLabelClient, startGroup;
+@synthesize startView, startGroupButton, joinGroupButton, editProfileButton;
+@synthesize semiTransparentOverlay, hostPopOver, clientPopOver;
+@synthesize groupNameInput, groupNameLabel, nameInputHost, nameLabelHost, nameInputClient, nameLabelClient, hostGo;
 @synthesize clientGo, screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view
 @synthesize delegate;
 
@@ -24,18 +26,64 @@
     if (self) {
         // Custom initialization
         refreshIndicator.hidesWhenStopped = TRUE;
+        
+        [self.view addSubview:startView];
+        [self.view addSubview:semiTransparentOverlay];
+        [self.view addSubview:clientPopOver];
+        [self.view addSubview:hostPopOver];
+        
+        [clientPopOver.layer setCornerRadius:9.0];
+        [hostPopOver.layer setCornerRadius: 9.0];
+        
     }
     return self;
 }
 
-- (void)startViewWith:(BOOL)host
+-(void) viewWillAppear:(BOOL)animated {
+    [startView setHidden:NO];
+    [semiTransparentOverlay setHidden:YES];
+    [clientPopOver setHidden:YES];
+    [hostPopOver setHidden:YES];
+    
+    [startGroupButton addTarget:self action:@selector(startGroupSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [joinGroupButton addTarget:self action:@selector(joinGroupSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [editProfileButton addTarget:self action:@selector(editProfileSelected:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark Button Methods
+
+- (void)startGroupSelected:(id)sender{
+    [startView setHidden:YES];
+    [semiTransparentOverlay setHidden:NO];
+    [hostPopOver setHidden:NO];
+    [self showPopOver:YES];
+}
+
+- (void)joinGroupSelected:(id)sender{
+    [startView setHidden:YES];
+    [semiTransparentOverlay setHidden:NO];
+    [clientPopOver setHidden:NO];
+    [self showPopOver:NO];
+}
+
+- (void)editProfileSelected:(id)sender{
+    
+}
+
+- (void)showPopOver:(BOOL)host
 {
     if (host) {
+        nameInputHost.placeholder = [[UIDevice currentDevice] name];
+        nameInputHost.textAlignment = NSTextAlignmentCenter;
+        groupNameInput.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"'"] objectAtIndex:0];
+        groupNameInput.textAlignment = NSTextAlignmentCenter;
         [screenTitle setText:@"Members:"];
         [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
         [start setTitle:@"Start" forState:UIControlStateNormal];
     }
     else {
+        nameInputClient.placeholder = [[UIDevice currentDevice] name];
+        nameInputClient.textAlignment = NSTextAlignmentCenter;
         [screenTitle setText:@"Groups:"];
         [start setHidden:TRUE];
         [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
@@ -45,6 +93,14 @@
     [self refresh];
     
 }
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 
 - (void)refresh
 {

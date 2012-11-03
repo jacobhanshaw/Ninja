@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "AppModel.h"
 #import "GameViewController.h"
-#import "NewUIExampleViewController.h"
 #import "ColorSelector.h"
-#import "TestViewController.h"
+#import "NetworkingViewController.h"
 
 @interface RootViewController : UIViewController{
     
