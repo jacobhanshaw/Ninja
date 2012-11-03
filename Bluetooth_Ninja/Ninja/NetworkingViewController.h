@@ -25,4 +25,6 @@
 @property (nonatomic) IBOutlet UIActivityIndicatorView *refreshIndicator;
 @property (nonatomic) IBOutlet UIImageView *refreshIcon;
 
+- (void)setValue:(id)value forKey:(NSString *)key;
+
 @end

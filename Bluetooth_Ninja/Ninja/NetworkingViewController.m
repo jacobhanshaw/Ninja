@@ -25,6 +25,11 @@
     return self;
 }
 
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

@@ -58,7 +58,8 @@
      */
     //ColorSelector *tempColor = [[ColorSelector alloc] initWithFrame:self.view.frame];
     //[self.view addSubview:tempColor];
-    NewUIExampleViewController *test = [[NewUIExampleViewController alloc] init];
+    //NewUIExampleViewController *test = [[NewUIExampleViewController alloc] init];
+    NetworkingViewController *test = [[NetworkingViewController alloc] init];//WithNibName:@"NetworkingViewController" bundle:nil];
     [self presentViewController:test animated:YES completion:nil];
 }
 
