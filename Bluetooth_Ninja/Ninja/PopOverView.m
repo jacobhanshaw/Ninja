@@ -21,11 +21,11 @@
 
 
 - (void)setup {
-    [roundedRectView.layer setCornerRadius:9.0];
-    roundedRectView.layer.borderColor = [UIColor grayColor].CGColor;
-    roundedRectView.layer.borderWidth = 3.0f;
-    roundedRectView.backgroundColor = [UIColor blackColor];
-    [self addSubview:roundedRectView];
+   // [roundedRectView.layer setCornerRadius:9.0];
+   // roundedRectView.layer.borderColor = [UIColor grayColor].CGColor;
+   // roundedRectView.layer.borderWidth = 3.0f;
+   // roundedRectView.backgroundColor = [UIColor blackColor];
+   // [self addSubview:roundedRectView];
     
     groupNameLabel.text = @"Group Name";
     groupNameLabel.frame = CGRectMake(self.frame.size.width/4, self.frame.size.height/4, self.frame.size.width/2, self.frame.size.height/4);
