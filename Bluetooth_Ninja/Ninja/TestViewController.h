@@ -10,20 +10,22 @@
 
 @interface TestViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
+    //Pop Over Outlets
+    IBOutlet UITextField
+    //End Pop Over Outlets
+    
+    //Peer table view Outlets
     IBOutlet UILabel *screenTitle;
     IBOutlet UITableView *peerTable;
     IBOutlet UIButton *leave, *start;
     
     IBOutlet UIActivityIndicatorView *refreshIndicator;
     IBOutlet UIImageView *refreshIcon;
+    //End peer table view outlets
     
     NSTimer *refreshTimer;
-    
     id delegate;
-    
     NSArray *tableViewInfo;
-    
-    BOOL host2;
 }
 
 @property (nonatomic) IBOutlet UILabel *screenTitle;
