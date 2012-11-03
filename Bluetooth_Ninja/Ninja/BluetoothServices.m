@@ -32,6 +32,7 @@
 
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext {
     
+    validated = NO;
     peersInSession = [[NSMutableArray alloc] init];
     self.peersInGroup = [[NSMutableArray alloc] init];
     
@@ -71,6 +72,7 @@
 
 - (void) receiveData:(NSData *)inputData fromPeer:(NSString *)inputPeer inSession:(GKSession *)inputSession context:(void *)inputContext {
 
+    if(validated){
     self.dataReceived = inputData;
     self.originOfData = inputPeer;
     self.sessionReceived = inputSession;
@@ -79,12 +81,12 @@
     NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"NewDataReceived" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
     
-    
+    }
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YOURMEHTODNAMEHERE) name:@"NewDataReceived" object:[BluetoothServices sharedBluetoothServices]];
     
 }
 
--(NSMutableArray *) getPeersInSession{
+-(NSArray *) getPeersInSession{
     return peersInSession;
 } 
 

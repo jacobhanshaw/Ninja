@@ -103,10 +103,10 @@
 				AD1F83771642AF06008A0C1C /* NameInputProtocol.h */,
 				AD1F83781642B29E008A0C1C /* LobbyView.h */,
 				AD1F83791642B29E008A0C1C /* LobbyView.m */,
+				AD1F837B1642B607008A0C1C /* LobbyProtocol.h */,
 				AD9C2C7216447EA70021372D /* NameEntryViewController.h */,
 				AD9C2C7316447EA70021372D /* NameEntryViewController.m */,
 				AD9C2C7416447EA70021372D /* NameEntryViewController.xib */,
-				AD1F837B1642B607008A0C1C /* LobbyProtocol.h */,
 				AD1F83551642A1B9008A0C1C /* Supporting Files */,
 			);
 			path = BluetoothLobby;

@@ -29,7 +29,10 @@
     void *context;                //data associated with the session upon set-up
     
     NSMutableArray *peersInSession; //all other devices in the session
-    NSMutableArray *peersInGroup;   //list of devices to send data toß
+    NSMutableArray *peersInGroup;   //list of devices to send data to
+    
+    BOOL validated;                 //boolean that is false until the game has been started and the host
+                                    //has approved of all peers
     
 }
 
@@ -50,6 +53,6 @@
 
 - (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll;
 
--(NSMutableArray *) getPeersInSession;
+-(NSArray *) getPeersInSession;
 
 @end

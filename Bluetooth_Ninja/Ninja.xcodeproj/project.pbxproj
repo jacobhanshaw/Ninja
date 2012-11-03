@@ -13,6 +13,9 @@
 		AD7DFE4D1632DB0E00268CE7 /* NetworkServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE4A1632DB0E00268CE7 /* NetworkServerViewController.m */; };
 		AD7DFE551632DB7500268CE7 /* ColorSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE541632DB7500268CE7 /* ColorSelector.m */; };
 		AD7DFE6416331A9800268CE7 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD7DFE6316331A9700268CE7 /* RootViewController.xib */; };
+		DDBDDBB21644961800006DD0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBAB1644961800006DD0 /* ViewController.m */; };
+		DDBDDBB31644961800006DD0 /* NameInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBAD1644961800006DD0 /* NameInputView.m */; };
+		DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBB01644961800006DD0 /* LobbyView.m */; };
 		DDC0018D163CEA410004AC36 /* BluetoothObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC0018C163CEA410004AC36 /* BluetoothObject.m */; };
 		DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F3D163B05DA00D91401 /* BluetoothServices.m */; };
 		DDC47F42163B11C000D91401 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F41163B11C000D91401 /* AppModel.m */; };
@@ -69,6 +72,14 @@
 		AD7DFE531632DB7500268CE7 /* ColorSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSelector.h; sourceTree = "<group>"; };
 		AD7DFE541632DB7500268CE7 /* ColorSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSelector.m; sourceTree = "<group>"; };
 		AD7DFE6316331A9700268CE7 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		DDBDDBAA1644961800006DD0 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DDBDDBAB1644961800006DD0 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DDBDDBAC1644961800006DD0 /* NameInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameInputView.h; sourceTree = "<group>"; };
+		DDBDDBAD1644961800006DD0 /* NameInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameInputView.m; sourceTree = "<group>"; };
+		DDBDDBAE1644961800006DD0 /* NameInputProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameInputProtocol.h; sourceTree = "<group>"; };
+		DDBDDBAF1644961800006DD0 /* LobbyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobbyView.h; sourceTree = "<group>"; };
+		DDBDDBB01644961800006DD0 /* LobbyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobbyView.m; sourceTree = "<group>"; };
+		DDBDDBB11644961800006DD0 /* LobbyProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobbyProtocol.h; sourceTree = "<group>"; };
 		DDC0018B163CEA400004AC36 /* BluetoothObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothObject.h; sourceTree = "<group>"; };
 		DDC0018C163CEA410004AC36 /* BluetoothObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothObject.m; sourceTree = "<group>"; };
 		DDC47F3C163B05DA00D91401 /* BluetoothServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothServices.h; sourceTree = "<group>"; };
@@ -145,13 +156,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DDC47F43163B130800D91401 /* Core */ = {
+		DDBDDBB51644962200006DD0 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				DDCEF7C31632559A0003EEB2 /* AppDelegate.h */,
-				DDCEF7C41632559A0003EEB2 /* AppDelegate.m */,
-				DDC47F40163B11C000D91401 /* AppModel.h */,
-				DDC47F41163B11C000D91401 /* AppModel.m */,
 				DDC47F3C163B05DA00D91401 /* BluetoothServices.h */,
 				DDC47F3D163B05DA00D91401 /* BluetoothServices.m */,
 				DDC0018B163CEA400004AC36 /* BluetoothObject.h */,
@@ -168,6 +175,25 @@
 				DDC495DE1640825600D4C063 /* NewUIExampleViewController.h */,
 				DDC495DF1640825600D4C063 /* NewUIExampleViewController.m */,
 				DDC495E01640825600D4C063 /* NewUIExampleViewController.xib */,
+				DDBDDBAA1644961800006DD0 /* ViewController.h */,
+				DDBDDBAB1644961800006DD0 /* ViewController.m */,
+				DDBDDBAC1644961800006DD0 /* NameInputView.h */,
+				DDBDDBAD1644961800006DD0 /* NameInputView.m */,
+				DDBDDBAE1644961800006DD0 /* NameInputProtocol.h */,
+				DDBDDBAF1644961800006DD0 /* LobbyView.h */,
+				DDBDDBB01644961800006DD0 /* LobbyView.m */,
+				DDBDDBB11644961800006DD0 /* LobbyProtocol.h */,
+			);
+			name = Bluetooth;
+			sourceTree = "<group>";
+		};
+		DDC47F43163B130800D91401 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DDCEF7C31632559A0003EEB2 /* AppDelegate.h */,
+				DDCEF7C41632559A0003EEB2 /* AppDelegate.m */,
+				DDC47F40163B11C000D91401 /* AppModel.h */,
+				DDC47F41163B11C000D91401 /* AppModel.m */,
 				DDCEF7DC163276D60003EEB2 /* RootViewController.h */,
 				DDCEF7DD163276D60003EEB2 /* RootViewController.m */,
 				AD7DFE6316331A9700268CE7 /* RootViewController.xib */,
@@ -235,6 +261,7 @@
 		DDCEF7901632556B0003EEB2 /* Ninja */ = {
 			isa = PBXGroup;
 			children = (
+				DDBDDBB51644962200006DD0 /* Bluetooth */,
 				DDC47F43163B130800D91401 /* Core */,
 				DDC47F45163B135900D91401 /* Game Mode Views */,
 				DDC47F44163B131F00D91401 /* Empty Views */,
@@ -405,6 +432,9 @@
 				DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */,
 				DDC0018D163CEA410004AC36 /* BluetoothObject.m in Sources */,
 				DDC495E11640825600D4C063 /* NewUIExampleViewController.m in Sources */,
+				DDBDDBB21644961800006DD0 /* ViewController.m in Sources */,
+				DDBDDBB31644961800006DD0 /* NameInputView.m in Sources */,
+				DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
