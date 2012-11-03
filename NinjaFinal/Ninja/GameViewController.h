@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 //#import "NetworkingViewController.h"
+#import "GameSetUpViewController.h"
 
 #define initialAnimationDuration 1.5
 #define initialNumberFlashes 5

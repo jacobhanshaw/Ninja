@@ -38,7 +38,7 @@
 
 - (void)newGame
 {
-    if (livePlayers == 0) {
+    if ([AppModel sharedAppModel].livePlayers == 0) {
         unsigned char reset[1];
         reset[0] = 4;
         
@@ -53,8 +53,8 @@
     if (state == GKPeerStateConnected) {
         [peersInGroup addObject:peerID];
         members++;
-        livePlayers++;
-        originalPlayers = livePlayers;
+        [AppModel sharedAppModel].livePlayers++;
+        [AppModel sharedAppModel].originalPlayers = [AppModel sharedAppModel].livePlayers;
         
         unsigned char connect[1];
         connect[0] = 5;
@@ -104,12 +104,12 @@
     unsigned char assignColors[2];
     
     assignColors[0] = AssignColor;
-    died = FALSE;
+    [AppModel sharedAppModel].playerHasDied = FALSE;
     if (game != NULL) {
         
         [game dismissViewControllerAnimated:YES completion:nil];
     }
-    livePlayers = originalPlayers;
+    [AppModel sharedAppModel].livePlayers = [AppModel sharedAppModel].originalPlayers;
     for (int i = 0; i < 1; ++i) {
         assignColors[1] = i;
         
@@ -165,8 +165,8 @@
 - (void)playerLost
 {
     NSLog(@"serverLost");
-    if (!died) {
-        died = TRUE;
+    if (![AppModel sharedAppModel].playerHasDied) {
+        [AppModel sharedAppModel].playerHasDied = TRUE;
         [self killPlayer:colorIndex];
     }
     

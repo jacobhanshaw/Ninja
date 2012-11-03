@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
-#import "NetworkingViewController.h"
+#import "ANetworkingViewController.h"
 
-@interface NetworkClientViewController : NetworkingViewController
+@interface NetworkClientViewController : ANetworkingViewController
 
 - (void)playerLost;//:(int)index;
 

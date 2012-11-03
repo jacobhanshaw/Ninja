@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
-#import "NetworkingViewController.h"
+#import "ANetworkingViewController.h"
 
-@interface NetworkServerViewController : NetworkingViewController
+@interface NetworkServerViewController : ANetworkingViewController
 
 {
     UILabel *membersInGame;

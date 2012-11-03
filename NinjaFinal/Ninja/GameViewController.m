@@ -44,6 +44,11 @@ int lightFlashes;
     
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    GameSetUpViewController *test = [[GameSetUpViewController alloc] init];
+    [self presentViewController:test animated:YES completion:nil];
+}
+
 - (void) viewWillDisappear:(BOOL)animated{
     [timer invalidate];
     

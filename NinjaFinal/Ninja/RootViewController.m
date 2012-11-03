@@ -62,13 +62,13 @@
 
 -(void) findButtonSelected:(id)sender{
     [AppModel sharedAppModel].isServer = NO;
-    /*
+    
     NetworkClientViewController *networkClientControllerA = [[NetworkClientViewController alloc] init];
     self.networkClientController = networkClientControllerA;
     [self presentViewController:self.networkClientController animated:YES completion:nil];
-     */
+     /*
     ColorSelector *tempColor = [[ColorSelector alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:tempColor];
+    [self.view addSubview:tempColor]; */
 }
 
 
