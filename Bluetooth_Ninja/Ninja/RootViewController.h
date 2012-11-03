@@ -11,7 +11,7 @@
 #import "GameViewController.h"
 #import "NewUIExampleViewController.h"
 #import "ColorSelector.h"
-#import "NetworkViewController.h"
+#import "TestViewController.h"
 
 @interface RootViewController : UIViewController{
     
