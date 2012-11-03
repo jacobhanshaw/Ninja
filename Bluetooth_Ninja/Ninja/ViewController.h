@@ -11,10 +11,10 @@
 #import "NameInputProtocol.h"
 
 #import "LobbyView.h"
-#import "LobbyProtocol.h"
+//#import "LobbyProtocol.h"
 
 
-@interface ViewController : UIViewController <NameInputProtocol, LobbyProtocol>
+@interface ViewController : UIViewController <NameInputProtocol>//, LobbyProtocol>
 
 {
     

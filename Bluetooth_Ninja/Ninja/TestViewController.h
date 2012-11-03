@@ -16,6 +16,14 @@
     
     IBOutlet UIActivityIndicatorView *refreshIndicator;
     IBOutlet UIImageView *refreshIcon;
+    
+    NSTimer *refreshTimer;
+    
+    id delegate;
+    
+    NSArray *tableViewInfo;
+    
+    BOOL host2;
 }
 
 @property (nonatomic) IBOutlet UILabel *screenTitle;
@@ -24,5 +32,10 @@
 @property (nonatomic) IBOutlet UIButton *start;
 @property (nonatomic) IBOutlet UIActivityIndicatorView *refreshIndicator;
 @property (nonatomic) IBOutlet UIImageView *refreshIcon;
+
+@property (nonatomic) id delegate;
+
+- (void)startViewWith:(BOOL) host;
+- (void)updatePeersList:(NSArray *)peersList;
 
 @end

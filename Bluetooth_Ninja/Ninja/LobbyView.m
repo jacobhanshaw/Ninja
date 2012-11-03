@@ -75,7 +75,7 @@
 
 - (void)search
 {
-    [delegate refreshLobby];
+    // [delegate refreshLobby];
 }
 
 - (void)setName:(NSString *)_name

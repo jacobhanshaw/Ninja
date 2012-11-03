@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LobbyProtocol.h"
 
 @interface LobbyView : UIView <UITableViewDataSource, UITableViewDelegate>
 
