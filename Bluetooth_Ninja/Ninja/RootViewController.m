@@ -11,7 +11,7 @@
 
 @implementation RootViewController
 
-@synthesize host, find, networkServerController, networkClientController;
+@synthesize startGame;
 
 + (id)sharedRootViewController
 {
@@ -38,11 +38,8 @@
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
-    [self.host setTitle:@"Start Group" forState:UIControlStateNormal];
-    [self.host addTarget:self action:@selector(hostButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.find setTitle:@"Join Group" forState:UIControlStateNormal];
-    [self.find addTarget:self action:@selector(findButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.startGame setTitle:@"Start Game" forState:UIControlStateNormal];
+    [self.startGame addTarget:self action:@selector(startGameSelected:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -53,15 +50,7 @@
 }
 
 
--(void) hostButtonSelected:(id)sender{
-    [AppModel sharedAppModel].isServer = YES;
-    NetworkServerViewController *networkServerControllerA = [[NetworkServerViewController alloc] init];
-    self.networkServerController = networkServerControllerA;
-    [self presentViewController:self.networkServerController animated:YES completion:nil];
-}
-
--(void) findButtonSelected:(id)sender{
-    [AppModel sharedAppModel].isServer = NO;
+-(void) startGameSelected:(id)sender{
     /*
     NetworkClientViewController *networkClientControllerA = [[NetworkClientViewController alloc] init];
     self.networkClientController = networkClientControllerA;
