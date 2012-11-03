@@ -14,7 +14,8 @@
 
 @implementation TestViewController
 
-@synthesize screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator;
+@synthesize groupNameInput, groupNameLabel, nameInput, nameLabel, startGroup;
+@synthesize screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -22,8 +23,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        host2 = false;
-        NSLog(@"init");
         refreshIndicator.hidesWhenStopped = TRUE;
     }
     return self;
@@ -50,12 +49,6 @@
 - (void)refresh
 {
     NSLog(@"refresh");
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    host2 = !host2;
-    [self startViewWith:host2];
 }
 
 - (void)updatePeersList:(NSArray *)peersList
