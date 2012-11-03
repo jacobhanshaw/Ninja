@@ -10,11 +10,17 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface PopOverView : UIView {
-        UILabel     *groupNameLabel;
-        UITextField *groupNameInput;
-        UILabel     *nameLabel;
-        UITextField *nameInput;
-        UIButton    *startGroup;
+        UILabel     IBOutlet *groupNameLabel;
+        UITextField IBOutlet *groupNameInput;
+        UILabel     IBOutlet *nameLabel;
+        UITextField IBOutlet *nameInput;
+        UIButton    IBOutlet *startGroup;
 }
+
+@property (nonatomic) UILabel     IBOutlet *groupNameLabel;
+@property (nonatomic) UITextField IBOutlet *groupNameInput;
+@property (nonatomic) UILabel     IBOutlet *nameLabel;
+@property (nonatomic) UITextField IBOutlet *nameInput;
+@property (nonatomic) UIButton    IBOutlet *startGroup;
 
 @end
