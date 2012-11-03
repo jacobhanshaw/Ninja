@@ -18,7 +18,7 @@
 		DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBB01644961800006DD0 /* LobbyView.m */; };
 		DDBDDBB81644A70B00006DD0 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */; };
 		DDBDDBB91644A70B00006DD0 /* UIButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */; };
-		DDC0018D163CEA410004AC36 /* BluetoothObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC0018C163CEA410004AC36 /* BluetoothObject.m */; };
+		DDBDDBC21644AC7A00006DD0 /* PopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBC11644AC7A00006DD0 /* PopOverView.m */; };
 		DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F3D163B05DA00D91401 /* BluetoothServices.m */; };
 		DDC47F42163B11C000D91401 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F41163B11C000D91401 /* AppModel.m */; };
 		DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F47163B18EF00D91401 /* NetworkingViewController.m */; };
@@ -85,8 +85,8 @@
 		DDBDDBB11644961800006DD0 /* LobbyProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobbyProtocol.h; sourceTree = "<group>"; };
 		DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
 		DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarRefresh.png; sourceTree = "<group>"; };
-		DDC0018B163CEA400004AC36 /* BluetoothObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothObject.h; sourceTree = "<group>"; };
-		DDC0018C163CEA410004AC36 /* BluetoothObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothObject.m; sourceTree = "<group>"; };
+		DDBDDBC01644AC7A00006DD0 /* PopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverView.h; sourceTree = "<group>"; };
+		DDBDDBC11644AC7A00006DD0 /* PopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopOverView.m; sourceTree = "<group>"; };
 		DDC47F3C163B05DA00D91401 /* BluetoothServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothServices.h; sourceTree = "<group>"; };
 		DDC47F3D163B05DA00D91401 /* BluetoothServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothServices.m; sourceTree = "<group>"; };
 		DDC47F40163B11C000D91401 /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
@@ -166,8 +166,6 @@
 			children = (
 				DDC47F3C163B05DA00D91401 /* BluetoothServices.h */,
 				DDC47F3D163B05DA00D91401 /* BluetoothServices.m */,
-				DDC0018B163CEA400004AC36 /* BluetoothObject.h */,
-				DDC0018C163CEA410004AC36 /* BluetoothObject.m */,
 				AD7DFE471632DB0E00268CE7 /* ANetworkingViewController.h */,
 				AD7DFE481632DB0E00268CE7 /* ANetworkingViewController.m */,
 				DDC47F46163B18EF00D91401 /* NetworkingViewController.h */,
@@ -178,6 +176,8 @@
 				AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */,
 				AD7DFE491632DB0E00268CE7 /* NetworkServerViewController.h */,
 				AD7DFE4A1632DB0E00268CE7 /* NetworkServerViewController.m */,
+				DDBDDBC01644AC7A00006DD0 /* PopOverView.h */,
+				DDBDDBC11644AC7A00006DD0 /* PopOverView.m */,
 				DDC495DE1640825600D4C063 /* NewUIExampleViewController.h */,
 				DDC495DF1640825600D4C063 /* NewUIExampleViewController.m */,
 				DDC495E01640825600D4C063 /* NewUIExampleViewController.xib */,
@@ -448,11 +448,11 @@
 				DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */,
 				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
 				DDC47F49163B18EF00D91401 /* NetworkingViewController.m in Sources */,
-				DDC0018D163CEA410004AC36 /* BluetoothObject.m in Sources */,
 				DDC495E11640825600D4C063 /* NewUIExampleViewController.m in Sources */,
 				DDBDDBB21644961800006DD0 /* ViewController.m in Sources */,
 				DDBDDBB31644961800006DD0 /* NameInputView.m in Sources */,
 				DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */,
+				DDBDDBC21644AC7A00006DD0 /* PopOverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
