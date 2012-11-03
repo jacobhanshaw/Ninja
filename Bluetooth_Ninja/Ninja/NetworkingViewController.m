@@ -1,18 +1,18 @@
 //
-//  TestViewController.m
+//  NetworkingViewController.m
 //  Ninja
 //
 //  Created by Michael on 11/2/12.
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
-#import "TestViewController.h"
+#import "NetworkingViewController.h"
 
-@interface TestViewController ()
+@interface NetworkingViewController ()
 
 @end
 
-@implementation TestViewController
+@implementation NetworkingViewController
 
 @synthesize groupNameInput, groupNameLabel, nameInput, nameLabel, startGroup;
 @synthesize screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view

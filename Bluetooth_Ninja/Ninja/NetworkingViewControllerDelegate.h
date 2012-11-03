@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TestViewControllerDelegate <NSObject>
+@protocol NetworkingViewControllerDelegate <NSObject>
 
 - (void)refreshLobby;
 

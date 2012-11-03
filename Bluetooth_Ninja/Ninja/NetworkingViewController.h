@@ -1,5 +1,5 @@
 //
-//  TestViewController.h
+//  NetworkingViewController.h
 //  Ninja
 //
 //  Created by Michael on 11/2/12.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     //Pop Over Outlets
     IBOutlet UILabel     *groupNameLabel;
