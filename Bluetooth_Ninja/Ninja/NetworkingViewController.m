@@ -14,6 +14,8 @@
 
 @implementation NetworkingViewController
 
+@synthesize label, start, leave, peers, refreshIcon, refreshIndicator;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

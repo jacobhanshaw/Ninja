@@ -74,6 +74,7 @@
 		AD7DFE531632DB7500268CE7 /* ColorSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSelector.h; sourceTree = "<group>"; };
 		AD7DFE541632DB7500268CE7 /* ColorSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSelector.m; sourceTree = "<group>"; };
 		AD7DFE6316331A9700268CE7 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		AD9C2CD71644B3830021372D /* NetworkingViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingViewControllerDelegate.h; sourceTree = "<group>"; };
 		DDBDDBAA1644961800006DD0 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DDBDDBAB1644961800006DD0 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DDBDDBAC1644961800006DD0 /* NameInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameInputView.h; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 				DDC47F46163B18EF00D91401 /* NetworkingViewController.h */,
 				DDC47F47163B18EF00D91401 /* NetworkingViewController.m */,
 				DDC47F48163B18EF00D91401 /* NetworkingViewController.xib */,
+				AD9C2CD71644B3830021372D /* NetworkingViewControllerDelegate.h */,
 				AD7DFE451632DB0E00268CE7 /* NetworkClientViewController.h */,
 				AD7DFE461632DB0E00268CE7 /* NetworkClientViewController.m */,
 				AD7DFE491632DB0E00268CE7 /* NetworkServerViewController.h */,
