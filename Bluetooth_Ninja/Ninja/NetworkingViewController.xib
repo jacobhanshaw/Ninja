@@ -324,7 +324,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrame">{{30, 149}, {260, 249}}</string>
+						<string key="NSFrame">{{25, 149}, {260, 249}}</string>
 						<reference key="NSSuperview" ref="497788672"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="53771048"/>
@@ -467,7 +467,7 @@
 								<reference key="IBUIFont" ref="768799693"/>
 							</object>
 						</array>
-						<string key="NSFrame">{{30, 106}, {260, 336}}</string>
+						<string key="NSFrame">{{25, 106}, {260, 336}}</string>
 						<reference key="NSSuperview" ref="497788672"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="654460181"/>
@@ -564,6 +564,54 @@
 						<reference key="destination" ref="654460181"/>
 					</object>
 					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">nameInputClient</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="475780157"/>
+					</object>
+					<int key="connectionID">64</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">nameInputHost</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="182337068"/>
+					</object>
+					<int key="connectionID">65</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">nameLabelClient</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="53771048"/>
+					</object>
+					<int key="connectionID">66</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">nameLabelHost</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="273118894"/>
+					</object>
+					<int key="connectionID">67</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">startGroup</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="31822986"/>
+					</object>
+					<int key="connectionID">68</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">clientGo</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="500296630"/>
+					</object>
+					<int key="connectionID">69</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -703,18 +751,8 @@
 						<reference key="parent" ref="497788672"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">49</int>
-						<reference key="object" ref="654460181"/>
-						<reference key="parent" ref="1066953372"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">48</int>
-						<reference key="object" ref="708158382"/>
-						<reference key="parent" ref="1066953372"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">47</int>
-						<reference key="object" ref="182337068"/>
+						<int key="objectID">51</int>
+						<reference key="object" ref="31822986"/>
 						<reference key="parent" ref="1066953372"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -723,8 +761,18 @@
 						<reference key="parent" ref="1066953372"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">51</int>
-						<reference key="object" ref="31822986"/>
+						<int key="objectID">47</int>
+						<reference key="object" ref="182337068"/>
+						<reference key="parent" ref="1066953372"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">48</int>
+						<reference key="object" ref="708158382"/>
+						<reference key="parent" ref="1066953372"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">49</int>
+						<reference key="object" ref="654460181"/>
 						<reference key="parent" ref="1066953372"/>
 					</object>
 				</array>
@@ -760,7 +808,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">63</int>
+			<int key="maxID">69</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -768,11 +816,14 @@
 					<string key="className">NetworkingViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="clientGo">UIButton</string>
 						<string key="groupNameInput">UITextField</string>
 						<string key="groupNameLabel">UILabel</string>
 						<string key="leave">UIButton</string>
-						<string key="nameInput">UITextField</string>
-						<string key="nameLabel">UILabel</string>
+						<string key="nameInputClient">UITextField</string>
+						<string key="nameInputHost">UITextField</string>
+						<string key="nameLabelClient">UILabel</string>
+						<string key="nameLabelHost">UILabel</string>
 						<string key="peerTable">UITableView</string>
 						<string key="refreshIcon">UIImageView</string>
 						<string key="refreshIndicator">UIActivityIndicatorView</string>
@@ -781,6 +832,10 @@
 						<string key="startGroup">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="clientGo">
+							<string key="name">clientGo</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="groupNameInput">
 							<string key="name">groupNameInput</string>
 							<string key="candidateClassName">UITextField</string>
@@ -793,12 +848,20 @@
 							<string key="name">leave</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="nameInput">
-							<string key="name">nameInput</string>
+						<object class="IBToOneOutletInfo" key="nameInputClient">
+							<string key="name">nameInputClient</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="nameLabel">
-							<string key="name">nameLabel</string>
+						<object class="IBToOneOutletInfo" key="nameInputHost">
+							<string key="name">nameInputHost</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="nameLabelClient">
+							<string key="name">nameLabelClient</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="nameLabelHost">
+							<string key="name">nameLabelHost</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="peerTable">

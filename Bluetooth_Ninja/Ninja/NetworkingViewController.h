@@ -13,9 +13,12 @@
     //Pop Over Outlets
     IBOutlet UILabel     *groupNameLabel;
     IBOutlet UITextField *groupNameInput;
-    IBOutlet UILabel     *nameLabel;
-    IBOutlet UITextField *nameInput;
+    IBOutlet UILabel     *nameLabelHost;
+    IBOutlet UITextField *nameInputHost;
+    IBOutlet UILabel     *nameLabelClient;
+    IBOutlet UITextField *nameInputClient;
     IBOutlet UIButton    *startGroup;
+    IBOutlet UIButton    *clientGo;
     //End Pop Over Outlets
     
     //Peer table view Outlets
@@ -35,9 +38,12 @@
 //Pop Over Outlets
 @property (nonatomic) IBOutlet UILabel     *groupNameLabel;
 @property (nonatomic) IBOutlet UITextField *groupNameInput;
-@property (nonatomic) IBOutlet UILabel     *nameLabel;
-@property (nonatomic) IBOutlet UITextField *nameInput;
+@property (nonatomic) IBOutlet UILabel     *nameLabelHost;
+@property (nonatomic) IBOutlet UITextField *nameInputHost;
+@property (nonatomic) IBOutlet UILabel     *nameLabelClient;
+@property (nonatomic) IBOutlet UITextField *nameInputClient;
 @property (nonatomic) IBOutlet UIButton    *startGroup;
+@property (nonatomic) IBOutlet UIButton    *clientGo;
 //End Pop Over Outlets
 
 //Peer table view Outlets

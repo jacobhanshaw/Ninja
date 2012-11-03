@@ -14,8 +14,8 @@
 
 @implementation NetworkingViewController
 
-@synthesize groupNameInput, groupNameLabel, nameInput, nameLabel, startGroup;
-@synthesize screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view
+@synthesize groupNameInput, groupNameLabel, nameInputHost, nameLabelHost, nameInputClient, nameLabelClient, startGroup;
+@synthesize clientGo, screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
