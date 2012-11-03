@@ -25,6 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        refreshIndicator.hidden = YES;
         refreshIndicator.hidesWhenStopped = TRUE;
         
         [self.view addSubview:startView];
@@ -35,58 +36,77 @@
         [clientPopOver.layer setCornerRadius:9.0];
         [hostPopOver.layer setCornerRadius: 9.0];
         
+        [startView setHidden:NO];
+        [semiTransparentOverlay setHidden:YES];
+        [clientPopOver setHidden:YES];
+        [hostPopOver setHidden:YES];
+        
+        groupNameInput.delegate = self;
+        nameInputHost.delegate = self;
+        nameInputClient.delegate = self;
+        
     }
     return self;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [startView setHidden:NO];
-    [semiTransparentOverlay setHidden:YES];
-    [clientPopOver setHidden:YES];
-    [hostPopOver setHidden:YES];
     
     [startGroupButton addTarget:self action:@selector(startGroupSelected:) forControlEvents:UIControlEventTouchUpInside];
     [joinGroupButton addTarget:self action:@selector(joinGroupSelected:) forControlEvents:UIControlEventTouchUpInside];
     [editProfileButton addTarget:self action:@selector(editProfileSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [hostGo addTarget:self action:@selector(hostGoSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [clientGo addTarget:self action:@selector(clientGoSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+ //   [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
+ //   [start setTitle:@"Start" forState:UIControlStateNormal];
 }
 
 #pragma mark Button Methods
 
 - (void)startGroupSelected:(id)sender{
-    [startView setHidden:YES];
-    [semiTransparentOverlay setHidden:NO];
-    [hostPopOver setHidden:NO];
     [self showPopOver:YES];
 }
 
 - (void)joinGroupSelected:(id)sender{
-    [startView setHidden:YES];
-    [semiTransparentOverlay setHidden:NO];
-    [clientPopOver setHidden:NO];
-    [self showPopOver:NO];
+    if([AppModel sharedAppModel].isFirstUse) {
+        [AppModel sharedAppModel].isFirstUse = NO;
+        [self showPopOver:NO];
+    }
 }
 
 - (void)editProfileSelected:(id)sender{
+    [self showPopOver:NO];
+}
+
+- (void)hostGoSelected:(id)sender{
+    
+}
+
+- (void)clientGoSelected:(id)sender{
     
 }
 
 - (void)showPopOver:(BOOL)host
 {
+    [startView setHidden:YES];
+    [semiTransparentOverlay setHidden:NO];
     if (host) {
+        [hostPopOver setHidden:NO];
         nameInputHost.placeholder = [[UIDevice currentDevice] name];
         nameInputHost.textAlignment = NSTextAlignmentCenter;
         groupNameInput.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"'"] objectAtIndex:0];
         groupNameInput.textAlignment = NSTextAlignmentCenter;
         [screenTitle setText:@"Members:"];
-        [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
-        [start setTitle:@"Start" forState:UIControlStateNormal];
+        [start setHidden:NO];
     }
     else {
+        [clientPopOver setHidden:NO];
         nameInputClient.placeholder = [[UIDevice currentDevice] name];
         nameInputClient.textAlignment = NSTextAlignmentCenter;
         [screenTitle setText:@"Groups:"];
-        [start setHidden:TRUE];
-        [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
+        [start setHidden:YES];
     }
     
     refreshTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refresh) userInfo:nil repeats:TRUE];
@@ -94,13 +114,10 @@
     
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
-    
     return YES;
 }
-
 
 - (void)refresh
 {

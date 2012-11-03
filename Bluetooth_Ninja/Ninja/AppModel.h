@@ -12,6 +12,7 @@
 #define MAX_PLAYERS 7
 
 @interface AppModel : NSObject {
+    BOOL isFirstUse;
     BOOL isServer;
     
     int originalPlayers;
@@ -21,6 +22,7 @@
 }
 
 @property(readwrite) BOOL isServer;
+@property(readwrite) BOOL isFirstUse;
 @property(readwrite) int originalPlayers;
 @property(readwrite) int livePlayers;
 @property(readwrite) BOOL playerHasDied;

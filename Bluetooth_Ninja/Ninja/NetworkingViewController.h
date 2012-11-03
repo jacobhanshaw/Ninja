@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "AppModel.h"     //REMOVE
 
-@interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     //Start View Outlets
     IBOutlet UIView      *startView;

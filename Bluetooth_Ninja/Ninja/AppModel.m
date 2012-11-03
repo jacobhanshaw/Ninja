@@ -10,7 +10,7 @@
 
 @implementation AppModel
 
-@synthesize isServer, originalPlayers, livePlayers, playerHasDied;
+@synthesize isServer, isFirstUse, originalPlayers, livePlayers, playerHasDied;
 
 + (id)sharedAppModel
 {
