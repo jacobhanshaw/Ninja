@@ -146,12 +146,6 @@
 				DDC47F3D163B05DA00D91401 /* BluetoothServices.m */,
 				DDBDDBC01644AC7A00006DD0 /* PopOverView.h */,
 				DDBDDBC11644AC7A00006DD0 /* PopOverView.m */,
-<<<<<<< HEAD
-=======
-				DDC495DE1640825600D4C063 /* NewUIExampleViewController.h */,
-				DDC495DF1640825600D4C063 /* NewUIExampleViewController.m */,
-				DDC495E01640825600D4C063 /* NewUIExampleViewController.xib */,
->>>>>>> Github won't like this
 				DDBDDBAF1644961800006DD0 /* LobbyView.h */,
 				DDBDDBB01644961800006DD0 /* LobbyView.m */,
 				ADFB6B841644CAFA00E00CBF /* TestViewController.h */,
@@ -412,10 +406,6 @@
 				AD7DFE551632DB7500268CE7 /* ColorSelector.m in Sources */,
 				DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */,
 				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
-<<<<<<< HEAD
-=======
-				DDC495E11640825600D4C063 /* NewUIExampleViewController.m in Sources */,
->>>>>>> Github won't like this
 				DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */,
 				DDBDDBC21644AC7A00006DD0 /* PopOverView.m in Sources */,
 				ADFB6B871644CAFA00E00CBF /* TestViewController.m in Sources */,

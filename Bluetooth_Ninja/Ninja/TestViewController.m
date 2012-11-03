@@ -14,7 +14,7 @@
 
 @implementation TestViewController
 
-@synthesize groupNameLabel, groupNameInput, nameLabelHost, nameLabelClient, nameInputHost, nameInputClient, startGroupHost, startGroupClient;
+@synthesize groupNameInput, groupNameLabel, nameInput, nameLabel, startGroup;
 @synthesize screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view
 @synthesize delegate;
 
