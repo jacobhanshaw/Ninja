@@ -108,10 +108,37 @@
         [screenTitle setText:@"Groups:"];
         [start setHidden:YES];
     }
+}
+
+- (void)hidePopOver
+{
+    UIView *viewToHide = hostPopOver;
+    if (hostPopOver.isHidden) {
+        viewToHide = clientPopOver;
+    }
     
+    [UIView animateWithDuration:0.5 animations:^(void){
+        [semiTransparentOverlay setCenter:CGPointMake(semiTransparentOverlay.center.x, semiTransparentOverlay.center.y + self.view.frame.size.height)];
+        [viewToHide setCenter:CGPointMake(viewToHide.center.x, viewToHide.center.y + self.view.frame.size.height)];
+    }completion:^(BOOL complete){
+        [viewToHide setHidden:TRUE];
+        [semiTransparentOverlay setHidden:TRUE];
+        [semiTransparentOverlay setCenter:self.view.center];
+        [viewToHide setCenter:self.view.center];
+    }];
+    
+}
+
+- (void)popOverDidHide
+{
     refreshTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refresh) userInfo:nil repeats:TRUE];
     [self refresh];
-    
+}
+
+- (void)didSelectGo:(id)sender
+{
+    [self hidePopOver];
+    [self popOverDidHide];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

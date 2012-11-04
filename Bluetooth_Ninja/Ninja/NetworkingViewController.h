@@ -80,7 +80,9 @@
 
 @property (nonatomic) id delegate;
 
+- (IBAction)didSelectGo:(id)sender;
 - (void)showPopOver:(BOOL) host;
 - (void)updatePeersList:(NSArray *)peersList;
+- (void)popOverDidHide;
 
 @end
