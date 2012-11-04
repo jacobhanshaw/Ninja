@@ -17,7 +17,7 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-//#define definedSessionID @"ninja"
+#define definedSessionID @"ninja"
 
 @interface BluetoothServices : NSObject <GKSessionDelegate, GKPeerPickerControllerDelegate> {
     
@@ -34,6 +34,9 @@
     BOOL validated;                 //boolean that is false until the game has been started and the host
                                     //has approved of all peers
     
+    NSString *groupName;            //name of group
+    NSString *personalName;         //name of individual (peer)
+    
 }
 
 @property (nonatomic) GKSession *bluetoothSession;
@@ -45,6 +48,11 @@
 
 //@property (nonatomic) NSMutableArray *peersInSession;
 @property (nonatomic) NSMutableArray *peersInGroup;
+
+@property (readwrite) BOOL validated;
+
+@property (nonatomic) NSString *groupName;
+@property (nonatomic) NSString *personalName;
 
 
 + (BluetoothServices *)sharedBluetoothSession;

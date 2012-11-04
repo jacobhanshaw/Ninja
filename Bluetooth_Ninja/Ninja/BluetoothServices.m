@@ -11,6 +11,7 @@
 @implementation BluetoothServices
 
 @synthesize bluetoothSession, dataReceived, originOfData, sessionReceived, context, peersInGroup;
+@synthesize validated, groupName, personalName;
 //, peersInSession;
 
 + (id)sharedBluetoothSession

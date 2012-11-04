@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "BluetoothServices.h"
 #import "AppModel.h"     //REMOVE
+
+#define definedSessionID @"ninja"
 
 @interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -80,9 +83,8 @@
 
 @property (nonatomic) id delegate;
 
-- (IBAction)didSelectGo:(id)sender;
 - (void)showPopOver:(BOOL) host;
 - (void)updatePeersList:(NSArray *)peersList;
-- (void)popOverDidHide;
+- (void)startTimer;
 
 @end

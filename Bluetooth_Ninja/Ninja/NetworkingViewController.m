@@ -45,6 +45,8 @@
         nameInputHost.delegate = self;
         nameInputClient.delegate = self;
         
+        peerTable.layer.cornerRadius = 9.0;
+        
     }
     return self;
 }
@@ -81,11 +83,23 @@
 }
 
 - (void)hostGoSelected:(id)sender{
-    
+    [hostPopOver setHidden:YES];
+    [semiTransparentOverlay setHidden:YES];
+    if(!([nameInputHost.text isEqualToString:@""] || nameInputHost.text == nil)) [BluetoothServices sharedBluetoothSession].personalName = nameInputHost.text;
+    else [BluetoothServices sharedBluetoothSession].personalName = [[UIDevice currentDevice] name];
+    if(!([groupNameInput.text isEqualToString:@""] || groupNameInput.text == nil)) [BluetoothServices sharedBluetoothSession].groupName = groupNameInput.text;
+    else [BluetoothServices sharedBluetoothSession].groupName= [[UIDevice currentDevice] name];
+    [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:definedSessionID displayName:[BluetoothServices sharedBluetoothSession].groupName sessionMode:GKSessionModePeer andContext:nil];
+    [self startTimer];
 }
 
 - (void)clientGoSelected:(id)sender{
-    
+    [clientPopOver setHidden:YES];
+    [semiTransparentOverlay setHidden:YES];
+    if(!([nameInputClient.text isEqualToString:@""] || nameInputClient.text == nil)) [BluetoothServices sharedBluetoothSession].personalName = nameInputClient.text;
+    else [BluetoothServices sharedBluetoothSession].personalName = [[UIDevice currentDevice] name];
+        [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:definedSessionID displayName:[BluetoothServices sharedBluetoothSession].personalName sessionMode:GKSessionModePeer andContext:nil];
+    [self startTimer];
 }
 
 - (void)showPopOver:(BOOL)host
@@ -94,22 +108,31 @@
     [semiTransparentOverlay setHidden:NO];
     if (host) {
         [hostPopOver setHidden:NO];
+        if([[BluetoothServices sharedBluetoothSession].personalName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].personalName == nil){
         nameInputHost.placeholder = [[UIDevice currentDevice] name];
         nameInputHost.textAlignment = NSTextAlignmentCenter;
+        }
+        else nameInputHost.placeholder =[BluetoothServices sharedBluetoothSession].personalName;
+        if([[BluetoothServices sharedBluetoothSession].groupName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].groupName == nil){
         groupNameInput.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"'"] objectAtIndex:0];
         groupNameInput.textAlignment = NSTextAlignmentCenter;
+        }
+        else groupNameInput.placeholder = [BluetoothServices sharedBluetoothSession].groupName;
         [screenTitle setText:@"Members:"];
         [start setHidden:NO];
     }
     else {
         [clientPopOver setHidden:NO];
+        if([[BluetoothServices sharedBluetoothSession].personalName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].personalName == nil){
         nameInputClient.placeholder = [[UIDevice currentDevice] name];
         nameInputClient.textAlignment = NSTextAlignmentCenter;
+        }
+        else nameInputClient.placeholder = [BluetoothServices sharedBluetoothSession].personalName;
         [screenTitle setText:@"Groups:"];
         [start setHidden:YES];
     }
 }
-
+/*
 - (void)hidePopOver
 {
     UIView *viewToHide = hostPopOver;
@@ -127,18 +150,12 @@
         [viewToHide setCenter:self.view.center];
     }];
     
-}
+} */
 
-- (void)popOverDidHide
+- (void)startTimer
 {
     refreshTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refresh) userInfo:nil repeats:TRUE];
     [self refresh];
-}
-
-- (void)didSelectGo:(id)sender
-{
-    [self hidePopOver];
-    [self popOverDidHide];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -148,6 +165,7 @@
 
 - (void)refresh
 {
+    refreshIndicator.hidden = NO;
     NSLog(@"refresh");
 }
 
