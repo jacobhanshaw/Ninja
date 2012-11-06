@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DDCEF7831632556B0003EEB2"
                BuildableName = "Ninja.app"
-               BlueprintName = "Ninja"
-               ReferencedContainer = "container:Ninja.xcodeproj">
+               BlueprintName = "Bluetooth API"
+               ReferencedContainer = "container:Bluetooth API.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DDCEF7A91632556C0003EEB2"
                BuildableName = "NinjaTests.octest"
-               BlueprintName = "NinjaTests"
-               ReferencedContainer = "container:Ninja.xcodeproj">
+               BlueprintName = "Bluetooth APITests"
+               ReferencedContainer = "container:Bluetooth API.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DDCEF7831632556B0003EEB2"
             BuildableName = "Ninja.app"
-            BlueprintName = "Ninja"
-            ReferencedContainer = "container:Ninja.xcodeproj">
+            BlueprintName = "Bluetooth API"
+            ReferencedContainer = "container:Bluetooth API.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DDCEF7831632556B0003EEB2"
             BuildableName = "Ninja.app"
-            BlueprintName = "Ninja"
-            ReferencedContainer = "container:Ninja.xcodeproj">
+            BlueprintName = "Bluetooth API"
+            ReferencedContainer = "container:Bluetooth API.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DDCEF7831632556B0003EEB2"
             BuildableName = "Ninja.app"
-            BlueprintName = "Ninja"
-            ReferencedContainer = "container:Ninja.xcodeproj">
+            BlueprintName = "Bluetooth API"
+            ReferencedContainer = "container:Bluetooth API.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

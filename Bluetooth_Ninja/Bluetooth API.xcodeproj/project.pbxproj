@@ -75,22 +75,22 @@
 		DDC47F3D163B05DA00D91401 /* BluetoothServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothServices.m; sourceTree = "<group>"; };
 		DDC47F40163B11C000D91401 /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		DDC47F41163B11C000D91401 /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
-		DDCEF7841632556B0003EEB2 /* Ninja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ninja.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDCEF7841632556B0003EEB2 /* Bluetooth API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth API.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCEF7881632556B0003EEB2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DDCEF78A1632556B0003EEB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DDCEF78C1632556B0003EEB2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DDCEF78E1632556B0003EEB2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		DDCEF7921632556B0003EEB2 /* Ninja-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ninja-Info.plist"; sourceTree = "<group>"; };
+		DDCEF7921632556B0003EEB2 /* Bluetooth API-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bluetooth API-Info.plist"; sourceTree = "<group>"; };
 		DDCEF7941632556B0003EEB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DDCEF7961632556B0003EEB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DDCEF7981632556B0003EEB2 /* Ninja-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ninja-Prefix.pch"; sourceTree = "<group>"; };
+		DDCEF7981632556B0003EEB2 /* Bluetooth API-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bluetooth API-Prefix.pch"; sourceTree = "<group>"; };
 		DDCEF79C1632556B0003EEB2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DDCEF79E1632556B0003EEB2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DDCEF7A01632556B0003EEB2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DDCEF7A31632556B0003EEB2 /* Ninja.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ninja.xcdatamodel; sourceTree = "<group>"; };
-		DDCEF7AA1632556C0003EEB2 /* NinjaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NinjaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDCEF7AA1632556C0003EEB2 /* Bluetooth APITests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bluetooth APITests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCEF7AB1632556C0003EEB2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		DDCEF7B41632556C0003EEB2 /* NinjaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NinjaTests-Info.plist"; sourceTree = "<group>"; };
+		DDCEF7B41632556C0003EEB2 /* Ninja BluetoothsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ninja BluetoothsTests-Info.plist"; sourceTree = "<group>"; };
 		DDCEF7B61632556C0003EEB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DDCEF7B81632556C0003EEB2 /* NinjaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NinjaTests.h; sourceTree = "<group>"; };
 		DDCEF7B91632556C0003EEB2 /* NinjaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NinjaTests.m; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 		DDCEF7851632556B0003EEB2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DDCEF7841632556B0003EEB2 /* Ninja.app */,
-				DDCEF7AA1632556C0003EEB2 /* NinjaTests.octest */,
+				DDCEF7841632556B0003EEB2 /* Bluetooth API.app */,
+				DDCEF7AA1632556C0003EEB2 /* Bluetooth APITests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -253,10 +253,10 @@
 		DDCEF7911632556B0003EEB2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DDCEF7921632556B0003EEB2 /* Ninja-Info.plist */,
+				DDCEF7921632556B0003EEB2 /* Bluetooth API-Info.plist */,
 				DDCEF7931632556B0003EEB2 /* InfoPlist.strings */,
 				DDCEF7961632556B0003EEB2 /* main.m */,
-				DDCEF7981632556B0003EEB2 /* Ninja-Prefix.pch */,
+				DDCEF7981632556B0003EEB2 /* Bluetooth API-Prefix.pch */,
 				DDCEF79C1632556B0003EEB2 /* Default.png */,
 				DDCEF79E1632556B0003EEB2 /* Default@2x.png */,
 				DDCEF7A01632556B0003EEB2 /* Default-568h@2x.png */,
@@ -277,7 +277,7 @@
 		DDCEF7B31632556C0003EEB2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DDCEF7B41632556C0003EEB2 /* NinjaTests-Info.plist */,
+				DDCEF7B41632556C0003EEB2 /* Ninja BluetoothsTests-Info.plist */,
 				DDCEF7B51632556C0003EEB2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -286,9 +286,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DDCEF7831632556B0003EEB2 /* Ninja */ = {
+		DDCEF7831632556B0003EEB2 /* Bluetooth API */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DDCEF7BD1632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Ninja" */;
+			buildConfigurationList = DDCEF7BD1632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Bluetooth API" */;
 			buildPhases = (
 				DDCEF7801632556B0003EEB2 /* Sources */,
 				DDCEF7811632556B0003EEB2 /* Frameworks */,
@@ -298,14 +298,14 @@
 			);
 			dependencies = (
 			);
-			name = Ninja;
+			name = "Bluetooth API";
 			productName = Ninja;
-			productReference = DDCEF7841632556B0003EEB2 /* Ninja.app */;
+			productReference = DDCEF7841632556B0003EEB2 /* Bluetooth API.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DDCEF7A91632556C0003EEB2 /* NinjaTests */ = {
+		DDCEF7A91632556C0003EEB2 /* Bluetooth APITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DDCEF7C01632556C0003EEB2 /* Build configuration list for PBXNativeTarget "NinjaTests" */;
+			buildConfigurationList = DDCEF7C01632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Bluetooth APITests" */;
 			buildPhases = (
 				DDCEF7A51632556C0003EEB2 /* Sources */,
 				DDCEF7A61632556C0003EEB2 /* Frameworks */,
@@ -317,9 +317,9 @@
 			dependencies = (
 				DDCEF7B11632556C0003EEB2 /* PBXTargetDependency */,
 			);
-			name = NinjaTests;
+			name = "Bluetooth APITests";
 			productName = NinjaTests;
-			productReference = DDCEF7AA1632556C0003EEB2 /* NinjaTests.octest */;
+			productReference = DDCEF7AA1632556C0003EEB2 /* Bluetooth APITests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -331,7 +331,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Jacob Hanshaw";
 			};
-			buildConfigurationList = DDCEF77E1632556B0003EEB2 /* Build configuration list for PBXProject "Ninja" */;
+			buildConfigurationList = DDCEF77E1632556B0003EEB2 /* Build configuration list for PBXProject "Bluetooth API" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -343,8 +343,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DDCEF7831632556B0003EEB2 /* Ninja */,
-				DDCEF7A91632556C0003EEB2 /* NinjaTests */,
+				DDCEF7831632556B0003EEB2 /* Bluetooth API */,
+				DDCEF7A91632556C0003EEB2 /* Bluetooth APITests */,
 			);
 		};
 /* End PBXProject section */
@@ -427,7 +427,7 @@
 /* Begin PBXTargetDependency section */
 		DDCEF7B11632556C0003EEB2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DDCEF7831632556B0003EEB2 /* Ninja */;
+			target = DDCEF7831632556B0003EEB2 /* Bluetooth API */;
 			targetProxy = DDCEF7B01632556C0003EEB2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -505,10 +505,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
-				INFOPLIST_FILE = "Ninja/Ninja-Info.plist";
+				GCC_PREFIX_HEADER = "Ninja/Bluetooth API-Prefix.pch";
+				INFOPLIST_FILE = "Ninja/Bluetooth API-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bluetooth API";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -517,10 +517,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
-				INFOPLIST_FILE = "Ninja/Ninja-Info.plist";
+				GCC_PREFIX_HEADER = "Ninja/Bluetooth API-Prefix.pch";
+				INFOPLIST_FILE = "Ninja/Bluetooth API-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bluetooth API";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -535,8 +535,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
-				INFOPLIST_FILE = "NinjaTests/NinjaTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "NinjaTests/Ninja BluetoothsTests-Info.plist";
+				PRODUCT_NAME = "Bluetooth APITests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -552,8 +552,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
-				INFOPLIST_FILE = "NinjaTests/NinjaTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "NinjaTests/Ninja BluetoothsTests-Info.plist";
+				PRODUCT_NAME = "Bluetooth APITests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -562,7 +562,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DDCEF77E1632556B0003EEB2 /* Build configuration list for PBXProject "Ninja" */ = {
+		DDCEF77E1632556B0003EEB2 /* Build configuration list for PBXProject "Bluetooth API" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DDCEF7BB1632556C0003EEB2 /* Debug */,
@@ -571,7 +571,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DDCEF7BD1632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Ninja" */ = {
+		DDCEF7BD1632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Bluetooth API" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DDCEF7BE1632556C0003EEB2 /* Debug */,
@@ -580,7 +580,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DDCEF7C01632556C0003EEB2 /* Build configuration list for PBXNativeTarget "NinjaTests" */ = {
+		DDCEF7C01632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Bluetooth APITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DDCEF7C11632556C0003EEB2 /* Debug */,

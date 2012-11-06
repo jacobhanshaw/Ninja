@@ -61,6 +61,8 @@
     [hostGo addTarget:self action:@selector(hostGoSelected:) forControlEvents:UIControlEventTouchUpInside];
     [clientGo addTarget:self action:@selector(clientGoSelected:) forControlEvents:UIControlEventTouchUpInside];
     
+    [leave addTarget:self action:@selector(leaveSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
  //   [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
  //   [start setTitle:@"Start" forState:UIControlStateNormal];
 }
@@ -72,10 +74,10 @@
 }
 
 - (void)joinGroupSelected:(id)sender{
-    if([AppModel sharedAppModel].isFirstUse) {
-        [AppModel sharedAppModel].isFirstUse = NO;
+  //  if([AppModel sharedAppModel].isFirstUse) {
+    //    [AppModel sharedAppModel].isFirstUse = NO;
         [self showPopOver:NO];
-    }
+  //  }
 }
 
 - (void)editProfileSelected:(id)sender{
@@ -100,6 +102,13 @@
     else [BluetoothServices sharedBluetoothSession].personalName = [[UIDevice currentDevice] name];
         [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:definedSessionID displayName:[BluetoothServices sharedBluetoothSession].personalName sessionMode:GKSessionModePeer andContext:nil];
     [self startTimer];
+}
+
+- (void)leaveSelected:(id)sender{
+    [startView setHidden:NO];
+    [hostPopOver setHidden:YES];
+    [clientPopOver setHidden:YES];
+    [self stopTimer];
 }
 
 - (void)showPopOver:(BOOL)host
@@ -138,6 +147,12 @@
     refreshTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refresh) userInfo:nil repeats:TRUE];
     [self refresh];
 }
+
+- (void)stopTimer
+{
+    [refreshTimer invalidate];
+}
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
