@@ -15,7 +15,6 @@
 		DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBB01644961800006DD0 /* LobbyView.m */; };
 		DDBDDBB81644A70B00006DD0 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */; };
 		DDBDDBB91644A70B00006DD0 /* UIButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */; };
-		DDBDDBC21644AC7A00006DD0 /* PopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBC11644AC7A00006DD0 /* PopOverView.m */; };
 		DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F3D163B05DA00D91401 /* BluetoothServices.m */; };
 		DDC47F42163B11C000D91401 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F41163B11C000D91401 /* AppModel.m */; };
 		DDCEF7891632556B0003EEB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7881632556B0003EEB2 /* UIKit.framework */; };
@@ -28,16 +27,8 @@
 		DDCEF79F1632556B0003EEB2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCEF79E1632556B0003EEB2 /* Default@2x.png */; };
 		DDCEF7A11632556B0003EEB2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCEF7A01632556B0003EEB2 /* Default-568h@2x.png */; };
 		DDCEF7A41632556B0003EEB2 /* Ninja.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7A21632556B0003EEB2 /* Ninja.xcdatamodeld */; };
-		DDCEF7AC1632556C0003EEB2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7AB1632556C0003EEB2 /* SenTestingKit.framework */; };
-		DDCEF7AD1632556C0003EEB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7881632556B0003EEB2 /* UIKit.framework */; };
-		DDCEF7AE1632556C0003EEB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78A1632556B0003EEB2 /* Foundation.framework */; };
-		DDCEF7AF1632556C0003EEB2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78E1632556B0003EEB2 /* CoreData.framework */; };
-		DDCEF7B71632556C0003EEB2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDCEF7B51632556C0003EEB2 /* InfoPlist.strings */; };
-		DDCEF7BA1632556C0003EEB2 /* NinjaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7B91632556C0003EEB2 /* NinjaTests.m */; };
 		DDCEF7CA1632559A0003EEB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7C41632559A0003EEB2 /* AppDelegate.m */; };
-		DDCEF7CB1632559A0003EEB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7C41632559A0003EEB2 /* AppDelegate.m */; };
 		DDCEF7D01632559A0003EEB2 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7C91632559A0003EEB2 /* GameViewController.m */; };
-		DDCEF7D11632559A0003EEB2 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7C91632559A0003EEB2 /* GameViewController.m */; };
 		DDCEF7D3163255A60003EEB2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7D2163255A60003EEB2 /* AudioToolbox.framework */; };
 		DDCEF7D6163257B90003EEB2 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7D4163255AC0003EEB2 /* CoreMotion.framework */; };
 		DDCEF7DF163276D60003EEB2 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7DD163276D60003EEB2 /* RootViewController.m */; };
@@ -45,16 +36,6 @@
 		DDCEF7F816329BE00003EEB2 /* ColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF7F716329BE00003EEB2 /* ColorButton.m */; };
 		DDCEF8041632AC310003EEB2 /* TablePopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF8031632AC310003EEB2 /* TablePopUp.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DDCEF7B01632556C0003EEB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DDCEF77B1632556B0003EEB2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DDCEF7831632556B0003EEB2;
-			remoteInfo = Ninja;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AD21EE611632D849009A9D4F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -69,8 +50,6 @@
 		DDBDDBB01644961800006DD0 /* LobbyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobbyView.m; sourceTree = "<group>"; };
 		DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
 		DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarRefresh.png; sourceTree = "<group>"; };
-		DDBDDBC01644AC7A00006DD0 /* PopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverView.h; sourceTree = "<group>"; };
-		DDBDDBC11644AC7A00006DD0 /* PopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopOverView.m; sourceTree = "<group>"; };
 		DDC47F3C163B05DA00D91401 /* BluetoothServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothServices.h; sourceTree = "<group>"; };
 		DDC47F3D163B05DA00D91401 /* BluetoothServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothServices.m; sourceTree = "<group>"; };
 		DDC47F40163B11C000D91401 /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
@@ -88,7 +67,6 @@
 		DDCEF79E1632556B0003EEB2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DDCEF7A01632556B0003EEB2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DDCEF7A31632556B0003EEB2 /* Ninja.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ninja.xcdatamodel; sourceTree = "<group>"; };
-		DDCEF7AA1632556C0003EEB2 /* Bluetooth APITests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bluetooth APITests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCEF7AB1632556C0003EEB2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		DDCEF7B41632556C0003EEB2 /* Ninja BluetoothsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ninja BluetoothsTests-Info.plist"; sourceTree = "<group>"; };
 		DDCEF7B61632556C0003EEB2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -125,17 +103,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DDCEF7A61632556C0003EEB2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DDCEF7AC1632556C0003EEB2 /* SenTestingKit.framework in Frameworks */,
-				DDCEF7AD1632556C0003EEB2 /* UIKit.framework in Frameworks */,
-				DDCEF7AE1632556C0003EEB2 /* Foundation.framework in Frameworks */,
-				DDCEF7AF1632556C0003EEB2 /* CoreData.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -144,8 +111,6 @@
 			children = (
 				DDC47F3C163B05DA00D91401 /* BluetoothServices.h */,
 				DDC47F3D163B05DA00D91401 /* BluetoothServices.m */,
-				DDBDDBC01644AC7A00006DD0 /* PopOverView.h */,
-				DDBDDBC11644AC7A00006DD0 /* PopOverView.m */,
 				DDBDDBAF1644961800006DD0 /* LobbyView.h */,
 				DDBDDBB01644961800006DD0 /* LobbyView.m */,
 				ADFB6B841644CAFA00E00CBF /* NetworkingViewController.h */,
@@ -219,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				DDCEF7841632556B0003EEB2 /* Bluetooth API.app */,
-				DDCEF7AA1632556C0003EEB2 /* Bluetooth APITests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -303,25 +267,6 @@
 			productReference = DDCEF7841632556B0003EEB2 /* Bluetooth API.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DDCEF7A91632556C0003EEB2 /* Bluetooth APITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DDCEF7C01632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Bluetooth APITests" */;
-			buildPhases = (
-				DDCEF7A51632556C0003EEB2 /* Sources */,
-				DDCEF7A61632556C0003EEB2 /* Frameworks */,
-				DDCEF7A71632556C0003EEB2 /* Resources */,
-				DDCEF7A81632556C0003EEB2 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DDCEF7B11632556C0003EEB2 /* PBXTargetDependency */,
-			);
-			name = "Bluetooth APITests";
-			productName = NinjaTests;
-			productReference = DDCEF7AA1632556C0003EEB2 /* Bluetooth APITests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -344,7 +289,6 @@
 			projectRoot = "";
 			targets = (
 				DDCEF7831632556B0003EEB2 /* Bluetooth API */,
-				DDCEF7A91632556C0003EEB2 /* Bluetooth APITests */,
 			);
 		};
 /* End PBXProject section */
@@ -365,31 +309,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DDCEF7A71632556C0003EEB2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DDCEF7B71632556C0003EEB2 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		DDCEF7A81632556C0003EEB2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DDCEF7801632556B0003EEB2 /* Sources */ = {
@@ -407,30 +327,11 @@
 				DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */,
 				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
 				DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */,
-				DDBDDBC21644AC7A00006DD0 /* PopOverView.m in Sources */,
 				ADFB6B871644CAFA00E00CBF /* NetworkingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DDCEF7A51632556C0003EEB2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DDCEF7BA1632556C0003EEB2 /* NinjaTests.m in Sources */,
-				DDCEF7CB1632559A0003EEB2 /* AppDelegate.m in Sources */,
-				DDCEF7D11632559A0003EEB2 /* GameViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DDCEF7B11632556C0003EEB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DDCEF7831632556B0003EEB2 /* Bluetooth API */;
-			targetProxy = DDCEF7B01632556C0003EEB2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DDCEF7931632556B0003EEB2 /* InfoPlist.strings */ = {
@@ -474,7 +375,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -494,7 +395,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -525,40 +426,6 @@
 			};
 			name = Release;
 		};
-		DDCEF7C11632556C0003EEB2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Ninja.app/Ninja";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
-				INFOPLIST_FILE = "NinjaTests/Ninja BluetoothsTests-Info.plist";
-				PRODUCT_NAME = "Bluetooth APITests";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		DDCEF7C21632556C0003EEB2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Ninja.app/Ninja";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ninja/Ninja-Prefix.pch";
-				INFOPLIST_FILE = "NinjaTests/Ninja BluetoothsTests-Info.plist";
-				PRODUCT_NAME = "Bluetooth APITests";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -576,15 +443,6 @@
 			buildConfigurations = (
 				DDCEF7BE1632556C0003EEB2 /* Debug */,
 				DDCEF7BF1632556C0003EEB2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DDCEF7C01632556C0003EEB2 /* Build configuration list for PBXNativeTarget "Bluetooth APITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DDCEF7C11632556C0003EEB2 /* Debug */,
-				DDCEF7C21632556C0003EEB2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -41,8 +41,9 @@
     IBOutlet UITableView *peerTable;
     IBOutlet UIButton *leave, *start;
     
-    IBOutlet UIActivityIndicatorView *refreshIndicator; //NOT SET UP PROPERLY
-    IBOutlet UIImageView *refreshIcon;
+    IBOutlet UIActivityIndicatorView *refreshIndicator;
+    IBOutlet UIButton *refreshIcon;
+    int manualRefreshCounter; //Tracks how many times we've refreshed due to a manual refresh, used to stop the activity indicator and reset the refresh button
     //End peer table view outlets
     
     NSTimer *refreshTimer;
@@ -77,7 +78,7 @@
 @property (nonatomic) IBOutlet UIButton *leave;
 @property (nonatomic) IBOutlet UIButton *start;
 @property (nonatomic) IBOutlet UIActivityIndicatorView *refreshIndicator;
-@property (nonatomic) IBOutlet UIImageView *refreshIcon;
+@property (nonatomic) IBOutlet UIButton *refreshIcon;
 //End peer table view outlets
 
 
@@ -86,5 +87,7 @@
 - (void)showPopOver:(BOOL) host;
 - (void)updatePeersList:(NSArray *)peersList;
 - (void)startTimer;
+- (IBAction)refreshRequest:(id)sender;
+- (void)abortRefresh; //Called if manual refresh needs to stop -- go back to main menu, game started, etc
 
 @end

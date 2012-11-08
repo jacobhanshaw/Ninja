@@ -6,3 +6,5 @@ Bluetooth_Ninja/Ninja.xcodeproj/project.xcworkspace/xcuserdata/Jacob James Hansh
 .DS_Store
 
 *.xcuserstate
+
+*.xcscheme

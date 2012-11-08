@@ -25,9 +25,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        refreshIndicator.hidden = YES;
-        refreshIndicator.hidesWhenStopped = TRUE;
-        
         [self.view addSubview:startView];
         [self.view addSubview:semiTransparentOverlay];
         [self.view addSubview:clientPopOver];
@@ -46,9 +43,39 @@
         nameInputClient.delegate = self;
         
         peerTable.layer.cornerRadius = 9.0;
+        manualRefreshCounter = -1; //-1 means that the button is ready to be pressed
         
     }
     return self;
+}
+
+- (IBAction)refreshRequest:(id)sender
+{
+    if (manualRefreshCounter == -1) {
+        [refreshTimer invalidate];
+        refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(refreshRequest:) userInfo:nil repeats:TRUE];
+        [refreshIcon setHidden:TRUE];
+        [refreshIndicator startAnimating];
+    }
+    if (manualRefreshCounter < 2) {
+        [self refresh];
+        ++manualRefreshCounter;
+    }
+    else {
+        [refreshTimer invalidate];
+        manualRefreshCounter = -1;
+        [self startTimer];
+        [refreshIndicator stopAnimating];
+        [refreshIcon setHidden:FALSE];
+    }
+}
+
+- (void)abortRefresh
+{
+    [refreshTimer invalidate];
+    manualRefreshCounter = -1;
+    [refreshIndicator stopAnimating];
+    [refreshIcon setHidden:FALSE];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -63,24 +90,29 @@
     
     [leave addTarget:self action:@selector(leaveSelected:) forControlEvents:UIControlEventTouchUpInside];
     
- //   [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
- //   [start setTitle:@"Start" forState:UIControlStateNormal];
+    //   [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
+    //   [start setTitle:@"Start" forState:UIControlStateNormal];
 }
 
 #pragma mark Button Methods
 
 - (void)startGroupSelected:(id)sender{
+    [startView setHidden:YES];
     [self showPopOver:YES];
 }
 
 - (void)joinGroupSelected:(id)sender{
-  //  if([AppModel sharedAppModel].isFirstUse) {
-    //    [AppModel sharedAppModel].isFirstUse = NO;
-        [self showPopOver:NO];
-  //  }
+    [[clientGo titleLabel] setText:@"Go"]; //Set this in case the view was last used for edit profile
+    if([AppModel sharedAppModel].isFirstUse){
+        [AppModel sharedAppModel].isFirstUse = NO;
+    [self showPopOver:NO];
+}
+    [startView setHidden:YES];
+    [self startTimer];
 }
 
 - (void)editProfileSelected:(id)sender{
+    [[clientGo titleLabel] setText:@"Save"]; //Change button label to fit profile editing
     [self showPopOver:NO];
 }
 
@@ -100,11 +132,17 @@
     [semiTransparentOverlay setHidden:YES];
     if(!([nameInputClient.text isEqualToString:@""] || nameInputClient.text == nil)) [BluetoothServices sharedBluetoothSession].personalName = nameInputClient.text;
     else [BluetoothServices sharedBluetoothSession].personalName = [[UIDevice currentDevice] name];
+    
+    if (startView.hidden == TRUE) { //If this is true then the person was editing their profile, not starting a game
         [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:definedSessionID displayName:[BluetoothServices sharedBluetoothSession].personalName sessionMode:GKSessionModePeer andContext:nil];
-    [self startTimer];
+        [self startTimer];
+    }
 }
 
 - (void)leaveSelected:(id)sender{
+    if (refreshIndicator.isAnimating) {
+        [self abortRefresh];
+    }
     [startView setHidden:NO];
     [hostPopOver setHidden:YES];
     [clientPopOver setHidden:YES];
@@ -113,18 +151,15 @@
 
 - (void)showPopOver:(BOOL)host
 {
-    [startView setHidden:YES];
     [semiTransparentOverlay setHidden:NO];
     if (host) {
         [hostPopOver setHidden:NO];
         if([[BluetoothServices sharedBluetoothSession].personalName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].personalName == nil){
-        nameInputHost.placeholder = [[UIDevice currentDevice] name];
-        nameInputHost.textAlignment = NSTextAlignmentCenter;
+            nameInputHost.placeholder = [[UIDevice currentDevice] name];
         }
         else nameInputHost.placeholder =[BluetoothServices sharedBluetoothSession].personalName;
         if([[BluetoothServices sharedBluetoothSession].groupName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].groupName == nil){
-        groupNameInput.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"'"] objectAtIndex:0];
-        groupNameInput.textAlignment = NSTextAlignmentCenter;
+            groupNameInput.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"'"] objectAtIndex:0];
         }
         else groupNameInput.placeholder = [BluetoothServices sharedBluetoothSession].groupName;
         [screenTitle setText:@"Members:"];
@@ -133,8 +168,7 @@
     else {
         [clientPopOver setHidden:NO];
         if([[BluetoothServices sharedBluetoothSession].personalName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].personalName == nil){
-        nameInputClient.placeholder = [[UIDevice currentDevice] name];
-        nameInputClient.textAlignment = NSTextAlignmentCenter;
+            nameInputClient.placeholder = [[UIDevice currentDevice] name];
         }
         else nameInputClient.placeholder = [BluetoothServices sharedBluetoothSession].personalName;
         [screenTitle setText:@"Groups:"];
@@ -161,7 +195,6 @@
 
 - (void)refresh
 {
-    refreshIndicator.hidden = NO;
     NSLog(@"refresh");
 }
 
@@ -190,7 +223,7 @@
         [peerTable insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationFade];
         [peerTable endUpdates];
     }
-
+    
 }
 
 //TableView delegate
@@ -227,6 +260,8 @@
             break;
     }
 }
+
+
 
 //End table view delegate
 
