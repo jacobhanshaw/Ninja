@@ -102,7 +102,8 @@
 }
 
 - (void)joinGroupSelected:(id)sender{
-    [[clientGo titleLabel] setText:@"Go"]; //Set this in case the view was last used for edit profile
+    [clientGo setTitle:@"Go" forState:UIControlStateHighlighted]; //Set this in case the view was last used for edit profile
+    [clientGo setTitle:@"Go" forState:UIControlStateNormal];
     if([AppModel sharedAppModel].isFirstUse){
         [AppModel sharedAppModel].isFirstUse = NO;
     [self showPopOver:NO];
@@ -112,7 +113,8 @@
 }
 
 - (void)editProfileSelected:(id)sender{
-    [[clientGo titleLabel] setText:@"Save"]; //Change button label to fit profile editing
+    [clientGo setTitle:@"Save" forState:UIControlStateHighlighted]; //Change button label to fit profile editing
+    [clientGo setTitle:@"Save" forState:UIControlStateNormal];
     [self showPopOver:NO];
 }
 
