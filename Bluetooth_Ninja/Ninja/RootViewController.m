@@ -60,9 +60,14 @@
     //[self.view addSubview:tempColor];
     //NewUIExampleViewController *test = [[NewUIExampleViewController alloc] init];//WithNibName:@"NetworkViewController" bundle:nil];
     [AppModel sharedAppModel].isFirstUse = YES; //FIND BETTER PLACE FOR THIS
-    NetworkingViewController *test = [[NetworkingViewController alloc] initWithNibName:@"NetworkingViewController" bundle:nil];
+    test = [[NetworkingViewController alloc] initWithNibName:@"NetworkingViewController" bundle:nil];
+    test.delegate = self;
     [self presentViewController:test animated:YES completion:nil];
 }
 
+- (void)refreshLobby
+{
+    [test updatePeersList:[NSArray arrayWithObjects:@"line 1", @"line 2", nil]];
+}
 
 @end

@@ -10,6 +10,8 @@
 		AD21EE621632D849009A9D4F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD21EE611632D849009A9D4F /* GameKit.framework */; };
 		AD7DFE551632DB7500268CE7 /* ColorSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE541632DB7500268CE7 /* ColorSelector.m */; };
 		AD7DFE6416331A9800268CE7 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD7DFE6316331A9700268CE7 /* RootViewController.xib */; };
+		AD7F7611164D9BFE001EE310 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD7F7610164D9BFE001EE310 /* CustomCell.xib */; };
+		AD7F7614164D9D88001EE310 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7613164D9D88001EE310 /* CustomCell.m */; };
 		ADFB6B871644CAFA00E00CBF /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFB6B851644CAFA00E00CBF /* NetworkingViewController.m */; };
 		ADFB6B881644CAFA00E00CBF /* NetworkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFB6B861644CAFA00E00CBF /* NetworkingViewController.xib */; };
 		DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBB01644961800006DD0 /* LobbyView.m */; };
@@ -42,6 +44,9 @@
 		AD7DFE531632DB7500268CE7 /* ColorSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSelector.h; sourceTree = "<group>"; };
 		AD7DFE541632DB7500268CE7 /* ColorSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSelector.m; sourceTree = "<group>"; };
 		AD7DFE6316331A9700268CE7 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		AD7F7610164D9BFE001EE310 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		AD7F7612164D9D87001EE310 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		AD7F7613164D9D88001EE310 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		ADFB6B841644CAFA00E00CBF /* NetworkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingViewController.h; sourceTree = "<group>"; };
 		ADFB6B851644CAFA00E00CBF /* NetworkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkingViewController.m; sourceTree = "<group>"; };
 		ADFB6B861644CAFA00E00CBF /* NetworkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkingViewController.xib; sourceTree = "<group>"; };
@@ -116,6 +121,9 @@
 				ADFB6B841644CAFA00E00CBF /* NetworkingViewController.h */,
 				ADFB6B851644CAFA00E00CBF /* NetworkingViewController.m */,
 				ADFB6B861644CAFA00E00CBF /* NetworkingViewController.xib */,
+				AD7F7610164D9BFE001EE310 /* CustomCell.xib */,
+				AD7F7612164D9D87001EE310 /* CustomCell.h */,
+				AD7F7613164D9D88001EE310 /* CustomCell.m */,
 				DD6FF9981644F4000098905D /* NetworkingViewControllerDelegate.h */,
 			);
 			name = Bluetooth;
@@ -306,6 +314,7 @@
 				DDBDDBB81644A70B00006DD0 /* UIButtonBarRefresh@2x.png in Resources */,
 				DDBDDBB91644A70B00006DD0 /* UIButtonBarRefresh.png in Resources */,
 				ADFB6B881644CAFA00E00CBF /* NetworkingViewController.xib in Resources */,
+				AD7F7611164D9BFE001EE310 /* CustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +337,7 @@
 				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
 				DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */,
 				ADFB6B871644CAFA00E00CBF /* NetworkingViewController.m in Sources */,
+				AD7F7614164D9D88001EE310 /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,7 @@
 @synthesize startView, startGroupButton, joinGroupButton, editProfileButton;
 @synthesize semiTransparentOverlay, hostPopOver, clientPopOver;
 @synthesize groupNameInput, groupNameLabel, nameInputHost, nameLabelHost, nameInputClient, nameLabelClient, hostGo;
-@synthesize clientGo, screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view
+@synthesize clientGo, screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator, customCell; //Peer table view
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -109,7 +109,6 @@
     [self showPopOver:NO];
 }
     [startView setHidden:YES];
-    [self startTimer];
 }
 
 - (void)editProfileSelected:(id)sender{
@@ -197,7 +196,7 @@
 
 - (void)refresh
 {
-    NSLog(@"refresh");
+    [delegate refreshLobby];
 }
 
 - (void)updatePeersList:(NSArray *)peersList
@@ -208,13 +207,13 @@
         
         for (int i = 0; i < [tableViewInfo count]; i++) {
             if (![peersList containsObject:[tableViewInfo objectAtIndex:i]]) {
-                [deletePaths addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+                [deletePaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
             }
         }
         
         for (int i = 0; i < [peersList count]; i++) {
             if (![tableViewInfo containsObject:[peersList objectAtIndex:i]]) {
-                [insertPaths addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+                [insertPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
             }
         }
         
@@ -232,14 +231,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     UITableViewCell *returnCell;
     if ((returnCell = [peerTable dequeueReusableCellWithIdentifier:@"group"]) == NULL) {
-        returnCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"group"];
+        [peerTable registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"group"];
+        returnCell = [peerTable dequeueReusableCellWithIdentifier:@"group"];
     }
     
     switch (indexPath.section) {
         case 0:
-            returnCell.textLabel.text = tableViewInfo[indexPath.row];
+            ((CustomCell *)returnCell).name.text = tableViewInfo[indexPath.row];
             break;
             
         default:

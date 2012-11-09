@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BluetoothServices.h"
 #import "AppModel.h"     //REMOVE
+#import "NetworkingViewControllerDelegate.h"
+#import "CustomCell.h"
 
 #define definedSessionID @"ninja"
 
@@ -39,6 +41,7 @@
     //Peer table view Outlets
     IBOutlet UILabel *screenTitle;
     IBOutlet UITableView *peerTable;
+    IBOutlet UITableViewCell *customCell;
     IBOutlet UIButton *leave, *start;
     
     IBOutlet UIActivityIndicatorView *refreshIndicator;
@@ -75,6 +78,7 @@
 //Peer table view Outlets
 @property (nonatomic) IBOutlet UILabel *screenTitle;
 @property (nonatomic) IBOutlet UITableView *peerTable;
+@property (nonatomic) IBOutlet UITableViewCell *customCell;
 @property (nonatomic) IBOutlet UIButton *leave;
 @property (nonatomic) IBOutlet UIButton *start;
 @property (nonatomic) IBOutlet UIActivityIndicatorView *refreshIndicator;
