@@ -17,7 +17,7 @@
 @synthesize startView, startGroupButton, joinGroupButton, editProfileButton;
 @synthesize semiTransparentOverlay, hostPopOver, clientPopOver;
 @synthesize groupNameInput, groupNameLabel, nameInputHost, nameLabelHost, nameInputClient, nameLabelClient, hostGo;
-@synthesize clientGo, screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator, customCell; //Peer table view
+@synthesize clientGo, screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -106,8 +106,8 @@
     [clientGo setTitle:@"Go" forState:UIControlStateNormal];
     if([AppModel sharedAppModel].isFirstUse){
         [AppModel sharedAppModel].isFirstUse = NO;
-    [self showPopOver:NO];
-}
+        [self showPopOver:NO];
+    }
     [startView setHidden:YES];
 }
 
@@ -271,9 +271,63 @@
         returnCell = [peerTable dequeueReusableCellWithIdentifier:@"group"];
     }
     
+    UIColor *tintColor;
+    float hue;
+    switch (((CellData *)tableViewInfo[indexPath.row]).colorSelection) {
+        case 0:
+            hue = 0;
+            break;
+        case 1:
+            hue = 38;
+            break;
+        case 2:
+            hue = 60;
+            break;
+        case 3:
+            hue = 105;
+            break;
+        case 4:
+            hue = 175;
+            break;
+        case 5:
+            hue = 224;
+            break;
+        case 6:
+            hue = 275;
+            break;
+        case 7:
+            hue = 320;
+            break;
+        default:
+            hue = 0;
+            break;
+    }
+    tintColor = [UIColor colorWithHue:hue / 360 saturation:1.0 brightness:1 alpha:1];
+        
+    UIImage *tempRef;
+    switch (((CellData *)tableViewInfo[indexPath.row]).iconLevel) {
+        case 0:
+            tempRef = [UIImage imageNamed:@"star0.jpg"];
+            break;
+            
+        case 1:
+            tempRef = [UIImage imageNamed:@"star1.jpg"];
+            break;
+            
+        case 2:
+            tempRef = [UIImage imageNamed:@"star2"];
+            break;
+            
+        default:
+            break;
+    }
+    
     switch (indexPath.section) {
         case 0:
-            ((CustomCell *)returnCell).name.text = tableViewInfo[indexPath.row];
+            ((CustomCell *)returnCell).name.text = ((CellData *)tableViewInfo[indexPath.row]).name;
+            ((CustomCell *)returnCell).score.text = [NSString stringWithFormat:@"%i", ((CellData *)tableViewInfo[indexPath.row]).score];
+            ((CustomCell *)returnCell).picture.image = tempRef;
+            ((CustomCell *)returnCell).colorSelector.tintColor = tintColor;
             break;
             
         default:
@@ -297,7 +351,17 @@
     }
 }
 
-
+//Makes keyboard disappear on touch outside of keyboard or textfield, only used when an input view thingy is visible
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (!hostPopOver.isHidden) {
+        [groupNameInput resignFirstResponder];
+        [nameInputHost resignFirstResponder];
+    }
+    else if(!clientPopOver.isHidden)
+        [nameLabelClient resignFirstResponder];
+    
+}
 
 //End table view delegate
 

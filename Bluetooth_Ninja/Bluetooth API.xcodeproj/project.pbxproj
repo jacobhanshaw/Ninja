@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD004BBA164DBE2D00226CAF /* CellData.m in Sources */ = {isa = PBXBuildFile; fileRef = AD004BB9164DBE2D00226CAF /* CellData.m */; };
+		AD004BBF164DC9F600226CAF /* star0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD004BBC164DC9F600226CAF /* star0.jpg */; };
+		AD004BC0164DC9F600226CAF /* star1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD004BBD164DC9F600226CAF /* star1.jpg */; };
+		AD004BC1164DC9F600226CAF /* star2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD004BBE164DC9F600226CAF /* star2.jpg */; };
 		AD21EE621632D849009A9D4F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD21EE611632D849009A9D4F /* GameKit.framework */; };
 		AD7DFE551632DB7500268CE7 /* ColorSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7DFE541632DB7500268CE7 /* ColorSelector.m */; };
 		AD7DFE6416331A9800268CE7 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD7DFE6316331A9700268CE7 /* RootViewController.xib */; };
@@ -40,6 +44,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD004BB8164DBE2D00226CAF /* CellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellData.h; sourceTree = "<group>"; };
+		AD004BB9164DBE2D00226CAF /* CellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellData.m; sourceTree = "<group>"; };
+		AD004BBC164DC9F600226CAF /* star0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = star0.jpg; sourceTree = "<group>"; };
+		AD004BBD164DC9F600226CAF /* star1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = star1.jpg; sourceTree = "<group>"; };
+		AD004BBE164DC9F600226CAF /* star2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = star2.jpg; sourceTree = "<group>"; };
 		AD21EE611632D849009A9D4F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		AD7DFE531632DB7500268CE7 /* ColorSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSelector.h; sourceTree = "<group>"; };
 		AD7DFE541632DB7500268CE7 /* ColorSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSelector.m; sourceTree = "<group>"; };
@@ -125,6 +134,8 @@
 				AD7F7612164D9D87001EE310 /* CustomCell.h */,
 				AD7F7613164D9D88001EE310 /* CustomCell.m */,
 				DD6FF9981644F4000098905D /* NetworkingViewControllerDelegate.h */,
+				AD004BB8164DBE2D00226CAF /* CellData.h */,
+				AD004BB9164DBE2D00226CAF /* CellData.m */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -133,6 +144,9 @@
 			isa = PBXGroup;
 			children = (
 				DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */,
+				AD004BBC164DC9F600226CAF /* star0.jpg */,
+				AD004BBD164DC9F600226CAF /* star1.jpg */,
+				AD004BBE164DC9F600226CAF /* star2.jpg */,
 				DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */,
 			);
 			name = Icons;
@@ -315,6 +329,9 @@
 				DDBDDBB91644A70B00006DD0 /* UIButtonBarRefresh.png in Resources */,
 				ADFB6B881644CAFA00E00CBF /* NetworkingViewController.xib in Resources */,
 				AD7F7611164D9BFE001EE310 /* CustomCell.xib in Resources */,
+				AD004BBF164DC9F600226CAF /* star0.jpg in Resources */,
+				AD004BC0164DC9F600226CAF /* star1.jpg in Resources */,
+				AD004BC1164DC9F600226CAF /* star2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +355,7 @@
 				DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */,
 				ADFB6B871644CAFA00E00CBF /* NetworkingViewController.m in Sources */,
 				AD7F7614164D9D88001EE310 /* CustomCell.m in Sources */,
+				AD004BBA164DBE2D00226CAF /* CellData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
