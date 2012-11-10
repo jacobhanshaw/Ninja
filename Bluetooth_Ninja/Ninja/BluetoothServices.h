@@ -17,7 +17,8 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-#define definedSessionID @"ninja"
+#define definedSessionID @"ninja" //remove
+#define MAX_PLAYERS 8             //currently not used. Use if you want a max number of players.
 
 @interface BluetoothServices : NSObject <GKSessionDelegate, GKPeerPickerControllerDelegate> {
     
@@ -30,9 +31,6 @@
     
     NSMutableArray *peersInSession; //all other devices in the session
     NSMutableArray *peersInGroup;   //list of devices to send data to
-    
-    BOOL validated;                 //boolean that is false until the game has been started and the host
-                                    //has approved of all peers
     
     NSString *groupName;            //name of group
     NSString *personalName;         //name of individual (peer)
@@ -49,10 +47,7 @@
 //@property (nonatomic) NSMutableArray *peersInSession;
 @property (nonatomic) NSMutableArray *peersInGroup;
 
-@property (readwrite) BOOL validated;
-
 @property (nonatomic) NSString *groupName;
-@property (nonatomic) NSString *personalName;
 
 
 + (BluetoothServices *)sharedBluetoothSession;
@@ -60,6 +55,9 @@
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext;
 
 - (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll;
+
+-(void) setPersonalName:(NSString *)newPersonalName;
+-(NSString *) getPersonalName;
 
 -(NSArray *) getPeersInSession;
 

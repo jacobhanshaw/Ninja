@@ -11,7 +11,7 @@
 @implementation BluetoothServices
 
 @synthesize bluetoothSession, dataReceived, originOfData, sessionReceived, context, peersInGroup;
-@synthesize validated, groupName, personalName;
+@synthesize groupName;
 //, peersInSession;
 
 + (id)sharedBluetoothSession
@@ -33,7 +33,8 @@
 
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext {
     
-    validated = NO;
+    personalName = inputName;
+    
     peersInSession = [[NSMutableArray alloc] init];
     self.peersInGroup = [[NSMutableArray alloc] init];
     
@@ -72,8 +73,7 @@
 }
 
 - (void) receiveData:(NSData *)inputData fromPeer:(NSString *)inputPeer inSession:(GKSession *)inputSession context:(void *)inputContext {
-
-    if(validated){
+    
     self.dataReceived = inputData;
     self.originOfData = inputPeer;
     self.sessionReceived = inputSession;
@@ -82,15 +82,21 @@
     NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"NewDataReceived" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
     
-    }
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YOURMEHTODNAMEHERE) name:@"NewDataReceived" object:[BluetoothServices sharedBluetoothServices]];
     
 }
 
 -(NSArray *) getPeersInSession{
     return peersInSession;
-} 
+}
 
+-(void) setPersonalName:(NSString *)newPersonalName {
+    personalName = newPersonalName;
+}
+
+-(NSString *) getPersonalName {
+    return personalName;
+}
 
 #pragma mark GKSessionDelegate Methods
 
@@ -99,18 +105,10 @@
     
     if (state == GKPeerStateConnected) {
         [peersInSession addObject:peerID];
-        
-       // unsigned char connect[1];
-       // connect[0] = 5;
-        
-      //  [self updateMembersLabel];
-        
-       // [self sendData:connect];
     }
     else if (state == GKPeerStateDisconnected) {
         [peersInSession removeObject:peerID];
-      //  if ([peersInSession count] < MAX_PLAYERS)
-        //    [self.bluetoothSession setAvailable:TRUE];
+      //  if ([peersInSession count] < MAX_PLAYERS) [self.bluetoothSession setAvailable:TRUE];
     }
 }
 
@@ -122,13 +120,9 @@
         NSError *acceptConnectionError;
         if(![self.bluetoothSession acceptConnectionFromPeer:peerID error:&acceptConnectionError])
             NSLog(@"Session Fail with Error: %@", [acceptConnectionError localizedDescription]);
-     //   if ([peersInSession count] == MAX_PLAYERS) {
-      //      [thisSession setAvailable:FALSE];
-       // }
+     //   if ([peersInSession count] == MAX_PLAYERS) [thisSession setAvailable:FALSE];
     }
-    else {
-        [self.bluetoothSession denyConnectionFromPeer:peerID];
-    }
+    else [self.bluetoothSession denyConnectionFromPeer:peerID];
 }
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error

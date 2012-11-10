@@ -13,7 +13,8 @@
 #import "NetworkingViewControllerDelegate.h"
 #import "CustomCell.h"
 
-#define definedSessionID @"ninja"
+//#define sessionID @"ninja" we recommend to define your sessionId as your unique Apple app identifier
+#define MAX_LENGTH 16
 
 @interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -52,6 +53,7 @@
     NSTimer *refreshTimer;
     id delegate;
     NSArray *tableViewInfo;
+    NSString *appIdentifier;
 }
 
 //Start View Outlets
@@ -84,7 +86,6 @@
 @property (nonatomic) IBOutlet UIActivityIndicatorView *refreshIndicator;
 @property (nonatomic) IBOutlet UIButton *refreshIcon;
 //End peer table view outlets
-
 
 @property (nonatomic) id delegate;
 

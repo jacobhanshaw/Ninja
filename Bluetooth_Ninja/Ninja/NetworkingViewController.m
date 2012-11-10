@@ -45,6 +45,8 @@
         peerTable.layer.cornerRadius = 9.0;
         manualRefreshCounter = -1; //-1 means that the button is ready to be pressed
         
+        appIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+        
     }
     return self;
 }
@@ -89,9 +91,7 @@
     [clientGo addTarget:self action:@selector(clientGoSelected:) forControlEvents:UIControlEventTouchUpInside];
     
     [leave addTarget:self action:@selector(leaveSelected:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //   [leave setTitle:@"Main Menu" forState:UIControlStateNormal];
-    //   [start setTitle:@"Start" forState:UIControlStateNormal];
+    [start addTarget:self action:@selector(startSelected:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark Button Methods
@@ -120,22 +120,36 @@
 - (void)hostGoSelected:(id)sender{
     [hostPopOver setHidden:YES];
     [semiTransparentOverlay setHidden:YES];
-    if(!([nameInputHost.text isEqualToString:@""] || nameInputHost.text == nil)) [BluetoothServices sharedBluetoothSession].personalName = nameInputHost.text;
-    else [BluetoothServices sharedBluetoothSession].personalName = [[UIDevice currentDevice] name];
-    if(!([groupNameInput.text isEqualToString:@""] || groupNameInput.text == nil)) [BluetoothServices sharedBluetoothSession].groupName = groupNameInput.text;
-    else [BluetoothServices sharedBluetoothSession].groupName= [[UIDevice currentDevice] name];
-    [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:definedSessionID displayName:[BluetoothServices sharedBluetoothSession].groupName sessionMode:GKSessionModePeer andContext:nil];
+    
+    NSString *personalName;
+    if(!([nameInputHost.text isEqualToString:@""] || nameInputHost.text == nil)) personalName = nameInputHost.text;
+    else if (!([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil)) personalName = [[BluetoothServices sharedBluetoothSession] getPersonalName];
+    else personalName = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
+    
+    unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
+    personalName = [personalName stringByAppendingString:[NSString stringWithCharacters:&newline length:1]];
+    
+    if(!([groupNameInput.text isEqualToString:@""] || groupNameInput.text == nil))
+        [BluetoothServices sharedBluetoothSession].groupName = groupNameInput.text;
+    else [BluetoothServices sharedBluetoothSession].groupName = [[UIDevice currentDevice] name];
+    
+    personalName = [personalName stringByAppendingString:[BluetoothServices sharedBluetoothSession].groupName];
+    
+    [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:[BluetoothServices sharedBluetoothSession].groupName sessionMode:GKSessionModePeer andContext:nil];
     [self startTimer];
 }
 
 - (void)clientGoSelected:(id)sender{
     [clientPopOver setHidden:YES];
     [semiTransparentOverlay setHidden:YES];
-    if(!([nameInputClient.text isEqualToString:@""] || nameInputClient.text == nil)) [BluetoothServices sharedBluetoothSession].personalName = nameInputClient.text;
-    else [BluetoothServices sharedBluetoothSession].personalName = [[UIDevice currentDevice] name];
+    
+    NSString *personalName;
+    if(!([nameInputClient.text isEqualToString:@""] || nameInputClient.text == nil)) personalName = nameInputClient.text;
+    else if (!([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil)) personalName = [[BluetoothServices sharedBluetoothSession] getPersonalName];
+    else personalName = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];;
     
     if (startView.hidden == TRUE) { //If this is true then the person was editing their profile, not starting a game
-        [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:definedSessionID displayName:[BluetoothServices sharedBluetoothSession].personalName sessionMode:GKSessionModePeer andContext:nil];
+        [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:personalName sessionMode:GKSessionModePeer andContext:nil];
         [self startTimer];
     }
 }
@@ -150,17 +164,26 @@
     [self stopTimer];
 }
 
+- (void)startSelected:(id)sender{
+    if (refreshIndicator.isAnimating) {
+        [self abortRefresh];
+    }
+    [self stopTimer];
+    
+    //Put your code to start here
+}
+
 - (void)showPopOver:(BOOL)host
 {
     [semiTransparentOverlay setHidden:NO];
     if (host) {
         [hostPopOver setHidden:NO];
-        if([[BluetoothServices sharedBluetoothSession].personalName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].personalName == nil){
-            nameInputHost.placeholder = [[UIDevice currentDevice] name];
+        if([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil){
+            nameInputHost.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
         }
-        else nameInputHost.placeholder =[BluetoothServices sharedBluetoothSession].personalName;
+        else nameInputHost.placeholder = [[BluetoothServices sharedBluetoothSession] getPersonalName];
         if([[BluetoothServices sharedBluetoothSession].groupName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].groupName == nil){
-            groupNameInput.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"'"] objectAtIndex:0];
+            groupNameInput.placeholder = [[UIDevice currentDevice] name];
         }
         else groupNameInput.placeholder = [BluetoothServices sharedBluetoothSession].groupName;
         [screenTitle setText:@"Members:"];
@@ -168,14 +191,16 @@
     }
     else {
         [clientPopOver setHidden:NO];
-        if([[BluetoothServices sharedBluetoothSession].personalName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].personalName == nil){
-            nameInputClient.placeholder = [[UIDevice currentDevice] name];
+        if([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil){
+            nameInputClient.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
         }
-        else nameInputClient.placeholder = [BluetoothServices sharedBluetoothSession].personalName;
+        else nameInputClient.placeholder = [[BluetoothServices sharedBluetoothSession] getPersonalName];
         [screenTitle setText:@"Groups:"];
         [start setHidden:YES];
     }
 }
+
+#pragma mark timer methods
 
 - (void)startTimer
 {
@@ -188,10 +213,18 @@
     [refreshTimer invalidate];
 }
 
+#pragma mark textField methods
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
     return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.text.length >= MAX_LENGTH && range.length == 0) return NO; // return NO to not change text
+    else return YES;
 }
 
 - (void)refresh
