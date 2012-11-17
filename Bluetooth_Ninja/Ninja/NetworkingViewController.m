@@ -18,7 +18,7 @@
 @synthesize semiTransparentOverlay, hostPopOver, clientPopOver;
 @synthesize groupNameInput, groupNameLabel, nameInputHost, nameLabelHost, nameInputClient, nameLabelClient, hostGo;
 @synthesize clientGo, screenTitle, peerTable, leave, start, refreshIcon, refreshIndicator; //Peer table view
-@synthesize delegate;
+@synthesize delegate, isHost;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -97,11 +97,15 @@
 #pragma mark Button Methods
 
 - (void)startGroupSelected:(id)sender{
+    self.isHost = YES;
+    [peerTable setEditing: YES animated: YES];
     [startView setHidden:YES];
     [self showPopOver:YES];
 }
 
 - (void)joinGroupSelected:(id)sender{
+    self.isHost = NO;
+    [peerTable setEditing: YES animated: YES];
     [clientGo setTitle:@"Go" forState:UIControlStateHighlighted]; //Set this in case the view was last used for edit profile
     [clientGo setTitle:@"Go" forState:UIControlStateNormal];
     if([AppModel sharedAppModel].isFirstUse){
@@ -349,6 +353,11 @@
             return 0;
             break;
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.isHost;
 }
 
 //Makes keyboard disappear on touch outside of keyboard or textfield, only used when an input view thingy is visible

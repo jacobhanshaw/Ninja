@@ -53,6 +53,7 @@
     id delegate;
     NSArray *tableViewInfo;
     NSString *appIdentifier;
+    BOOL isHost;
 }
 
 //Start View Outlets
@@ -86,6 +87,7 @@
 //End peer table view outlets
 
 @property (nonatomic) id delegate;
+@property (readwrite) BOOL isHost;
 
 - (void)showPopOver:(BOOL) host;
 - (void)updatePeersList:(NSArray *)peersList;
