@@ -12,11 +12,12 @@
 @interface ColorButton : UIButton{
     
     UIView *solidColorView;
-    
+    BOOL   hasTitle;
 }
 
 @property (nonatomic) UIView *solidColorView;
 
+- (id)initWithFrame:(CGRect)inputFrame andImage:(UIColor *) inputColor;
 - (id)initWithFrame:(CGRect)inputFrame andImage:(UIColor *) inputColor andTitle:(NSString *)inputTitle;
 
 @end

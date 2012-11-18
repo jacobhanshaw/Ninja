@@ -12,6 +12,7 @@
 #import "AppModel.h"     //REMOVE
 #import "NetworkingViewControllerDelegate.h"
 #import "CustomCell.h"
+#import "ColorButton.h"
 
 //#define sessionID @"ninja" we recommend to define your sessionId as your unique Apple app identifier
 #define MAX_LENGTH 16

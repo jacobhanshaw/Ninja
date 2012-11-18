@@ -96,16 +96,14 @@
 
 #pragma mark Button Methods
 
-- (void)startGroupSelected:(id)sender{
+- (IBAction)startGroupSelected:(UIButton *)sender{
     self.isHost = YES;
-    [peerTable setEditing: YES animated: YES];
     [startView setHidden:YES];
     [self showPopOver:YES];
 }
 
-- (void)joinGroupSelected:(id)sender{
+- (IBAction)joinGroupSelected:(UIButton *)sender{
     self.isHost = NO;
-    [peerTable setEditing: YES animated: YES];
     [clientGo setTitle:@"Go" forState:UIControlStateHighlighted]; //Set this in case the view was last used for edit profile
     [clientGo setTitle:@"Go" forState:UIControlStateNormal];
     if([AppModel sharedAppModel].isFirstUse){
@@ -115,13 +113,13 @@
     [startView setHidden:YES];
 }
 
-- (void)editProfileSelected:(id)sender{
+- (IBAction)editProfileSelected:(UIButton *)sender{
     [clientGo setTitle:@"Save" forState:UIControlStateHighlighted]; //Change button label to fit profile editing
     [clientGo setTitle:@"Save" forState:UIControlStateNormal];
     [self showPopOver:NO];
 }
 
-- (void)hostGoSelected:(id)sender{
+- (IBAction)hostGoSelected:(UIButton *)sender{
     [hostPopOver setHidden:YES];
     [semiTransparentOverlay setHidden:YES];
     
@@ -129,7 +127,6 @@
     if(!([nameInputHost.text isEqualToString:@""] || nameInputHost.text == nil)) personalName = nameInputHost.text;
     else if (!([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil)) personalName = [[BluetoothServices sharedBluetoothSession] getPersonalName];
     else personalName = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
-    
     unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
     personalName = [personalName stringByAppendingString:[NSString stringWithCharacters:&newline length:1]];
     
@@ -137,13 +134,15 @@
         [BluetoothServices sharedBluetoothSession].groupName = groupNameInput.text;
     else [BluetoothServices sharedBluetoothSession].groupName = [[UIDevice currentDevice] name];
     
+    [BluetoothServices sharedBluetoothSession].groupName = [[BluetoothServices sharedBluetoothSession].groupName stringByReplacingOccurrencesOfString:@"iPhone" withString:@"Group"];
+    
     personalName = [personalName stringByAppendingString:[BluetoothServices sharedBluetoothSession].groupName];
     
     [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:[BluetoothServices sharedBluetoothSession].groupName sessionMode:GKSessionModePeer andContext:nil];
     [self startTimer];
 }
 
-- (void)clientGoSelected:(id)sender{
+- (IBAction)clientGoSelected:(UIButton *)sender{
     [clientPopOver setHidden:YES];
     [semiTransparentOverlay setHidden:YES];
     
@@ -158,7 +157,7 @@
     }
 }
 
-- (void)leaveSelected:(id)sender{
+- (IBAction)leaveSelected:(UIButton *)sender{
     if (refreshIndicator.isAnimating) {
         [self abortRefresh];
     }
@@ -168,13 +167,22 @@
     [self stopTimer];
 }
 
-- (void)startSelected:(id)sender{
+- (IBAction)startSelected:(UIButton *)sender{
     if (refreshIndicator.isAnimating) {
         [self abortRefresh];
     }
     [self stopTimer];
     
     //Put your code to start here
+}
+
+- (IBAction)colorSelectorSelector:(UIButton *)sender {
+ //   if(sender.tag == 1) show button select
+    [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
+}
+
+- (void)highlightButton:(UIButton *)button {
+    [button setHighlighted:YES];
 }
 
 - (void)showPopOver:(BOOL)host
@@ -188,6 +196,7 @@
         else nameInputHost.placeholder = [[BluetoothServices sharedBluetoothSession] getPersonalName];
         if([[BluetoothServices sharedBluetoothSession].groupName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].groupName == nil){
             groupNameInput.placeholder = [[UIDevice currentDevice] name];
+            groupNameInput.placeholder = [groupNameInput.placeholder stringByReplacingOccurrencesOfString:@"iPhone" withString:@"Group"];
         }
         else groupNameInput.placeholder = [BluetoothServices sharedBluetoothSession].groupName;
         [screenTitle setText:@"Members:"];
@@ -332,12 +341,15 @@
             ((CustomCell *)returnCell).score.text = [NSString stringWithFormat:@"%i", ((CellData *)tableViewInfo[indexPath.row]).score];
             ((CustomCell *)returnCell).picture.image = tempRef;
             ((CustomCell *)returnCell).colorSelector.tintColor = tintColor;
+            if((self.isHost && indexPath.row == 0) || (!self.isHost && indexPath.row == 1)) ((CustomCell *)returnCell).colorSelector.tag = 1;
+            else ((CustomCell *)returnCell).colorSelector.tag = 0;
+            [((CustomCell *)returnCell).colorSelector addTarget:self action:@selector(colorSelectorSelector:) forControlEvents:UIControlEventTouchUpInside];
             break;
             
         default:
             returnCell.textLabel.text = @"if you're reading this, something has gone horribly wrong";
             break;
-    }
+        }
     
     return returnCell;
 }
@@ -355,11 +367,26 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.isHost){
+      //  [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        NSMutableArray *tempMutableArray = [NSMutableArray arrayWithArray:tableViewInfo];
+        [tempMutableArray removeObjectAtIndex:indexPath.row];
+        tableViewInfo = [NSArray arrayWithArray:tempMutableArray];
+        [tableView reloadData];
+    }
+    else{
+        
+    }
+}
+
+/*
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return self.isHost;
 }
-
+*/
 //Makes keyboard disappear on touch outside of keyboard or textfield, only used when an input view thingy is visible
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
