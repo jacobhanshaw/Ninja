@@ -376,9 +376,10 @@
         [tempMutableArray removeObjectAtIndex:indexPath.row];
         tableViewInfo = [NSArray arrayWithArray:tempMutableArray];
         [tableView reloadData];
+        //MUST REMOVE FROM SESSION
     }
     else{
-        
+        //JOIN SESSION
     }
 }
 
