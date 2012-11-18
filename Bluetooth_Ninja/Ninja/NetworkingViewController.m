@@ -344,6 +344,7 @@
             if((self.isHost && indexPath.row == 0) || (!self.isHost && indexPath.row == 1)) ((CustomCell *)returnCell).colorSelector.tag = 1;
             else ((CustomCell *)returnCell).colorSelector.tag = 0;
             [((CustomCell *)returnCell).colorSelector addTarget:self action:@selector(colorSelectorSelector:) forControlEvents:UIControlEventTouchUpInside];
+            [self highlightButton:((CustomCell *)returnCell).colorSelector];
             break;
             
         default:
