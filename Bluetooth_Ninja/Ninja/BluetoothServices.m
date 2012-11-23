@@ -11,7 +11,7 @@
 @implementation BluetoothServices
 
 @synthesize bluetoothSession, dataReceived, originOfData, sessionReceived, context, peersInGroup;
-@synthesize groupName;
+//@synthesize groupName;
 //, peersInSession;
 
 + (id)sharedBluetoothSession
@@ -34,6 +34,8 @@
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext {
     
     personalName = inputName;
+    
+    failedConnections = 0;
     
     peersInSession = [[NSMutableArray alloc] init];
     self.peersInGroup = [[NSMutableArray alloc] init];
@@ -87,7 +89,19 @@
 }
 
 -(NSArray *) getPeersInSession{
-    return peersInSession;
+    return [self.bluetoothSession peersWithConnectionState:GKPeerStateConnected];
+}
+
+-(NSArray *) getAvailablePeers{
+    return [self.bluetoothSession peersWithConnectionState:GKPeerStateAvailable];
+}
+
+-(void) setGroupName:(NSString *)newGroupName {
+    groupName = newGroupName;
+}
+
+-(NSString *) getGroupName {
+    return groupName;
 }
 
 -(void) setPersonalName:(NSString *)newPersonalName {
@@ -99,7 +113,7 @@
 }
 
 #pragma mark GKSessionDelegate Methods
-
+/*
 // we've gotten a state change in the session
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
     
@@ -111,10 +125,12 @@
       //  if ([peersInSession count] < MAX_PLAYERS) [self.bluetoothSession setAvailable:TRUE];
     }
 }
-
+*/
 //Should have more logic, prompt user?
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
+    [self.bluetoothSession acceptConnectionFromPeer:peerID error:nil];
+    /*
     //Called when a client tries to connect to a server
     if (![peersInSession containsObject:peerID]) {
         NSError *acceptConnectionError;
@@ -123,6 +139,7 @@
      //   if ([peersInSession count] == MAX_PLAYERS) [thisSession setAvailable:FALSE];
     }
     else [self.bluetoothSession denyConnectionFromPeer:peerID];
+     */
 }
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error
@@ -130,9 +147,14 @@
     NSLog(@"Session Fail with Error: %@", [error localizedDescription]);
 }
 
+
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
 {
     NSLog(@"Connection with Peer Failed with Error: %@", [error localizedDescription]);
+    if(failedConnections < 10){
+    [bluetoothSession connectToPeer:peerID withTimeout:5.0];
+    failedConnections++;
+    }
 }
 
 

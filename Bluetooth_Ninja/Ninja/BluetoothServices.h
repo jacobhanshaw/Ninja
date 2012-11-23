@@ -35,6 +35,8 @@
     NSString *groupName;            //name of group
     NSString *personalName;         //name of individual (peer)
     
+    int failedConnections;
+    
 }
 
 @property (nonatomic) GKSession *bluetoothSession;
@@ -47,8 +49,6 @@
 //@property (nonatomic) NSMutableArray *peersInSession;
 @property (nonatomic) NSMutableArray *peersInGroup;
 
-@property (nonatomic) NSString *groupName;
-
 
 + (BluetoothServices *)sharedBluetoothSession;
 
@@ -56,9 +56,13 @@
 
 - (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll;
 
+-(void) setGroupName:(NSString *)newGroupName;
+-(NSString *) getGroupName;
+
 -(void) setPersonalName:(NSString *)newPersonalName;
 -(NSString *) getPersonalName;
 
 -(NSArray *) getPeersInSession;
+-(NSArray *) getAvailablePeers;
 
 @end

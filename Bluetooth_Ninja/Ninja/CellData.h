@@ -30,16 +30,18 @@ enum colors {
 
 {
     NSString *name;
+    NSString *peerID;
     int score;
     enum icons iconLevel;
     enum colors colorSelection;
 }
 
 @property (nonatomic) NSString *name;
+@property (nonatomic) NSString *peerID;
 @property (assign) int score;
 @property (assign) enum icons iconLevel;
 @property (assign) enum colors colorSelection;
 
-- (id)initWithColor:(enum colors)_color name:(NSString *)_name score:(int)_score andIcon:(enum icons)_iconLevel;
+- (id)initWithColor:(enum colors)_color name:(NSString *)_name peerID:(NSString *)_peerID score:(int)_score andIcon:(enum icons)_iconLevel;
 
 @end

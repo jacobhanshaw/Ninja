@@ -67,10 +67,10 @@
 
 - (void)refreshLobby
 {
-    CellData *test1 = [[CellData alloc] initWithColor:2 name:@"Michael" score:1337 andIcon:0];
-    CellData *test2 = [[CellData alloc] initWithColor:7 name:@"Jacob" score:8008 andIcon:1];
+  //  CellData *test1 = [[CellData alloc] initWithColor:2 name:@"Michael" score:1337 andIcon:0];
+   // CellData *test2 = [[CellData alloc] initWithColor:7 name:@"Jacob" score:8008 andIcon:1];
     
-    [test updatePeersList:[NSArray arrayWithObjects:test1, test2, nil]];
+   // [test updatePeersList:[NSArray arrayWithObjects:test1, test2, nil]];
 }
 
 @end

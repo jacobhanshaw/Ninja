@@ -54,7 +54,9 @@
     id delegate;
     NSArray *tableViewInfo;
     NSString *appIdentifier;
+    BOOL isInGroup;
     BOOL isHost;
+    CellData *personalCellData;
 }
 
 //Start View Outlets

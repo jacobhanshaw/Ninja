@@ -46,7 +46,6 @@
         manualRefreshCounter = -1; //-1 means that the button is ready to be pressed
         
         appIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-        
     }
     return self;
 }
@@ -98,12 +97,14 @@
 
 - (IBAction)startGroupSelected:(UIButton *)sender{
     self.isHost = YES;
+    isInGroup = NO;
     [startView setHidden:YES];
     [self showPopOver:YES];
 }
 
 - (IBAction)joinGroupSelected:(UIButton *)sender{
     self.isHost = NO;
+    isInGroup = NO;
     [clientGo setTitle:@"Go" forState:UIControlStateHighlighted]; //Set this in case the view was last used for edit profile
     [clientGo setTitle:@"Go" forState:UIControlStateNormal];
     if([AppModel sharedAppModel].isFirstUse){
@@ -123,22 +124,29 @@
     [hostPopOver setHidden:YES];
     [semiTransparentOverlay setHidden:YES];
     
-    NSString *personalName;
-    if(!([nameInputHost.text isEqualToString:@""] || nameInputHost.text == nil)) personalName = nameInputHost.text;
-    else if (!([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil)) personalName = [[BluetoothServices sharedBluetoothSession] getPersonalName];
-    else personalName = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
+    NSString *displayName;
+    if(!([nameInputHost.text isEqualToString:@""] || nameInputHost.text == nil)) [[BluetoothServices sharedBluetoothSession] setPersonalName: nameInputHost.text];
+    else if (([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil))
+        [[BluetoothServices sharedBluetoothSession] setPersonalName: [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0]];
+    
+    displayName = [[BluetoothServices sharedBluetoothSession] getPersonalName];
+    
     unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
-    personalName = [personalName stringByAppendingString:[NSString stringWithCharacters:&newline length:1]];
+    displayName = [displayName stringByAppendingString:[NSString stringWithCharacters:&newline length:1]];
     
     if(!([groupNameInput.text isEqualToString:@""] || groupNameInput.text == nil))
-        [BluetoothServices sharedBluetoothSession].groupName = groupNameInput.text;
-    else [BluetoothServices sharedBluetoothSession].groupName = [[UIDevice currentDevice] name];
+        [[BluetoothServices sharedBluetoothSession] setGroupName: groupNameInput.text];
+    else if (([[[BluetoothServices sharedBluetoothSession] getGroupName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getGroupName] == nil))
+        [[BluetoothServices sharedBluetoothSession] setGroupName:[[UIDevice currentDevice] name]];
     
-    [BluetoothServices sharedBluetoothSession].groupName = [[BluetoothServices sharedBluetoothSession].groupName stringByReplacingOccurrencesOfString:@"iPhone" withString:@"Group"];
+    NSLog(@"%@", [[BluetoothServices sharedBluetoothSession] getGroupName]);
     
-    personalName = [personalName stringByAppendingString:[BluetoothServices sharedBluetoothSession].groupName];
+    [[BluetoothServices sharedBluetoothSession] setGroupName: [[[BluetoothServices sharedBluetoothSession] getGroupName] stringByReplacingOccurrencesOfString:@"iPhone" withString:@"Group"]];
     
-    [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:[BluetoothServices sharedBluetoothSession].groupName sessionMode:GKSessionModePeer andContext:nil];
+    displayName = [displayName stringByAppendingString:[[BluetoothServices sharedBluetoothSession] getGroupName]];
+    
+    NSLog(@"%@",displayName);
+    [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:displayName sessionMode:GKSessionModePeer andContext:nil];
     [self startTimer];
 }
 
@@ -194,11 +202,11 @@
             nameInputHost.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
         }
         else nameInputHost.placeholder = [[BluetoothServices sharedBluetoothSession] getPersonalName];
-        if([[BluetoothServices sharedBluetoothSession].groupName isEqualToString:@""] || [BluetoothServices sharedBluetoothSession].groupName == nil){
+        if([[[BluetoothServices sharedBluetoothSession] getGroupName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getGroupName] == nil){
             groupNameInput.placeholder = [[UIDevice currentDevice] name];
             groupNameInput.placeholder = [groupNameInput.placeholder stringByReplacingOccurrencesOfString:@"iPhone" withString:@"Group"];
         }
-        else groupNameInput.placeholder = [BluetoothServices sharedBluetoothSession].groupName;
+        else groupNameInput.placeholder = [[BluetoothServices sharedBluetoothSession] getGroupName];
         [screenTitle setText:@"Members:"];
         [start setHidden:NO];
     }
@@ -242,7 +250,32 @@
 
 - (void)refresh
 {
-    [delegate refreshLobby];
+    //[delegate refreshLobby];
+    if(!personalCellData) personalCellData = [[CellData alloc] initWithColor:0 name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
+    NSMutableArray *peersList = [[NSMutableArray alloc] init];
+    if(self.isHost || isInGroup){
+        [peersList addObject:personalCellData];
+        NSArray *connectedPeers = [[BluetoothServices sharedBluetoothSession] getPeersInSession];
+        for(int i = 0; i < [connectedPeers count]; ++i){
+            NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer:[connectedPeers objectAtIndex:i]];
+            [peersList addObject:[[CellData alloc] initWithColor:i+1 name: peerDisplayName peerID: [connectedPeers objectAtIndex:i] score:0 andIcon:0]];
+        }
+    }
+    else{
+        NSArray *availablePeers = [[BluetoothServices sharedBluetoothSession] getAvailablePeers];
+        for(int i = 0; i < [availablePeers count]; ++i){
+            NSLog(@"%@", [availablePeers objectAtIndex:i]);
+            NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer:[availablePeers objectAtIndex:i]];
+            NSLog(@"%@", peerDisplayName);
+            unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
+            NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
+            if([peerDisplayName rangeOfString:newLineCharacterString].location != NSNotFound){
+                NSString *groupName = [[peerDisplayName componentsSeparatedByString:newLineCharacterString] objectAtIndex:1];
+                [peersList addObject:[[CellData alloc] initWithColor:i+1 name: groupName peerID: [availablePeers objectAtIndex:i] score:0 andIcon:0]];
+            }
+        }
+    }
+    [self updatePeersList:peersList]; 
 }
 
 - (void)updatePeersList:(NSArray *)peersList
@@ -373,13 +406,29 @@
     if(self.isHost){
       //  [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         NSMutableArray *tempMutableArray = [NSMutableArray arrayWithArray:tableViewInfo];
+        NSString *peerToRemove = ((CellData *)[tempMutableArray objectAtIndex:indexPath.row]).peerID;
         [tempMutableArray removeObjectAtIndex:indexPath.row];
         tableViewInfo = [NSArray arrayWithArray:tempMutableArray];
         [tableView reloadData];
-        //MUST REMOVE FROM SESSION
+        
+        //DISCONNECT FROM SESSION
+        [[BluetoothServices sharedBluetoothSession].bluetoothSession disconnectPeerFromAllPeers:peerToRemove];
     }
-    else{
+    else if(!isInGroup){
         //JOIN SESSION
+        //MAY NEED TO DO SOMETHING SPECIAL HERE AS THE HOST PEERID IS DIFFERENT
+        NSString *peerToConnectWith = ((CellData *)[tableViewInfo objectAtIndex:indexPath.row]).peerID;
+        [[BluetoothServices sharedBluetoothSession].bluetoothSession connectToPeer:peerToConnectWith withTimeout:5.0];
+        
+        //MOVE INTO GROUP VIEW
+        isInGroup = YES;
+        NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer: peerToConnectWith];
+        unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
+        NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
+        NSString *groupName = [[peerDisplayName componentsSeparatedByString:newLineCharacterString] objectAtIndex:1];
+        [groupName stringByAppendingString:@":"];
+        [screenTitle setText:groupName];
+        [self refresh];
     }
 }
 

@@ -10,15 +10,16 @@
 
 @implementation CellData
 
-@synthesize colorSelection, name, score, iconLevel;
+@synthesize colorSelection, name, score, iconLevel, peerID;
 
-- (id)initWithColor:(enum colors)_color name:(NSString *)_name score:(int)_score andIcon:(enum icons)_iconLevel
+- (id)initWithColor:(enum colors)_color name:(NSString *)_name peerID:(NSString *)_peerID score:(int)_score andIcon:(enum icons)_iconLevel
 {
     self = [super init];
     if (self) {
         
         colorSelection = _color;
         name = _name;
+        peerID = _peerID;
         score = _score;
         iconLevel = _iconLevel;
     }
