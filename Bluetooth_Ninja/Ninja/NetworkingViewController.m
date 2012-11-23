@@ -426,7 +426,8 @@
         unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
         NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
         NSString *groupName = [[peerDisplayName componentsSeparatedByString:newLineCharacterString] objectAtIndex:1];
-        [groupName stringByAppendingString:@":"];
+        [[BluetoothServices sharedBluetoothSession] setGroupName:groupName];
+        groupName = [groupName stringByAppendingString:@":"];
         [screenTitle setText:groupName];
         [self refresh];
     }
