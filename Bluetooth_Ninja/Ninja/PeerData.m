@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Jacob Hanshaw. All rights reserved.
 //
 
-#import "CellData.h"
+#import "PeerData.h"
 
-@implementation CellData
+@implementation PeerData
 
 @synthesize colorSelection, name, score, iconLevel, peerID;
 

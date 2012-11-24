@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ColorButton.h"
 
 @interface CustomCell : UITableViewCell
 

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD004BBA164DBE2D00226CAF /* CellData.m in Sources */ = {isa = PBXBuildFile; fileRef = AD004BB9164DBE2D00226CAF /* CellData.m */; };
+		AD004BBA164DBE2D00226CAF /* PeerData.m in Sources */ = {isa = PBXBuildFile; fileRef = AD004BB9164DBE2D00226CAF /* PeerData.m */; };
 		AD004BBF164DC9F600226CAF /* star0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD004BBC164DC9F600226CAF /* star0.jpg */; };
 		AD004BC0164DC9F600226CAF /* star1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD004BBD164DC9F600226CAF /* star1.jpg */; };
 		AD004BC1164DC9F600226CAF /* star2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD004BBE164DC9F600226CAF /* star2.jpg */; };
@@ -22,6 +22,9 @@
 		DDBDDBB91644A70B00006DD0 /* UIButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */; };
 		DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F3D163B05DA00D91401 /* BluetoothServices.m */; };
 		DDC47F42163B11C000D91401 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F41163B11C000D91401 /* AppModel.m */; };
+		DDC5CFB016618277007D07F1 /* Remove-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DDC5CFAE16618277007D07F1 /* Remove-icon.png */; };
+		DDC5CFB116618277007D07F1 /* Remove-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDC5CFAF16618277007D07F1 /* Remove-icon@2x.png */; };
+		DDC5CFB41661837D007D07F1 /* remove_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DDC5CFB31661837D007D07F1 /* remove_icon.png */; };
 		DDCEF7891632556B0003EEB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF7881632556B0003EEB2 /* UIKit.framework */; };
 		DDCEF78B1632556B0003EEB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78A1632556B0003EEB2 /* Foundation.framework */; };
 		DDCEF78D1632556B0003EEB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEF78C1632556B0003EEB2 /* CoreGraphics.framework */; };
@@ -43,8 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AD004BB8164DBE2D00226CAF /* CellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellData.h; sourceTree = "<group>"; };
-		AD004BB9164DBE2D00226CAF /* CellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellData.m; sourceTree = "<group>"; };
+		AD004BB8164DBE2D00226CAF /* PeerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerData.h; sourceTree = "<group>"; };
+		AD004BB9164DBE2D00226CAF /* PeerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeerData.m; sourceTree = "<group>"; };
 		AD004BBC164DC9F600226CAF /* star0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = star0.jpg; sourceTree = "<group>"; };
 		AD004BBD164DC9F600226CAF /* star1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = star1.jpg; sourceTree = "<group>"; };
 		AD004BBE164DC9F600226CAF /* star2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = star2.jpg; sourceTree = "<group>"; };
@@ -64,6 +67,9 @@
 		DDC47F3D163B05DA00D91401 /* BluetoothServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothServices.m; sourceTree = "<group>"; };
 		DDC47F40163B11C000D91401 /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		DDC47F41163B11C000D91401 /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
+		DDC5CFAE16618277007D07F1 /* Remove-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove-icon.png"; sourceTree = "<group>"; };
+		DDC5CFAF16618277007D07F1 /* Remove-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Remove-icon@2x.png"; sourceTree = "<group>"; };
+		DDC5CFB31661837D007D07F1 /* remove_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove_icon.png; sourceTree = "<group>"; };
 		DDCEF7841632556B0003EEB2 /* Bluetooth API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth API.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCEF7881632556B0003EEB2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DDCEF78A1632556B0003EEB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,8 +133,8 @@
 				AD7F7610164D9BFE001EE310 /* CustomCell.xib */,
 				AD7F7612164D9D87001EE310 /* CustomCell.h */,
 				AD7F7613164D9D88001EE310 /* CustomCell.m */,
-				AD004BB8164DBE2D00226CAF /* CellData.h */,
-				AD004BB9164DBE2D00226CAF /* CellData.m */,
+				AD004BB8164DBE2D00226CAF /* PeerData.h */,
+				AD004BB9164DBE2D00226CAF /* PeerData.m */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -239,6 +245,9 @@
 				DDCEF79C1632556B0003EEB2 /* Default.png */,
 				DDCEF79E1632556B0003EEB2 /* Default@2x.png */,
 				DDCEF7A01632556B0003EEB2 /* Default-568h@2x.png */,
+				DDC5CFB31661837D007D07F1 /* remove_icon.png */,
+				DDC5CFAE16618277007D07F1 /* Remove-icon.png */,
+				DDC5CFAF16618277007D07F1 /* Remove-icon@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -325,6 +334,9 @@
 				AD004BBF164DC9F600226CAF /* star0.jpg in Resources */,
 				AD004BC0164DC9F600226CAF /* star1.jpg in Resources */,
 				AD004BC1164DC9F600226CAF /* star2.jpg in Resources */,
+				DDC5CFB016618277007D07F1 /* Remove-icon.png in Resources */,
+				DDC5CFB116618277007D07F1 /* Remove-icon@2x.png in Resources */,
+				DDC5CFB41661837D007D07F1 /* remove_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +359,7 @@
 				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
 				ADFB6B871644CAFA00E00CBF /* NetworkingViewController.m in Sources */,
 				AD7F7614164D9D88001EE310 /* CustomCell.m in Sources */,
-				AD004BBA164DBE2D00226CAF /* CellData.m in Sources */,
+				AD004BBA164DBE2D00226CAF /* PeerData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

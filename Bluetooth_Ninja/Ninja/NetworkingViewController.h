@@ -10,9 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BluetoothServices.h"
 #import "AppModel.h"     //REMOVE
-#import "NetworkingViewControllerDelegate.h"
 #import "CustomCell.h"
-#import "ColorButton.h"
+#import "PeerData.h"
 
 //#define sessionID @"ninja" we recommend to define your sessionId as your unique Apple app identifier
 #define MAX_LENGTH 16
@@ -56,7 +55,8 @@
     NSString *appIdentifier;                      //bundle identifier, used as sessionID, unique to each app
     BOOL isInGroup;                               //used only for peers other than the host, indicates if the peer has joined a group
     BOOL isHost;
-    CellData *personalCellData;                   //variable used to hold cell data for this user
+    int  rowOfPeerToRemove;                       //if host decides to remove a peer, save the row in this variable
+    PeerData *personalPeerData;                   //variable used to hold cell data for this user
 }
 
 //Start View Outlets

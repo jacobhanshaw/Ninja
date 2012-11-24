@@ -26,7 +26,7 @@ enum colors {
     MAGENTA
 }colors;
 
-@interface CellData : NSObject
+@interface PeerData : NSObject
 
 {
     NSString *name;

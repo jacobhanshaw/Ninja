@@ -11,9 +11,8 @@
 #import "GameViewController.h"
 #import "ColorSelector.h"
 #import "NetworkingViewController.h"
-#import "NetworkingViewControllerDelegate.h"
 
-@interface RootViewController : UIViewController <NetworkingViewControllerDelegate> {
+@interface RootViewController : UIViewController {
     
     NetworkingViewController *test;
     UIButton *startGame;

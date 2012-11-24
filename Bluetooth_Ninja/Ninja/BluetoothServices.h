@@ -31,6 +31,7 @@
     
     NSMutableArray *peersInSession; //all other devices in the session
     NSMutableArray *peersInGroup;   //list of devices to send data to
+    NSMutableArray *peersBlocked;   //list of devices blocked from joining the session
     
     NSString *groupName;            //name of group
     NSString *personalName;         //name of individual (peer)
@@ -67,5 +68,8 @@
 
 -(NSArray *) getPeersInSession; //connected peerIDs
 -(NSArray *) getAvailablePeers; //available peerIDs
+
+-(void) setPeersBlocked:(NSMutableArray *)newPeersBlocked;
+-(NSMutableArray *) getPeersBlocked;
 
 @end

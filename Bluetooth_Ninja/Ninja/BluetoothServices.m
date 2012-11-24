@@ -124,6 +124,15 @@
     return personalName;
 }
 
+-(void) setPeersBlocked:(NSMutableArray *)newPeersBlocked {
+    peersBlocked = newPeersBlocked;
+}
+
+-(NSMutableArray *) getPeersBlocked {
+    return peersBlocked;
+}
+
+
 #pragma mark GKSessionDelegate Methods
 /*
  // example code of implementing the didChangeState GKSession delegate method
@@ -143,14 +152,14 @@
 //Called when a client tries to connect to a server
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
+    if(![peersBlocked containsObject:peerID]){
     NSError *acceptConnectionError;
     if(![self.bluetoothSession acceptConnectionFromPeer:peerID error:&acceptConnectionError])
         NSLog(@"Session Fail with Error: %@", [acceptConnectionError localizedDescription]);
-    
+    }
     //     if ([peersInSession count] == MAX_PLAYERS) [thisSession setAvailable:NO];
     //     if (![peersInSession containsObject:peerID]) { }
     //     else [self.bluetoothSession denyConnectionFromPeer:peerID];
-    
 }
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error

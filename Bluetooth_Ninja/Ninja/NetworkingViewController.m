@@ -264,14 +264,14 @@
 - (void)refresh
 {
     //[delegate refreshLobby];
-    if(!personalCellData) personalCellData = [[CellData alloc] initWithColor:0 name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
+    if(!personalPeerData) personalPeerData = [[PeerData alloc] initWithColor:0 name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
     NSMutableArray *peersList = [[NSMutableArray alloc] init];
     if(self.isHost || isInGroup){
-        [peersList addObject:personalCellData];
+        [peersList addObject:personalPeerData];
         NSArray *connectedPeers = [[BluetoothServices sharedBluetoothSession] getPeersInSession];
         for(int i = 0; i < [connectedPeers count]; ++i){
             NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer:[connectedPeers objectAtIndex:i]];
-            [peersList addObject:[[CellData alloc] initWithColor:i+1 name: peerDisplayName peerID: [connectedPeers objectAtIndex:i] score:0 andIcon:0]];
+            [peersList addObject:[[PeerData alloc] initWithColor:i+1 name: peerDisplayName peerID: [connectedPeers objectAtIndex:i] score:0 andIcon:0]];
         }
     }
     else{
@@ -284,7 +284,7 @@
             NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
             if([peerDisplayName rangeOfString:newLineCharacterString].location != NSNotFound){
                 NSString *groupName = [[peerDisplayName componentsSeparatedByString:newLineCharacterString] objectAtIndex:1];
-                [peersList addObject:[[CellData alloc] initWithColor:i+1 name: groupName peerID: [availablePeers objectAtIndex:i] score:0 andIcon:0]];
+                [peersList addObject:[[PeerData alloc] initWithColor:i+1 name: groupName peerID: [availablePeers objectAtIndex:i] score:0 andIcon:0]];
             }
         }
     }
@@ -332,7 +332,7 @@
     
     UIColor *tintColor;
     float hue;
-    switch (((CellData *)tableViewInfo[indexPath.row]).colorSelection) {
+    switch (((PeerData *)tableViewInfo[indexPath.row]).colorSelection) {
         case 0:
             hue = 0;
             break;
@@ -364,7 +364,7 @@
     tintColor = [UIColor colorWithHue:hue / 360 saturation:1.0 brightness:1 alpha:1];
         
     UIImage *tempRef;
-    switch (((CellData *)tableViewInfo[indexPath.row]).iconLevel) {
+    switch (((PeerData *)tableViewInfo[indexPath.row]).iconLevel) {
         case 0:
             tempRef = [UIImage imageNamed:@"star0.jpg"];
             break;
@@ -383,9 +383,9 @@
     
     switch (indexPath.section) {
         case 0:
-            ((CustomCell *)returnCell).name.text = ((CellData *)tableViewInfo[indexPath.row]).name;
-            ((CustomCell *)returnCell).score.text = [NSString stringWithFormat:@"%i", ((CellData *)tableViewInfo[indexPath.row]).score];
-            ((CustomCell *)returnCell).picture.image = tempRef;
+            ((CustomCell *)returnCell).name.text = ((PeerData *)tableViewInfo[indexPath.row]).name;
+            ((CustomCell *)returnCell).score.text = [NSString stringWithFormat:@"%i", ((PeerData *)tableViewInfo[indexPath.row]).score];
+            if(!self.isHost) ((CustomCell *)returnCell).picture.image = tempRef;
             ((CustomCell *)returnCell).colorSelector.tintColor = tintColor;
             if((self.isHost && indexPath.row == 0) || (!self.isHost && indexPath.row == 1)) ((CustomCell *)returnCell).colorSelector.tag = 1;
             else ((CustomCell *)returnCell).colorSelector.tag = 0;
@@ -417,20 +417,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(self.isHost){
-      //  [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        NSMutableArray *tempMutableArray = [NSMutableArray arrayWithArray:tableViewInfo];
-        NSString *peerToRemove = ((CellData *)[tempMutableArray objectAtIndex:indexPath.row]).peerID;
-        [tempMutableArray removeObjectAtIndex:indexPath.row];
-        tableViewInfo = [NSArray arrayWithArray:tempMutableArray];
-        [tableView reloadData];
         
-        //DISCONNECT FROM SESSION
-        [[BluetoothServices sharedBluetoothSession].bluetoothSession disconnectPeerFromAllPeers:peerToRemove];
+        rowOfPeerToRemove = indexPath.row;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"Are you sure you want to block this peer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: @"Yes", nil];
+        [alert show];
+        
     }
     else if(!isInGroup){
         //JOIN SESSION
         //MAY NEED TO DO SOMETHING SPECIAL HERE AS THE HOST PEERID IS DIFFERENT
-        NSString *peerToConnectWith = ((CellData *)[tableViewInfo objectAtIndex:indexPath.row]).peerID;
+        NSString *peerToConnectWith = ((PeerData *)[tableViewInfo objectAtIndex:indexPath.row]).peerID;
         [[BluetoothServices sharedBluetoothSession].bluetoothSession connectToPeer:peerToConnectWith withTimeout:5.0];
         
         //MOVE INTO GROUP VIEW
@@ -453,6 +449,31 @@
     return self.isHost;
 }
 */
+
+// Alertview to confirm removal of peer
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	NSString *title = [alertView title];
+    NSLog(@"%@", title);
+    
+    if([title isEqualToString:@"Are you sure?"]) {
+        if (buttonIndex == 1) {
+            NSLog(@"user pressed Yes");
+            NSMutableArray *tempMutableArray = [NSMutableArray arrayWithArray:tableViewInfo];
+            NSString *peerToRemove = ((PeerData *)[tempMutableArray objectAtIndex:rowOfPeerToRemove]).peerID;
+            [tempMutableArray removeObjectAtIndex:rowOfPeerToRemove];
+            tableViewInfo = [NSArray arrayWithArray:tempMutableArray];
+            [peerTable reloadData];
+            
+            //DISCONNECT FROM SESSION
+            NSMutableArray *peersBlocked = [[BluetoothServices sharedBluetoothSession] getPeersBlocked];
+            [peersBlocked addObject:peerToRemove];
+            [[BluetoothServices sharedBluetoothSession].bluetoothSession disconnectPeerFromAllPeers:peerToRemove];
+        }
+        else {
+            NSLog(@"user pressed Cancel");
+        }
+    }
+}
 
 
 - (void)viewDidLoad
