@@ -277,9 +277,7 @@
     else{
         NSArray *availablePeers = [[BluetoothServices sharedBluetoothSession] getAvailablePeers];
         for(int i = 0; i < [availablePeers count]; ++i){
-            NSLog(@"%@", [availablePeers objectAtIndex:i]);
             NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer:[availablePeers objectAtIndex:i]];
-            NSLog(@"%@", peerDisplayName);
             unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
             NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
             if([peerDisplayName rangeOfString:newLineCharacterString].location != NSNotFound){
@@ -385,7 +383,7 @@
         case 0:
             ((CustomCell *)returnCell).name.text = ((PeerData *)tableViewInfo[indexPath.row]).name;
             ((CustomCell *)returnCell).score.text = [NSString stringWithFormat:@"%i", ((PeerData *)tableViewInfo[indexPath.row]).score];
-            if(!self.isHost) ((CustomCell *)returnCell).picture.image = tempRef;
+            if(!self.isHost || indexPath.row == 0) ((CustomCell *)returnCell).picture.image = tempRef;
             ((CustomCell *)returnCell).colorSelector.tintColor = tintColor;
             if((self.isHost && indexPath.row == 0) || (!self.isHost && indexPath.row == 1)) ((CustomCell *)returnCell).colorSelector.tag = 1;
             else ((CustomCell *)returnCell).colorSelector.tag = 0;
@@ -419,9 +417,10 @@
     if(self.isHost){
         
         rowOfPeerToRemove = indexPath.row;
+        if(rowOfPeerToRemove != 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"Are you sure you want to block this peer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: @"Yes", nil];
         [alert show];
-        
+        }
     }
     else if(!isInGroup){
         //JOIN SESSION
@@ -453,11 +452,9 @@
 // Alertview to confirm removal of peer
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	NSString *title = [alertView title];
-    NSLog(@"%@", title);
     
     if([title isEqualToString:@"Are you sure?"]) {
         if (buttonIndex == 1) {
-            NSLog(@"user pressed Yes");
             NSMutableArray *tempMutableArray = [NSMutableArray arrayWithArray:tableViewInfo];
             NSString *peerToRemove = ((PeerData *)[tempMutableArray objectAtIndex:rowOfPeerToRemove]).peerID;
             [tempMutableArray removeObjectAtIndex:rowOfPeerToRemove];
@@ -469,9 +466,6 @@
             [peersBlocked addObject:peerToRemove];
             [[BluetoothServices sharedBluetoothSession] setPeersBlocked:peersBlocked];
             [[BluetoothServices sharedBluetoothSession].bluetoothSession disconnectPeerFromAllPeers:peerToRemove];
-        }
-        else {
-            NSLog(@"user pressed Cancel");
         }
     }
 }
