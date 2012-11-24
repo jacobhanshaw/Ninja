@@ -27,8 +27,8 @@
     //End Start View Outlets
     
     //Pop Over Outlets
-    IBOutlet UIView      *semiTransparentOverlay;
-    IBOutlet UIView      *hostPopOver;
+    IBOutlet UIView      *semiTransparentOverlay;  //obscure's background to draw focus to pop over
+    IBOutlet UIView      *hostPopOver;             //views allowing users to specify personal and group names
     IBOutlet UIView      *clientPopOver;
     IBOutlet UILabel     *groupNameLabel;
     IBOutlet UITextField *groupNameInput;
@@ -36,12 +36,12 @@
     IBOutlet UITextField *nameInputHost;
     IBOutlet UILabel     *nameLabelClient;
     IBOutlet UITextField *nameInputClient;
-    IBOutlet UIButton    *hostGo;
+    IBOutlet UIButton    *hostGo;                 //proceed after popover
     IBOutlet UIButton    *clientGo;
     //End Pop Over Outlets
     
     //Peer table view Outlets
-    IBOutlet UILabel *screenTitle;
+    IBOutlet UILabel *screenTitle;                //title above table
     IBOutlet UITableView *peerTable;
     IBOutlet UIButton *leave, *start;
     
@@ -50,13 +50,13 @@
     int manualRefreshCounter; //Tracks how many times we've refreshed due to a manual refresh, used to stop the activity indicator and reset the refresh button
     //End peer table view outlets
     
-    NSTimer *refreshTimer;
+    NSTimer *refreshTimer;                        //timer to automatically refresh after a certain number of time
     id delegate;
     NSArray *tableViewInfo;
-    NSString *appIdentifier;
-    BOOL isInGroup;
+    NSString *appIdentifier;                      //bundle identifier, used as sessionID, unique to each app
+    BOOL isInGroup;                               //used only for peers other than the host, indicates if the peer has joined a group
     BOOL isHost;
-    CellData *personalCellData;
+    CellData *personalCellData;                   //variable used to hold cell data for this user
 }
 
 //Start View Outlets
@@ -92,10 +92,10 @@
 @property (nonatomic) id delegate;
 @property (readwrite) BOOL isHost;
 
-- (void)showPopOver:(BOOL) host;
-- (void)updatePeersList:(NSArray *)peersList;
+- (void)showPopOver:(BOOL) host;              //YES for hostPopOver, NO for clientPopOver
+- (void)updatePeersList:(NSArray *)peersList; //update the table to be the provided list
 - (void)startTimer;
 - (IBAction)refreshRequest:(id)sender;
-- (void)abortRefresh; //Called if manual refresh needs to stop -- go back to main menu, game started, etc
+- (void)abortRefresh;                         //Called if manual refresh needs to stop -- go back to main menu, game started, etc
 
 @end

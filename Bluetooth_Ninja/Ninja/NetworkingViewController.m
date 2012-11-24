@@ -50,12 +50,14 @@
     return self;
 }
 
+#pragma mark refresh set-up methods
+
 - (IBAction)refreshRequest:(id)sender
 {
     if (manualRefreshCounter == -1) {
         [refreshTimer invalidate];
-        refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(refreshRequest:) userInfo:nil repeats:TRUE];
-        [refreshIcon setHidden:TRUE];
+        refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(refreshRequest:) userInfo:nil repeats:YES];
+        [refreshIcon setHidden:YES];
         [refreshIndicator startAnimating];
     }
     if (manualRefreshCounter < 2) {
@@ -67,7 +69,7 @@
         manualRefreshCounter = -1;
         [self startTimer];
         [refreshIndicator stopAnimating];
-        [refreshIcon setHidden:FALSE];
+        [refreshIcon setHidden:NO];
     }
 }
 
@@ -138,14 +140,11 @@
         [[BluetoothServices sharedBluetoothSession] setGroupName: groupNameInput.text];
     else if (([[[BluetoothServices sharedBluetoothSession] getGroupName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getGroupName] == nil))
         [[BluetoothServices sharedBluetoothSession] setGroupName:[[UIDevice currentDevice] name]];
-    
-    NSLog(@"%@", [[BluetoothServices sharedBluetoothSession] getGroupName]);
-    
+
     [[BluetoothServices sharedBluetoothSession] setGroupName: [[[BluetoothServices sharedBluetoothSession] getGroupName] stringByReplacingOccurrencesOfString:@"iPhone" withString:@"Group"]];
     
     displayName = [displayName stringByAppendingString:[[BluetoothServices sharedBluetoothSession] getGroupName]];
     
-    NSLog(@"%@",displayName);
     [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:displayName sessionMode:GKSessionModePeer andContext:nil];
     [self startTimer];
 }
@@ -193,6 +192,7 @@
     [button setHighlighted:YES];
 }
 
+// YES to show host popOver, No to show client popOver
 - (void)showPopOver:(BOOL)host
 {
     [semiTransparentOverlay setHidden:NO];
@@ -247,6 +247,19 @@
     if (textField.text.length >= MAX_LENGTH && range.length == 0) return NO; // return NO to not change text
     else return YES;
 }
+
+//Makes keyboard disappear on touch outside of keyboard or textfield, only used when an input view thingy is visible
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (!hostPopOver.isHidden) {
+        [groupNameInput resignFirstResponder];
+        [nameInputHost resignFirstResponder];
+    }
+    else if(!clientPopOver.isHidden)
+        [nameLabelClient resignFirstResponder];
+}
+
+#pragma mark Table Update Methods
 
 - (void)refresh
 {
@@ -306,7 +319,7 @@
     
 }
 
-//TableView delegate
+#pragma mark TableView Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -433,25 +446,14 @@
     }
 }
 
+// Apple's Method of Removing Rows
 /*
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return self.isHost;
 }
 */
-//Makes keyboard disappear on touch outside of keyboard or textfield, only used when an input view thingy is visible
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    if (!hostPopOver.isHidden) {
-        [groupNameInput resignFirstResponder];
-        [nameInputHost resignFirstResponder];
-    }
-    else if(!clientPopOver.isHidden)
-        [nameLabelClient resignFirstResponder];
-    
-}
 
-//End table view delegate
 
 - (void)viewDidLoad
 {

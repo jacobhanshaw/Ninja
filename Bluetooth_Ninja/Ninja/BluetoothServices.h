@@ -7,7 +7,8 @@
 //
 // IMPORTANT!
 // Please see:
-// http://developer.apple.com/library/ios/#documentation/GameKit/Reference/GKSession_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40008258
+// http://developer.apple.com/library/ios/#documentation/GameKit/Reference/GKSession_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40008258 ,
+//http://developer.apple.com/library/ios/#documentation/GameKit/Reference/GKSession_Class/Reference/Reference.html ,
 // and
 // http://developer.apple.com/library/ios/#DOCUMENTATION/GameKit/Reference/GKPeerPickerControllerDelegate_Protocol/Reference/Reference.html
 // for Apple's documentation
@@ -17,7 +18,6 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-#define definedSessionID @"ninja" //remove
 #define MAX_PLAYERS 8             //currently not used. Use if you want a max number of players.
 
 @interface BluetoothServices : NSObject <GKSessionDelegate, GKPeerPickerControllerDelegate> {
@@ -35,7 +35,9 @@
     NSString *groupName;            //name of group
     NSString *personalName;         //name of individual (peer)
     
-    int failedConnections;
+    int failedConnections;          //variable keeping track of the number of failed connections to prevent an infinite loop
+                                    //could be more robust as it is not based on the number of failed connections to an certain peer
+                                    //but rather the number of failed connections overall
     
 }
 
@@ -46,7 +48,6 @@
 @property (nonatomic) GKSession *sessionReceived;
 @property (nonatomic) void *context;
 
-//@property (nonatomic) NSMutableArray *peersInSession;
 @property (nonatomic) NSMutableArray *peersInGroup;
 
 
@@ -54,7 +55,9 @@
 
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext;
 
-- (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll;
+- (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll; //peersInGroup is used as the list of peers to send data to, it toAll is NO
+                                                              //so set peersInGroup (using some subset of peersInSession) before calling
+                                                              //this function
 
 -(void) setGroupName:(NSString *)newGroupName;
 -(NSString *) getGroupName;
@@ -62,7 +65,7 @@
 -(void) setPersonalName:(NSString *)newPersonalName;
 -(NSString *) getPersonalName;
 
--(NSArray *) getPeersInSession;
--(NSArray *) getAvailablePeers;
+-(NSArray *) getPeersInSession; //connected peerIDs
+-(NSArray *) getAvailablePeers; //available peerIDs
 
 @end

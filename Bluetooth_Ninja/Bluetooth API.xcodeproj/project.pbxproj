@@ -18,7 +18,6 @@
 		AD7F7614164D9D88001EE310 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7F7613164D9D88001EE310 /* CustomCell.m */; };
 		ADFB6B871644CAFA00E00CBF /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFB6B851644CAFA00E00CBF /* NetworkingViewController.m */; };
 		ADFB6B881644CAFA00E00CBF /* NetworkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFB6B861644CAFA00E00CBF /* NetworkingViewController.xib */; };
-		DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBDDBB01644961800006DD0 /* LobbyView.m */; };
 		DDBDDBB81644A70B00006DD0 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */; };
 		DDBDDBB91644A70B00006DD0 /* UIButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */; };
 		DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F3D163B05DA00D91401 /* BluetoothServices.m */; };
@@ -59,9 +58,6 @@
 		ADFB6B841644CAFA00E00CBF /* NetworkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingViewController.h; sourceTree = "<group>"; };
 		ADFB6B851644CAFA00E00CBF /* NetworkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkingViewController.m; sourceTree = "<group>"; };
 		ADFB6B861644CAFA00E00CBF /* NetworkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkingViewController.xib; sourceTree = "<group>"; };
-		DD6FF9981644F4000098905D /* NetworkingViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingViewControllerDelegate.h; sourceTree = "<group>"; };
-		DDBDDBAF1644961800006DD0 /* LobbyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobbyView.h; sourceTree = "<group>"; };
-		DDBDDBB01644961800006DD0 /* LobbyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobbyView.m; sourceTree = "<group>"; };
 		DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
 		DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarRefresh.png; sourceTree = "<group>"; };
 		DDC47F3C163B05DA00D91401 /* BluetoothServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothServices.h; sourceTree = "<group>"; };
@@ -125,15 +121,12 @@
 			children = (
 				DDC47F3C163B05DA00D91401 /* BluetoothServices.h */,
 				DDC47F3D163B05DA00D91401 /* BluetoothServices.m */,
-				DDBDDBAF1644961800006DD0 /* LobbyView.h */,
-				DDBDDBB01644961800006DD0 /* LobbyView.m */,
 				ADFB6B841644CAFA00E00CBF /* NetworkingViewController.h */,
 				ADFB6B851644CAFA00E00CBF /* NetworkingViewController.m */,
 				ADFB6B861644CAFA00E00CBF /* NetworkingViewController.xib */,
 				AD7F7610164D9BFE001EE310 /* CustomCell.xib */,
 				AD7F7612164D9D87001EE310 /* CustomCell.h */,
 				AD7F7613164D9D88001EE310 /* CustomCell.m */,
-				DD6FF9981644F4000098905D /* NetworkingViewControllerDelegate.h */,
 				AD004BB8164DBE2D00226CAF /* CellData.h */,
 				AD004BB9164DBE2D00226CAF /* CellData.m */,
 			);
@@ -352,7 +345,6 @@
 				AD7DFE551632DB7500268CE7 /* ColorSelector.m in Sources */,
 				DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */,
 				DDC47F42163B11C000D91401 /* AppModel.m in Sources */,
-				DDBDDBB41644961800006DD0 /* LobbyView.m in Sources */,
 				ADFB6B871644CAFA00E00CBF /* NetworkingViewController.m in Sources */,
 				AD7F7614164D9D88001EE310 /* CustomCell.m in Sources */,
 				AD004BBA164DBE2D00226CAF /* CellData.m in Sources */,
