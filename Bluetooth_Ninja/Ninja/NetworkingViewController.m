@@ -467,6 +467,7 @@
             //DISCONNECT FROM SESSION
             NSMutableArray *peersBlocked = [[BluetoothServices sharedBluetoothSession] getPeersBlocked];
             [peersBlocked addObject:peerToRemove];
+            [[BluetoothServices sharedBluetoothSession] setPeersBlocked:peersBlocked];
             [[BluetoothServices sharedBluetoothSession].bluetoothSession disconnectPeerFromAllPeers:peerToRemove];
         }
         else {
