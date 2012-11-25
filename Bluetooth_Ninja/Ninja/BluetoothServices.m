@@ -44,6 +44,7 @@
     
     failedConnections = 0;
     
+    peersBlocked = [[NSMutableArray alloc] init];
     peersInSession = [[NSMutableArray alloc] init];
     self.peersInGroup = [[NSMutableArray alloc] init];
     
@@ -85,7 +86,7 @@
 
 //when data is received a notification is posted in the notification center. Your model or viewcontroller should receive
 //the information by implementing the line of code below and accessing the information received from the sharedBluetoothSession
-//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YOURMEHTODNAMEHERE) name:@"NewDataReceived" object:[BluetoothServices sharedBluetoothServices]];
+//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YOURMEHTODNAMEHERE) name:@"NewDataReceived" object:nil];
 
 - (void) receiveData:(NSData *)inputData fromPeer:(NSString *)inputPeer inSession:(GKSession *)inputSession context:(void *)inputContext {
     
@@ -126,6 +127,7 @@
 
 -(void) setPeersBlocked:(NSMutableArray *)newPeersBlocked {
     peersBlocked = newPeersBlocked;
+    
 }
 
 -(NSMutableArray *) getPeersBlocked {
@@ -137,6 +139,9 @@
 
 // example code of implementing the didChangeState GKSession delegate method
 // we originally kept track of peers manually, but this also contains code useful if you decide to set a maximum number of players
+// implement the methods below to observe changes in count of players
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInPeerCount:) name:@"NewPeerConnected" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInPeerCount:) name:@"PeerDisconnected" object:nil];
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
     
     if (state == GKPeerStateConnected) {
@@ -165,8 +170,11 @@
         if(![self.bluetoothSession acceptConnectionFromPeer:peerID error:&acceptConnectionError])
             NSLog(@"Session Fail with Error: %@", [acceptConnectionError localizedDescription]);
     }
+    else{
+        [session denyConnectionFromPeer:peerID];
+    }
     //     if ([peersInSession count] == MAX_PLAYERS) [thisSession setAvailable:NO];
-    //     if (![peersInSession containsObject:peerID]) { }
+    //     if (![peersInSession containsObject:peerID]) { add peer }
     //     else [self.bluetoothSession denyConnectionFromPeer:peerID];
 }
 

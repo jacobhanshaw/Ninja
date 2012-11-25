@@ -18,7 +18,8 @@
 
 enum dataMessages {
     //COLORSAVAILABLEUPDATED,
-    GAMESTARTED
+    GAMESTARTED,
+    REJECTEDFROMSESSION
 }dataMessages;
 
 @interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
@@ -62,7 +63,7 @@ enum dataMessages {
     BOOL isHost;
     int  rowOfPeerToRemove;                       //if host decides to remove a peer, save the row in this variable
     PeerData *personalPeerData;                   //variable used to hold cell data for this user
-    NSMutableArray *colorsAvailable;              //colors available
+    NSMutableArray *groupsNotAvailable;           //groups not to show if peer has been rejected from group
 }
 
 //Start View Outlets
