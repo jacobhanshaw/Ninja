@@ -10,14 +10,13 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BluetoothServices.h"
 #import "AppModel.h"     //REMOVE
+#import "GameViewController.h" //REMOVE
 #import "CustomCell.h"
 #import "PeerData.h"
-#import "ColorSelector.h"
 
 #define MAX_LENGTH 16
 
 enum dataMessages {
-    //COLORSAVAILABLEUPDATED,
     GAMESTARTED,
     REJECTEDFROMSESSION
 }dataMessages;
@@ -62,6 +61,7 @@ enum dataMessages {
     BOOL isInGroup;                               //used only for peers other than the host, indicates if the peer has joined a group
     BOOL isHost;
     int  rowOfPeerToRemove;                       //if host decides to remove a peer, save the row in this variable
+    int  playerNumber;
     PeerData *personalPeerData;                   //variable used to hold cell data for this user
     NSMutableArray *groupsNotAvailable;           //groups not to show if peer has been rejected from group
 }
@@ -100,9 +100,9 @@ enum dataMessages {
 @property (readwrite) BOOL isHost;
 
 - (void)showPopOver:(BOOL) host;              //YES for hostPopOver, NO for clientPopOver
-- (void)updatePeersList:(NSArray *)peersList; //update the table to be the provided list
 - (void)startTimer;
 - (IBAction)refreshRequest:(id)sender;
 - (void)abortRefresh;                         //Called if manual refresh needs to stop -- go back to main menu, game started, etc
+- (void)reset;
 
 @end

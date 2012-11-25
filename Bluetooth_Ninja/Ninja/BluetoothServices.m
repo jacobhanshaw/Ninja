@@ -134,6 +134,9 @@
     return peersBlocked;
 }
 
+-(BOOL) getHasNoPeers {
+    return hasNoPeers;
+}
 
 #pragma mark GKSessionDelegate Methods
 
@@ -145,6 +148,7 @@
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
     
     if (state == GKPeerStateConnected) {
+        hasNoPeers = NO;
         NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"NewPeerConnected" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
         connectionStateChangePeerID = peerID;
@@ -152,6 +156,9 @@
     }
     
     else if (state == GKPeerStateDisconnected) {
+        if([[self getPeersInSession] count] == 0){
+            hasNoPeers = YES;
+        }
         NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"PeerDisconnected" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
         connectionStateChangePeerID = peerID;

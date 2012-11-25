@@ -38,6 +38,8 @@
     
     NSString *connectionStateChangePeerID; //id of peer that last had a change of connection state
     
+    BOOL hasNoPeers;                //Boolean to notice if this session is no longer connected to any peers
+    
     int failedConnections;          //variable keeping track of the number of failed connections to prevent an infinite loop
                                     //could be more robust as it is not based on the number of failed connections to an certain peer
                                     //but rather the number of failed connections overall
@@ -56,6 +58,8 @@
 
 + (BluetoothServices *)sharedBluetoothSession;
 
+-(void) invalidateSession;
+
 -(void) setUpWithSessionID:(NSString *)inputSessionID displayName:(NSString *)inputName sessionMode:(GKSessionMode)inputMode andContext:(void *)inputContext;
 
 - (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll; //peersInGroup is used as the list of peers to send data to, it toAll is NO
@@ -73,5 +77,7 @@
 
 -(void) setPeersBlocked:(NSMutableArray *)newPeersBlocked;
 -(NSMutableArray *) getPeersBlocked;
+
+-(BOOL) getHasNoPeers;
 
 @end

@@ -42,6 +42,8 @@
         nameInputHost.delegate = self;
         nameInputClient.delegate = self;
         
+        playerNumber = -1;
+        
         peerTable.layer.cornerRadius = 9.0;
         manualRefreshCounter = -1; //-1 means that the button is ready to be pressed
         
@@ -50,6 +52,18 @@
         groupsNotAvailable = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (void) reset {
+    [startView setHidden:NO];
+    [semiTransparentOverlay setHidden:YES];
+    [clientPopOver setHidden:YES];
+    [hostPopOver setHidden:YES];
+    
+    isInGroup = NO;
+    isHost = NO;
+    playerNumber = -1;
+    [[BluetoothServices sharedBluetoothSession] invalidateSession];
 }
 
 #pragma mark Refresh Set-up Methods
@@ -97,6 +111,8 @@
     [start addTarget:self action:@selector(startSelected:) forControlEvents:UIControlEventTouchUpInside];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReceived:) name:@"NewDataReceived" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPeer:) name:@"NewPeerConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(peerDisconnected:) name:@"PeerDisconnected" object:nil];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -108,6 +124,7 @@
 - (IBAction)startGroupSelected:(UIButton *)sender{
     self.isHost = YES;
     isInGroup = NO;
+    playerNumber = 0;
     [startView setHidden:YES];
     [self showPopOver:YES];
 }
@@ -178,6 +195,11 @@
     if (refreshIndicator.isAnimating) {
         [self abortRefresh];
     }
+    if(self.isHost){
+        int i = REJECTEDFROMSESSION;
+        NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
+        [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+    }
     [startView setHidden:NO];
     [hostPopOver setHidden:YES];
     [clientPopOver setHidden:YES];
@@ -198,6 +220,9 @@
     //Send out to set session unavailable
     
     //Put your code to start here
+    GameViewController *game = [[GameViewController alloc] init];
+    if(self.isHost) game.playerNumber = playerNumber;
+    [self presentViewController:game animated:YES completion:nil];
 }
 
 - (IBAction)colorSelectorSelected:(UIButton *)sender {
@@ -280,20 +305,29 @@
 
 - (void)refresh
 {
-    if(!personalPeerData) personalPeerData = [[PeerData alloc] initWithColor:0 name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
+    if(!personalPeerData) personalPeerData = [[PeerData alloc] initWithColor:playerNumber name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
+    if(playerNumber != -1) personalPeerData.colorSelection = playerNumber;
+    else personalPeerData.colorSelection = 0;
+    
     NSMutableArray *peersList = [[NSMutableArray alloc] init];
     if(self.isHost || isInGroup){
-        [peersList addObject:personalPeerData];
         NSArray *connectedPeers = [[BluetoothServices sharedBluetoothSession] getPeersInSession];
-        for(int i = 0; i < [connectedPeers count]; ++i){
-            NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer:[connectedPeers objectAtIndex:i]];
+        int peerIndex = 0;
+        for(int i = 0; i <= [connectedPeers count]; ++i){
+            if(i == playerNumber || playerNumber == -1){
+                [peersList addObject:personalPeerData];
+            }
+            else{
+            NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer:[connectedPeers objectAtIndex:peerIndex]];
             unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
             NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
             if([peerDisplayName rangeOfString:newLineCharacterString].location != NSNotFound){
                 NSString *peerName = [[peerDisplayName componentsSeparatedByString:newLineCharacterString] objectAtIndex:0];
-                [peersList addObject:[[PeerData alloc] initWithColor:(i+1)%8 name: peerName peerID: [connectedPeers objectAtIndex:i] score:0 andIcon:0]];
+                [peersList addObject:[[PeerData alloc] initWithColor:(i)%8 name: peerName peerID: [connectedPeers objectAtIndex:peerIndex] score:0 andIcon:0]];
             }
-            else [peersList addObject:[[PeerData alloc] initWithColor:(i+1)%8 name: peerDisplayName peerID: [connectedPeers objectAtIndex:i] score:0 andIcon:0]];
+            else [peersList addObject:[[PeerData alloc] initWithColor:(i)%8 name: peerDisplayName peerID: [connectedPeers objectAtIndex:peerIndex] score:0 andIcon:0]];
+            peerIndex++;    
+            }
         }
     }
     else{
@@ -305,41 +339,16 @@
             if([peerDisplayName rangeOfString:newLineCharacterString].location != NSNotFound){
                 NSString *groupName = [[peerDisplayName componentsSeparatedByString:newLineCharacterString] objectAtIndex:1];
                 if(![groupsNotAvailable containsObject:groupName]){
-                    [peersList addObject:[[PeerData alloc] initWithColor:(i+1)%8 name: groupName peerID: [availablePeers objectAtIndex:i] score:0 andIcon:0]];
+                    [peersList addObject:[[PeerData alloc] initWithColor:(i)%8 name: groupName peerID: [availablePeers objectAtIndex:i] score:0 andIcon:0]];
                 }
             }
         }
     }
-    [self updatePeersList:peersList];
+    tableViewInfo = [NSArray arrayWithArray:peersList];
+    [peerTable reloadData];
 }
 
-- (void)updatePeersList:(NSArray *)peersList
-{
-    if (![tableViewInfo isEqualToArray:peersList]) {
-        NSMutableArray *deletePaths = [[NSMutableArray alloc] init];
-        NSMutableArray *insertPaths = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i < [tableViewInfo count]; i++) {
-            if (![peersList containsObject:[tableViewInfo objectAtIndex:i]]) {
-                [deletePaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-            }
-        }
-        
-        for (int i = 0; i < [peersList count]; i++) {
-            if (![tableViewInfo containsObject:[peersList objectAtIndex:i]]) {
-                [insertPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-            }
-        }
-        
-        tableViewInfo = [NSArray arrayWithArray:peersList];
-        
-        [peerTable beginUpdates];
-        [peerTable deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationFade];
-        [peerTable insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationFade];
-        [peerTable endUpdates];
-    }
-    
-}
+#pragma mark Bluetooth Notification Methods
 
 - (void) updateReceived:(NSNotification *) sender {
     
@@ -347,10 +356,20 @@
     int i;
     [data getBytes: &i length: sizeof(i)];
     
-    if(i == GAMESTARTED) [[BluetoothServices sharedBluetoothSession].bluetoothSession setAvailable: NO];
+    if(i == GAMESTARTED){
+        if (refreshIndicator.isAnimating) {
+            [self abortRefresh];
+        }
+        [self stopTimer];
+        
+        [[BluetoothServices sharedBluetoothSession].bluetoothSession setAvailable: NO];
+        GameViewController *game = [[GameViewController alloc] init];
+        game.playerNumber = playerNumber;
+        [self presentViewController:game animated:YES completion:nil];
+    }
     
     if(i == REJECTEDFROMSESSION){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Denied" message:@"Your request to join that group has been denied. Feel free to join another group." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Group Unavailable" message:@"Your request to join that group has been denied or the host has left. Feel free to join another group." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
         
         [groupsNotAvailable addObject:[screenTitle.text substringToIndex:[screenTitle.text length] - 1]];
@@ -362,6 +381,25 @@
         isInGroup = NO;
         [self refresh];
     }
+    
+    if(i >= 100){
+        i -= 100;
+        if(i < playerNumber) playerNumber--;
+    }
+}
+
+- (void) newPeer:(NSNotification *) sender {
+    if(playerNumber == -1) playerNumber = [[[BluetoothServices sharedBluetoothSession] getPeersInSession] count];
+
+    [self refresh];
+}
+
+- (void) peerDisconnected:(NSNotification *) sender {
+    int i = 100 + playerNumber;
+    NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
+    [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+    
+    [self refresh];
 }
 
 #pragma mark TableView Delegate Methods
@@ -483,7 +521,6 @@
         [[BluetoothServices sharedBluetoothSession] setGroupName:groupName];
         groupName = [groupName stringByAppendingString:@":"];
         [screenTitle setText:groupName];
-        [self refresh];
     }
 }
 

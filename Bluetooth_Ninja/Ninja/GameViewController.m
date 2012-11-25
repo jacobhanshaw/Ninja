@@ -31,6 +31,8 @@ int lightFlashes;
     
     lightOn = false;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReceived:) name:@"NewDataReceived" object:nil];
+    
     self.minAccel = 1.2;
     self.currentMagAccel = 0;
     self.maxAccel = 2.35;
@@ -42,10 +44,11 @@ int lightFlashes;
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     [self startMyMotionDetect];
     
+    [self newGameWithPlayerId:self.playerNumber];
 }
 
 - (void) viewWillDisappear:(BOOL)animated{
-    [timer invalidate];
+    if(timer.isValid) [timer invalidate];
     
     [[UIScreen mainScreen] setBrightness:self.initialBrightness];
     [UIApplication sharedApplication].idleTimerDisabled = self.idleTimerInitiallyDisabled;
@@ -64,6 +67,12 @@ int lightFlashes;
 }
 
 -(void) pulse{
+    if([[BluetoothServices sharedBluetoothSession] getHasNoPeers]){
+        [timer invalidate];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"No Other Players" message: @"All other players have left the game. Please press continue to start or join a new group." delegate: self cancelButtonTitle: nil otherButtonTitles: @"Continue", nil];
+        
+        [alert show];
+    }
     if(self.shouldPulse){
         
         CMAccelerometerData *data = self.motionManager.accelerometerData;
@@ -131,11 +140,29 @@ int lightFlashes;
     }
 }
 
+- (void) updateReceived:(NSNotification *) sender {
+    
+    NSData *data = [BluetoothServices sharedBluetoothSession].dataReceived;
+    int i;
+    [data getBytes: &i length: sizeof(i)];
+    
+    if(i == PLAYEROUT){
+        otherPlayersLeft--;
+        if(otherPlayersLeft == 0 && !isOut){
+            [self hasWonGame];
+        }
+    }
+    else if(i == NEWGAME) [self newGameWithPlayerId:self.playerNumber];
+}
+
 -(void) newGameWithPlayerId: (int) playerId {
     NSNotification *newNotice = [NSNotification notificationWithName:@"NewGame" object:nil];
      [[NSNotificationCenter defaultCenter] postNotification:newNotice];
     self.shouldPulse = YES;
     self.playerNumber = playerId;
+    
+    otherPlayersLeft = [[[BluetoothServices sharedBluetoothSession] getPeersInSession] count];
+    isOut = NO;
     
     self.isAnimating = NO;
     self.currentMagAccel = 0;
@@ -175,6 +202,8 @@ int lightFlashes;
     
     [[UIScreen mainScreen] setBrightness:self.initialBrightness];
     
+    isOut = YES;
+    
     self.shouldPulse = NO;
     [self vibrate];
     
@@ -184,7 +213,11 @@ int lightFlashes;
     NSNotification *loseNotice = [NSNotification notificationWithName:@"PlayerLost" object:nil];
     [[NSNotificationCenter defaultCenter] postNotification:loseNotice];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Nice Try" message: @"You've Lost!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Play Again", nil];
+    int i = PLAYEROUT;
+    NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
+    [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Nice Try" message: @"You've Lost!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Leave", @"Play Again", nil];
 	
 	[alert show];
 }
@@ -194,7 +227,7 @@ int lightFlashes;
     
     [[UIScreen mainScreen] setBrightness:self.initialBrightness];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Good Job" message: @"You've Won!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Play Again", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Good Job" message: @"You've Won!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Leave", @"Play Again", nil];
 	
 	[alert show];
 }
@@ -205,29 +238,41 @@ int lightFlashes;
     
     if([title isEqualToString:@"Nice Try"]) {
         
-        //    if (buttonIndex == 1) {
-        //  NSLog(@"User pressed Leave %d", buttonIndex);
-        //    NSNotification *endNotice = [NSNotification notificationWithName:@"EndGame" object:nil];
-        // [[NSNotificationCenter defaultCenter] postNotification:endNotice];
-        // [self dismissViewControllerAnimated:YES completion:nil];
-        // }
-        //else {
-            [self newGameWithPlayerId:self.playerNumber];
-        // }
+            if (buttonIndex == 0) {
+          NSLog(@"User pressed Leave %d", buttonIndex);
+            NSNotification *endNotice = [NSNotification notificationWithName:@"EndGame" object:nil];
+         [[NSNotificationCenter defaultCenter] postNotification:endNotice];
+                [(NetworkingViewController *)self.presentingViewController reset];
+         [self dismissViewControllerAnimated:YES completion:nil];
+         }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Please Wait" message: @"Please wait for the game to end." delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+            
+            [alert show];
+         }
     }
     
     if([title isEqualToString:@"Good Job"]) {
         
-        //if (buttonIndex == 1) {
-        //  NSLog(@"User pressed Leave %d", buttonIndex);
-        //   NSNotification *endNotice = [NSNotification notificationWithName:@"EndGame" object:nil];
-        // [[NSNotificationCenter defaultCenter] postNotification:endNotice];
-        //   [self dismissViewControllerAnimated:YES completion:nil];
-        // [self dismissViewControllerAnimated:YES completion:nil];
-        // }
-        //else {
+        if (buttonIndex == 0) {
+          NSLog(@"User pressed Leave %d", buttonIndex);
+          NSNotification *endNotice = [NSNotification notificationWithName:@"EndGame" object:nil];
+         [[NSNotificationCenter defaultCenter] postNotification:endNotice];
+         [(NetworkingViewController *)self.presentingViewController reset];
+         [self dismissViewControllerAnimated:YES completion:nil];
+         }
+        else {
+            int i = NEWGAME;
+            NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
+            [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+            
            [self newGameWithPlayerId:self.playerNumber];
-        //}
+        }
+    }
+    
+    if([title isEqualToString:@"No Other Players"]) {
+        [(NetworkingViewController *)self.presentingViewController reset];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

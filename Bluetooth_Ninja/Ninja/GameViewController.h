@@ -13,15 +13,22 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-//#import "NetworkingViewController.h"
+#import "BluetoothServices.h"
+#import "NetworkingViewController.h"
 
 #define initialAnimationDuration 1.5
 #define initialNumberFlashes 5
+
+enum dataMessagesGame {
+    PLAYEROUT,
+    NEWGAME
+}dataMessagesGame;
 
 @interface GameViewController : UIViewController {
     
     int playerNumber;
     int lightFlashes;
+    int otherPlayersLeft;
     float initialBrightness;
     float playerColorHue;
     float playerColorBrightness;
@@ -29,6 +36,7 @@
     float currentMagAccel;
     float maxAccel;
     float animationDuration;
+    BOOL isOut;
     BOOL shouldPulse;
     BOOL isAnimating;
     BOOL idleTimerInitiallyDisabled;
@@ -54,6 +62,7 @@
 @property(nonatomic, retain) CMMotionManager *motionManager;
 //@property (nonatomic) NetworkingViewController *owner;
 
+-(id) init;
 -(void) newGameWithPlayerId: (int) playerId;
 - (void)hasWonGame;
 @end
