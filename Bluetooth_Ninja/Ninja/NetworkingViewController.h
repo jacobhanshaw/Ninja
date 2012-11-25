@@ -12,9 +12,14 @@
 #import "AppModel.h"     //REMOVE
 #import "CustomCell.h"
 #import "PeerData.h"
+#import "ColorSelector.h"
 
-//#define sessionID @"ninja" we recommend to define your sessionId as your unique Apple app identifier
 #define MAX_LENGTH 16
+
+enum dataMessages {
+    //COLORSAVAILABLEUPDATED,
+    GAMESTARTED
+}dataMessages;
 
 @interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -57,6 +62,7 @@
     BOOL isHost;
     int  rowOfPeerToRemove;                       //if host decides to remove a peer, save the row in this variable
     PeerData *personalPeerData;                   //variable used to hold cell data for this user
+    NSMutableArray *colorsAvailable;              //colors available
 }
 
 //Start View Outlets

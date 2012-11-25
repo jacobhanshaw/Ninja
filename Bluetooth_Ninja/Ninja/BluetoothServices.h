@@ -36,6 +36,8 @@
     NSString *groupName;            //name of group
     NSString *personalName;         //name of individual (peer)
     
+    NSString *connectionStateChangePeerID; //id of peer that last had a change of connection state
+    
     int failedConnections;          //variable keeping track of the number of failed connections to prevent an infinite loop
                                     //could be more robust as it is not based on the number of failed connections to an certain peer
                                     //but rather the number of failed connections overall

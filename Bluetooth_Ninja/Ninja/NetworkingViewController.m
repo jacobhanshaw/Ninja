@@ -46,11 +46,13 @@
         manualRefreshCounter = -1; //-1 means that the button is ready to be pressed
         
         appIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+        
+
     }
     return self;
 }
 
-#pragma mark refresh set-up methods
+#pragma mark Refresh Set-up Methods
 
 - (IBAction)refreshRequest:(id)sender
 {
@@ -93,6 +95,14 @@
     
     [leave addTarget:self action:@selector(leaveSelected:) forControlEvents:UIControlEventTouchUpInside];
     [start addTarget:self action:@selector(startSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReceived:) name:@"NewDataReceived" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInPeerCount:) name:@"NewPeerConnected" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInPeerCount:) name:@"PeerDisconnected" object:nil];
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Button Methods
@@ -147,6 +157,7 @@
     
     [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:displayName sessionMode:GKSessionModePeer andContext:nil];
     [self startTimer];
+    [self refresh];
 }
 
 - (IBAction)clientGoSelected:(UIButton *)sender{
@@ -158,9 +169,10 @@
     else if (!([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil)) personalName = [[BluetoothServices sharedBluetoothSession] getPersonalName];
     else personalName = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];;
     
-    if (startView.hidden == TRUE) { //If this is true then the person was editing their profile, not starting a game
+    if (startView.hidden == YES) { //If this is false then the person was editing their profile, not starting a game
         [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:personalName sessionMode:GKSessionModePeer andContext:nil];
         [self startTimer];
+        [self refresh];
     }
 }
 
@@ -180,10 +192,17 @@
     }
     [self stopTimer];
     
+    [[BluetoothServices sharedBluetoothSession].bluetoothSession setAvailable: NO];
+    
+    int i = GAMESTARTED;
+    NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
+    [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+    //Send out to set session unavailable
+    
     //Put your code to start here
 }
 
-- (IBAction)colorSelectorSelector:(UIButton *)sender {
+- (IBAction)colorSelectorSelected:(UIButton *)sender {
  //   if(sender.tag == 1) show button select
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
@@ -221,7 +240,7 @@
     }
 }
 
-#pragma mark timer methods
+#pragma mark Timer Methods
 
 - (void)startTimer
 {
@@ -234,7 +253,7 @@
     [refreshTimer invalidate];
 }
 
-#pragma mark textField methods
+#pragma mark TextField Methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -263,7 +282,6 @@
 
 - (void)refresh
 {
-    //[delegate refreshLobby];
     if(!personalPeerData) personalPeerData = [[PeerData alloc] initWithColor:0 name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
     NSMutableArray *peersList = [[NSMutableArray alloc] init];
     if(self.isHost || isInGroup){
@@ -317,6 +335,28 @@
     
 }
 
+- (void) updateReceived:(NSNotification *) sender {
+    
+    NSData *data = [BluetoothServices sharedBluetoothSession].dataReceived;
+    int i;
+    [data getBytes: &i length: sizeof(i)];
+    
+   // if(i == COLORSAVAILABLEUPDATED){ }
+    if(i == GAMESTARTED){
+        [[BluetoothServices sharedBluetoothSession].bluetoothSession setAvailable: NO];
+    }
+}
+/*
+- (void) changeInPeerCount:(NSNotification *) sender {
+    
+    if(self.isHost){
+        int i = COLORSAVAILABLEUPDATED;
+        NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
+        [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+    }
+ 
+}
+*/
 #pragma mark TableView Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -387,12 +427,12 @@
             ((CustomCell *)returnCell).colorSelector.tintColor = tintColor;
             if((self.isHost && indexPath.row == 0) || (!self.isHost && indexPath.row == 1)) ((CustomCell *)returnCell).colorSelector.tag = 1;
             else ((CustomCell *)returnCell).colorSelector.tag = 0;
-            [((CustomCell *)returnCell).colorSelector addTarget:self action:@selector(colorSelectorSelector:) forControlEvents:UIControlEventTouchUpInside];
+            [((CustomCell *)returnCell).colorSelector addTarget:self action:@selector(colorSelectorSelected:) forControlEvents:UIControlEventTouchUpInside];
             [self highlightButton:((CustomCell *)returnCell).colorSelector];
             break;
             
         default:
-            returnCell.textLabel.text = @"if you're reading this, something has gone horribly wrong";
+            returnCell.textLabel.text = @"If you're reading this, something has gone horribly wrong";
             break;
         }
     
@@ -415,7 +455,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(self.isHost){
-        
         rowOfPeerToRemove = indexPath.row;
         if(rowOfPeerToRemove != 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"Are you sure you want to block this peer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: @"Yes", nil];

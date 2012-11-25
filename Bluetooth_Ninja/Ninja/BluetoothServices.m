@@ -134,28 +134,36 @@
 
 
 #pragma mark GKSessionDelegate Methods
-/*
- // example code of implementing the didChangeState GKSession delegate method
- // we originally kept track of peers manually, but this also contains code useful if you decide to set a maximum number of players
- - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
- 
- if (state == GKPeerStateConnected) {
- [peersInSession addObject:peerID];
- }
- else if (state == GKPeerStateDisconnected) {
- [peersInSession removeObject:peerID];
- //  if ([peersInSession count] < MAX_PLAYERS) [self.bluetoothSession setAvailable:YES];
- }
- }
- */
+
+// example code of implementing the didChangeState GKSession delegate method
+// we originally kept track of peers manually, but this also contains code useful if you decide to set a maximum number of players
+- (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
+    
+    if (state == GKPeerStateConnected) {
+        NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"NewPeerConnected" object:self];
+        [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
+        connectionStateChangePeerID = peerID;
+        //[peersInSession addObject:peerID];
+    }
+    
+    else if (state == GKPeerStateDisconnected) {
+        NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"PeerDisconnected" object:self];
+        [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
+        connectionStateChangePeerID = peerID;
+        //[peersInSession removeObject:peerID];
+        //  if ([peersInSession count] < MAX_PLAYERS) [self.bluetoothSession setAvailable:YES];
+    }
+    
+}
+
 
 //Called when a client tries to connect to a server
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
     if(![peersBlocked containsObject:peerID]){
-    NSError *acceptConnectionError;
-    if(![self.bluetoothSession acceptConnectionFromPeer:peerID error:&acceptConnectionError])
-        NSLog(@"Session Fail with Error: %@", [acceptConnectionError localizedDescription]);
+        NSError *acceptConnectionError;
+        if(![self.bluetoothSession acceptConnectionFromPeer:peerID error:&acceptConnectionError])
+            NSLog(@"Session Fail with Error: %@", [acceptConnectionError localizedDescription]);
     }
     //     if ([peersInSession count] == MAX_PLAYERS) [thisSession setAvailable:NO];
     //     if (![peersInSession containsObject:peerID]) { }
