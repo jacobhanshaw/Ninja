@@ -26,7 +26,7 @@ enum colors {
     MAGENTA
 }colors;
 
-@interface PeerData : NSObject
+@interface PeerData : NSObject <NSCoding>
 
 {
     NSString *name;
@@ -43,5 +43,8 @@ enum colors {
 @property (assign) enum colors colorSelection;
 
 - (id)initWithColor:(enum colors)_color name:(NSString *)_name peerID:(NSString *)_peerID score:(int)_score andIcon:(enum icons)_iconLevel;
+
+- (id)initWithCoder:(NSCoder *)decoder;
+- (void)encodeWithCoder:(NSCoder *)encoder;
 
 @end

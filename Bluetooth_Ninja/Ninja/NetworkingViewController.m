@@ -110,6 +110,7 @@
     [leave addTarget:self action:@selector(leaveSelected:) forControlEvents:UIControlEventTouchUpInside];
     [start addTarget:self action:@selector(startSelected:) forControlEvents:UIControlEventTouchUpInside];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset:) name:@"UIApplicationDidEnterBackgroundNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReceived:) name:@"NewDataReceived" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPeer:) name:@"NewPeerConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(peerDisconnected:) name:@"PeerDisconnected" object:nil];
@@ -315,7 +316,7 @@
     if(!personalPeerData) personalPeerData = [[PeerData alloc] initWithColor:playerNumber name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
 
     if(playerNumber != -1) personalPeerData.colorSelection = playerNumber;
-    else personalPeerData.colorSelection = 0;
+    else personalPeerData.colorSelection = RED;
     
     NSMutableArray *peersList = [[NSMutableArray alloc] init];
     if(self.isHost || isInGroup){
@@ -368,7 +369,8 @@
     NSData *data = [BluetoothServices sharedBluetoothSession].dataReceived;
     int i;
     [data getBytes: &i length: sizeof(i)];
-    NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
+  //  NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
+    NSData *rest = [data subdataWithRange:NSMakeRange(sizeof(i), data.length - sizeof(i))];
     
     if(i == GAMESTARTED){
         if (refreshIndicator.isAnimating) {
@@ -397,7 +399,8 @@
     }
     
     if(i == UPDATEPEERDATA){
-        [[[BluetoothServices sharedBluetoothSession] getPeerData] setObject:((PeerData *)rest) forKey:[[BluetoothServices sharedBluetoothSession] originOfData]];
+        PeerData *peerData = [NSKeyedUnarchiver unarchiveObjectWithData:rest];
+        [[[BluetoothServices sharedBluetoothSession] getPeerData] setObject:peerData forKey:[[BluetoothServices sharedBluetoothSession] originOfData]];
     }
     
     if(i >= 100){
@@ -411,7 +414,7 @@
         playerNumber = [[[BluetoothServices sharedBluetoothSession] getPeersInSession] count];
         int i = UPDATEPEERDATA;
         NSMutableData *data = [NSMutableData dataWithBytes: &i length: sizeof(i)];
-        NSMutableData *peerData = [NSMutableData dataWithBytes:(__bridge const void *)(personalPeerData) length:sizeof(personalPeerData)];
+        NSData *peerData = [NSKeyedArchiver archivedDataWithRootObject:personalPeerData];
         [data appendData:peerData];
         [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
     }

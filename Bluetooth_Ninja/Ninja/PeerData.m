@@ -27,4 +27,23 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.colorSelection = [decoder decodeIntForKey:@"colorSelection"];
+        self.name = [decoder decodeObjectForKey:@"name"];
+        self.peerID = [decoder decodeObjectForKey:@"peerID"];
+        self.score = [decoder decodeIntForKey:@"score"];
+        self.iconLevel = [decoder decodeIntForKey:@"iconLevel"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeInt:colorSelection forKey:@"colorSelection"];
+    [encoder encodeObject:name forKey:@"name"];
+    [encoder encodeObject:peerID forKey:@"peerID"];
+    [encoder encodeInt:score forKey:@"score"];
+    [encoder encodeInt:iconLevel forKey:@"iconLevel"];
+}
+
 @end

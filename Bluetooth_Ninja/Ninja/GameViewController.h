@@ -16,6 +16,7 @@
 
 #import "BluetoothServices.h"
 #import "NetworkingViewController.h"
+#import "PeerData.h"
 
 #define initialAnimationDuration 1.5
 #define initialNumberFlashes 5

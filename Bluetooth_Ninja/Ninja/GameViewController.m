@@ -30,7 +30,7 @@ int lightFlashes;
 	// Do any additional setup after loading the view.
     
     lightOn = false;
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset:) name:@"UIApplicationDidEnterBackgroundNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReceived:) name:@"NewDataReceived" object:nil];
     
     self.minAccel = 1.2;
@@ -49,15 +49,8 @@ int lightFlashes;
     
 }
 
--(void) viewDidAppear:(BOOL)animated{
-    
-}
-
 - (void) viewWillDisappear:(BOOL)animated{
-    if(timer.isValid) [timer invalidate];
-    
-    [[UIScreen mainScreen] setBrightness:self.initialBrightness];
-    [UIApplication sharedApplication].idleTimerDisabled = self.idleTimerInitiallyDisabled;
+    [self exit];
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,14 +157,13 @@ int lightFlashes;
     if(i == PLAYSONG){
       //  myAudioPlayer = [AVPlayer playerWithPlayerItem:((AVPlayerItem *)rest)];
        // [myAudioPlayer play];
-        [tempMusicPlayer setQueueWithItemCollection: ((MPMediaItemCollection *) rest)];
+        MPMediaItemCollection *itemCollection = ((MPMediaItemCollection *) rest);
+        [tempMusicPlayer setQueueWithItemCollection: itemCollection];
         [tempMusicPlayer play];
     }
 }
 
 -(void) newGameWithPlayerId: (int) playerId {
-    NSNotification *newNotice = [NSNotification notificationWithName:@"NewGame" object:nil];
-     [[NSNotificationCenter defaultCenter] postNotification:newNotice];
     self.shouldPulse = YES;
     self.playerNumber = playerId;
     
@@ -224,9 +216,6 @@ int lightFlashes;
     self.lightFlashes = initialNumberFlashes;
     [self flashLight];
     
-    NSNotification *loseNotice = [NSNotification notificationWithName:@"PlayerLost" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:loseNotice];
-    
     int i = PLAYEROUT;
     NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
     [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
@@ -234,7 +223,7 @@ int lightFlashes;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Nice Try" message: @"You've Lost!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Leave", @"Play Again", nil];
 	
 	[alert show];
-   // [self showMediaPicker:self];
+   // [self showMediaPicker];
 }
 
 - (void) hasWonGame{
@@ -255,10 +244,7 @@ int lightFlashes;
         
             if (buttonIndex == 0) {
           NSLog(@"User pressed Leave %d", buttonIndex);
-            NSNotification *endNotice = [NSNotification notificationWithName:@"EndGame" object:nil];
-         [[NSNotificationCenter defaultCenter] postNotification:endNotice];
-                [(NetworkingViewController *)self.presentingViewController reset];
-         [self dismissViewControllerAnimated:YES completion:nil];
+                [self exit];
          }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Please Wait" message: @"Please wait for the game to end." delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
@@ -271,10 +257,7 @@ int lightFlashes;
         
         if (buttonIndex == 0) {
           NSLog(@"User pressed Leave %d", buttonIndex);
-          NSNotification *endNotice = [NSNotification notificationWithName:@"EndGame" object:nil];
-         [[NSNotificationCenter defaultCenter] postNotification:endNotice];
-         [(NetworkingViewController *)self.presentingViewController reset];
-         [self dismissViewControllerAnimated:YES completion:nil];
+            [self exit];
          }
         else {
             int i = NEWGAME;
@@ -296,15 +279,31 @@ int lightFlashes;
 	AudioServicesPlayAlertSound(kSystemSoundID_Vibrate); 
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self showMediaPicker];
+}
+
+- (void) exit {
+    if(self.view.subviews)  [self dismissViewControllerAnimated:YES completion:nil];
+    if(timer.isValid) [timer invalidate];
+    
+    [[UIScreen mainScreen] setBrightness:self.initialBrightness];
+    [UIApplication sharedApplication].idleTimerDisabled = self.idleTimerInitiallyDisabled;
+    
+    [(NetworkingViewController *)self.presentingViewController reset];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Media Picker
 
-- (IBAction)showMediaPicker:(id)sender
+- (void) showMediaPicker
 {
     MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeAny];
     
     mediaPicker.delegate = self;
-    mediaPicker.allowsPickingMultipleItems = YES;
-    mediaPicker.prompt = @"Select songs to play";
+    mediaPicker.allowsPickingMultipleItems = NO;
+    mediaPicker.prompt = @"Select a song to play";
     
     [self presentViewController:mediaPicker animated:YES completion:nil];
 }
@@ -313,7 +312,7 @@ int lightFlashes;
 {
     if (mediaItemCollection) {
         [tempMusicPlayer setQueueWithItemCollection: mediaItemCollection];
-   //     [tempMusicPlayer play];
+        [tempMusicPlayer play];
      //   MPMediaItem *nowPlayingItem = tempMusicPlayer.nowPlayingItem;
       //  NSURL * mediaURL = [nowPlayingItem valueForProperty:MPMediaItemPropertyAssetURL];
        // AVPlayerItem * myAVPlayerItem = [AVPlayerItem playerItemWithURL:mediaURL];
@@ -322,7 +321,7 @@ int lightFlashes;
         NSMutableData *song = [NSMutableData dataWithBytes:(__bridge const void *)(mediaItemCollection) length:sizeof(mediaItemCollection)];
         [data appendData:song];
         [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
-        [tempMusicPlayer stop];
+     //   [tempMusicPlayer stop];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
