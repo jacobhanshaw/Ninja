@@ -13,7 +13,7 @@
 BOOL lightOn = NO;
 int lightFlashes;
 
-@synthesize minAccel, currentMagAccel, maxAccel, animationDuration, motionManager, playerNumber, playerColorHue, playerColorBrightness, shouldPulse, isAnimating, initialBrightness, lightFlashes, idleTimerInitiallyDisabled;
+@synthesize minAccel, currentMagAccel, maxAccel, animationDuration, motionManager, playerNumber, playerColorHue, playerColorBrightness, shouldPulse, isAnimating, initialBrightness, lightFlashes, idleTimerInitiallyDisabled, myAudioPlayer, tempMusicPlayer;
 
 - (id)init
 {
@@ -44,7 +44,13 @@ int lightFlashes;
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     [self startMyMotionDetect];
     
+     tempMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
     [self newGameWithPlayerId:self.playerNumber];
+    
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    
 }
 
 - (void) viewWillDisappear:(BOOL)animated{
@@ -154,7 +160,13 @@ int lightFlashes;
             [self hasWonGame];
         }
     }
-    else if(i == NEWGAME) [self newGameWithPlayerId:self.playerNumber];
+    if(i == NEWGAME) [self newGameWithPlayerId:self.playerNumber];
+    if(i == PLAYSONG){
+      //  myAudioPlayer = [AVPlayer playerWithPlayerItem:((AVPlayerItem *)rest)];
+       // [myAudioPlayer play];
+        [tempMusicPlayer setQueueWithItemCollection: ((MPMediaItemCollection *) rest)];
+        [tempMusicPlayer play];
+    }
 }
 
 -(void) newGameWithPlayerId: (int) playerId {
@@ -222,6 +234,7 @@ int lightFlashes;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Nice Try" message: @"You've Lost!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Leave", @"Play Again", nil];
 	
 	[alert show];
+   // [self showMediaPicker:self];
 }
 
 - (void) hasWonGame{
@@ -282,5 +295,44 @@ int lightFlashes;
 - (void) vibrate{
 	AudioServicesPlayAlertSound(kSystemSoundID_Vibrate); 
 }
+
+#pragma mark - Media Picker
+
+- (IBAction)showMediaPicker:(id)sender
+{
+    MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes: MPMediaTypeAny];
+    
+    mediaPicker.delegate = self;
+    mediaPicker.allowsPickingMultipleItems = YES;
+    mediaPicker.prompt = @"Select songs to play";
+    
+    [self presentViewController:mediaPicker animated:YES completion:nil];
+}
+
+- (void) mediaPicker: (MPMediaPickerController *) mediaPicker didPickMediaItems: (MPMediaItemCollection *) mediaItemCollection
+{
+    if (mediaItemCollection) {
+        [tempMusicPlayer setQueueWithItemCollection: mediaItemCollection];
+   //     [tempMusicPlayer play];
+     //   MPMediaItem *nowPlayingItem = tempMusicPlayer.nowPlayingItem;
+      //  NSURL * mediaURL = [nowPlayingItem valueForProperty:MPMediaItemPropertyAssetURL];
+       // AVPlayerItem * myAVPlayerItem = [AVPlayerItem playerItemWithURL:mediaURL];
+        int i = PLAYSONG;
+        NSMutableData *data = [NSMutableData dataWithBytes: &i length: sizeof(i)];
+        NSMutableData *song = [NSMutableData dataWithBytes:(__bridge const void *)(mediaItemCollection) length:sizeof(mediaItemCollection)];
+        [data appendData:song];
+        [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+        [tempMusicPlayer stop];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void) mediaPickerDidCancel: (MPMediaPickerController *) mediaPicker
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

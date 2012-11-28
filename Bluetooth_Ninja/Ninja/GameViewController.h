@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import <CoreMotion/CoreMotion.h>
 #import <AudioToolbox/AudioServices.h>
 
@@ -21,11 +22,11 @@
 
 enum dataMessagesGame {
     PLAYEROUT,
-    NEWGAME
+    NEWGAME,
+    PLAYSONG
 }dataMessagesGame;
 
-@interface GameViewController : UIViewController {
-    
+@interface GameViewController : UIViewController <MPMediaPickerControllerDelegate> {
     int playerNumber;
     int lightFlashes;
     int otherPlayersLeft;
@@ -42,6 +43,8 @@ enum dataMessagesGame {
     BOOL idleTimerInitiallyDisabled;
     CMMotionManager *motionManager;
     NSTimer *timer;
+    AVPlayer *myAudioPlayer;
+    MPMusicPlayerController *tempMusicPlayer;
     
     //NetworkingViewController *owner;
     
@@ -60,6 +63,8 @@ enum dataMessagesGame {
 @property(readwrite) float playerColorHue;
 @property(readwrite) float playerColorBrightness;
 @property(nonatomic, retain) CMMotionManager *motionManager;
+@property(nonatomic, retain) AVPlayer *myAudioPlayer;
+@property (nonatomic, retain) MPMusicPlayerController *tempMusicPlayer;
 //@property (nonatomic) NetworkingViewController *owner;
 
 -(id) init;
