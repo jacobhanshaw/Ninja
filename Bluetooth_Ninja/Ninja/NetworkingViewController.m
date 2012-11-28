@@ -134,10 +134,10 @@
     isInGroup = NO;
     [clientGo setTitle:@"Go" forState:UIControlStateHighlighted]; //Set this in case the view was last used for edit profile
     [clientGo setTitle:@"Go" forState:UIControlStateNormal];
-    if([AppModel sharedAppModel].isFirstUse){
-        [AppModel sharedAppModel].isFirstUse = NO;
+  //  if([AppModel sharedAppModel].isFirstUse){
+    //    [AppModel sharedAppModel].isFirstUse = NO;
         [self showPopOver:NO];
-    }
+    // }
     [startView setHidden:YES];
 }
 
@@ -171,6 +171,10 @@
     displayName = [displayName stringByAppendingString:[[BluetoothServices sharedBluetoothSession] getGroupName]];
     
     [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:displayName sessionMode:GKSessionModePeer andContext:nil];
+    
+    [groupNameInput resignFirstResponder];
+    [nameInputHost resignFirstResponder];
+    
     [self startTimer];
     [self refresh];
 }
@@ -182,7 +186,9 @@
     NSString *personalName;
     if(!([nameInputClient.text isEqualToString:@""] || nameInputClient.text == nil)) personalName = nameInputClient.text;
     else if (!([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil)) personalName = [[BluetoothServices sharedBluetoothSession] getPersonalName];
-    else personalName = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];;
+    else personalName = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
+    
+    [nameInputClient resignFirstResponder];
     
     if (startView.hidden == YES) { //If this is false then the person was editing their profile, not starting a game
         [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:personalName sessionMode:GKSessionModePeer andContext:nil];
@@ -305,7 +311,9 @@
 
 - (void)refresh
 {
+    //recommend fetching data from appModel to populate peerData. Can also expand peer data beyond this.
     if(!personalPeerData) personalPeerData = [[PeerData alloc] initWithColor:playerNumber name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
+
     if(playerNumber != -1) personalPeerData.colorSelection = playerNumber;
     else personalPeerData.colorSelection = 0;
     
@@ -318,6 +326,10 @@
                 [peersList addObject:personalPeerData];
             }
             else{
+            if([[[BluetoothServices sharedBluetoothSession] getPeerData] objectForKey:[connectedPeers objectAtIndex:peerIndex]] != nil)
+            [peersList addObject:[[[BluetoothServices sharedBluetoothSession] getPeerData] objectForKey:[connectedPeers objectAtIndex:peerIndex]]];
+                
+            else{
             NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer:[connectedPeers objectAtIndex:peerIndex]];
             unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
             NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
@@ -326,7 +338,8 @@
                 [peersList addObject:[[PeerData alloc] initWithColor:(i)%8 name: peerName peerID: [connectedPeers objectAtIndex:peerIndex] score:0 andIcon:0]];
             }
             else [peersList addObject:[[PeerData alloc] initWithColor:(i)%8 name: peerDisplayName peerID: [connectedPeers objectAtIndex:peerIndex] score:0 andIcon:0]];
-            peerIndex++;    
+            }
+            peerIndex++;
             }
         }
     }
@@ -355,6 +368,7 @@
     NSData *data = [BluetoothServices sharedBluetoothSession].dataReceived;
     int i;
     [data getBytes: &i length: sizeof(i)];
+    NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
     
     if(i == GAMESTARTED){
         if (refreshIndicator.isAnimating) {
@@ -382,6 +396,10 @@
         [self refresh];
     }
     
+    if(i == UPDATEPEERDATA){
+        [[[BluetoothServices sharedBluetoothSession] getPeerData] setObject:((PeerData *)rest) forKey:[[BluetoothServices sharedBluetoothSession] originOfData]];
+    }
+    
     if(i >= 100){
         i -= 100;
         if(i < playerNumber) playerNumber--;
@@ -389,7 +407,14 @@
 }
 
 - (void) newPeer:(NSNotification *) sender {
-    if(playerNumber == -1) playerNumber = [[[BluetoothServices sharedBluetoothSession] getPeersInSession] count];
+    if(playerNumber == -1){
+        playerNumber = [[[BluetoothServices sharedBluetoothSession] getPeersInSession] count];
+        int i = UPDATEPEERDATA;
+        NSMutableData *data = [NSMutableData dataWithBytes: &i length: sizeof(i)];
+        NSMutableData *peerData = [NSMutableData dataWithBytes:(__bridge const void *)(personalPeerData) length:sizeof(personalPeerData)];
+        [data appendData:peerData];
+        [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+    }
 
     [self refresh];
 }

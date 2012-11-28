@@ -44,9 +44,10 @@
     
     failedConnections = 0;
     
+    peerData = [[NSMutableDictionary alloc] init];
+    
     peersBlocked = [[NSMutableArray alloc] init];
-    peersInSession = [[NSMutableArray alloc] init];
-    self.peersInGroup = [[NSMutableArray alloc] init];
+    peersInGroup = [[NSMutableArray alloc] init];
     
     self.bluetoothSession = [[GKSession alloc] initWithSessionID:inputSessionID displayName:inputName sessionMode:inputMode];
     self.bluetoothSession.delegate = self;
@@ -138,6 +139,10 @@
     return hasNoPeers;
 }
 
+-(NSMutableDictionary *) getPeerData {
+    return peerData;
+}
+
 #pragma mark GKSessionDelegate Methods
 
 // example code of implementing the didChangeState GKSession delegate method
@@ -177,11 +182,9 @@
         if(![self.bluetoothSession acceptConnectionFromPeer:peerID error:&acceptConnectionError])
             NSLog(@"Session Fail with Error: %@", [acceptConnectionError localizedDescription]);
     }
-    else{
-        [session denyConnectionFromPeer:peerID];
-    }
-    //     if ([peersInSession count] == MAX_PLAYERS) [thisSession setAvailable:NO];
-    //     if (![peersInSession containsObject:peerID]) { add peer }
+    else [session denyConnectionFromPeer:peerID];
+    //     if ([[self getPeersInSession] count] == MAX_PLAYERS) [thisSession setAvailable:NO];
+    //     if (![peersInSession containsObject:peerID]) { accept connection }
     //     else [self.bluetoothSession denyConnectionFromPeer:peerID];
 }
 

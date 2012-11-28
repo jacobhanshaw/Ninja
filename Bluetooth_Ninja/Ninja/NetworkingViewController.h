@@ -18,7 +18,8 @@
 
 enum dataMessages {
     GAMESTARTED,
-    REJECTEDFROMSESSION
+    REJECTEDFROMSESSION,
+    UPDATEPEERDATA
 }dataMessages;
 
 @interface NetworkingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>

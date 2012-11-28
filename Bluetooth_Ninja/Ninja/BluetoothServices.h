@@ -25,11 +25,12 @@
     GKSession *bluetoothSession; //the bluetooth connection session
     
     NSData * dataReceived;        //the data received
-    NSString *originOfData;       //the sender of the notification
+    NSString *originOfData;       //peerID of teh sender of the notification
     GKSession *sessionReceived;   //the bluetooth session that is that has received data
     void *context;                //data associated with the session upon set-up
     
-    NSMutableArray *peersInSession; //all other devices in the session
+    NSMutableDictionary *peerData;  //data about each peer, uses peerID as key
+    
     NSMutableArray *peersInGroup;   //list of devices to send data to
     NSMutableArray *peersBlocked;   //list of devices blocked from joining the session
     
@@ -77,6 +78,8 @@
 
 -(void) setPeersBlocked:(NSMutableArray *)newPeersBlocked;
 -(NSMutableArray *) getPeersBlocked;
+
+-(NSMutableDictionary *) getPeerData;
 
 -(BOOL) getHasNoPeers;
 

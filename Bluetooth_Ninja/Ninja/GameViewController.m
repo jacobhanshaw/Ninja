@@ -146,6 +146,8 @@ int lightFlashes;
     int i;
     [data getBytes: &i length: sizeof(i)];
     
+    NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
+    
     if(i == PLAYEROUT){
         otherPlayersLeft--;
         if(otherPlayersLeft == 0 && !isOut){
