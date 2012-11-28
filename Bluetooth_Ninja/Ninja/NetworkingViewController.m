@@ -54,7 +54,7 @@
     return self;
 }
 
-- (void) reset {
+- (void) reset:(id)sender {
     [startView setHidden:NO];
     [semiTransparentOverlay setHidden:YES];
     [clientPopOver setHidden:YES];

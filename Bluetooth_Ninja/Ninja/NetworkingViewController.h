@@ -104,6 +104,6 @@ enum dataMessages {
 - (void)startTimer;
 - (IBAction)refreshRequest:(id)sender;
 - (void)abortRefresh;                         //Called if manual refresh needs to stop -- go back to main menu, game started, etc
-- (void)reset;
+- (void)reset:(id)sender;
 
 @end

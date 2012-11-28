@@ -49,6 +49,11 @@ int lightFlashes;
     
 }
 
+- (void)reset:(id)sender
+{
+    NSLog(@"this method was forgotten");
+}
+
 - (void) viewWillDisappear:(BOOL)animated{
     [self exit];
 }
@@ -145,7 +150,8 @@ int lightFlashes;
     int i;
     [data getBytes: &i length: sizeof(i)];
     
-    NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
+    //NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
+    NSData *rest = [data subdataWithRange:NSMakeRange(sizeof(i), data.length - sizeof(i))];
     
     if(i == PLAYEROUT){
         otherPlayersLeft--;
@@ -269,7 +275,7 @@ int lightFlashes;
     }
     
     if([title isEqualToString:@"No Other Players"]) {
-        [(NetworkingViewController *)self.presentingViewController reset];
+        [(NetworkingViewController *)self.presentingViewController reset:NULL];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -291,7 +297,7 @@ int lightFlashes;
     [[UIScreen mainScreen] setBrightness:self.initialBrightness];
     [UIApplication sharedApplication].idleTimerDisabled = self.idleTimerInitiallyDisabled;
     
-    [(NetworkingViewController *)self.presentingViewController reset];
+    [(NetworkingViewController *)self.presentingViewController reset:NULL];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
