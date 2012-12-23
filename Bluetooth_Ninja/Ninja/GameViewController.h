@@ -71,5 +71,4 @@ enum dataMessagesGame {
 -(id) init;
 -(void) newGameWithPlayerId: (int) playerId;
 - (void)hasWonGame;
-- (void)reset:(id)sender;
 @end
