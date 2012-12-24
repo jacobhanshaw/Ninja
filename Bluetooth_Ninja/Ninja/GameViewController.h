@@ -46,6 +46,7 @@ enum dataMessagesGame {
     NSTimer *timer;
     AVPlayer *myAudioPlayer;
     MPMusicPlayerController *tempMusicPlayer;
+    UIAlertView* alert;
     
     //NetworkingViewController *owner;
     
@@ -66,6 +67,7 @@ enum dataMessagesGame {
 @property(nonatomic, retain) CMMotionManager *motionManager;
 @property(nonatomic, retain) AVPlayer *myAudioPlayer;
 @property (nonatomic, retain) MPMusicPlayerController *tempMusicPlayer;
+@property (nonatomic, retain) UIAlertView* alert;
 //@property (nonatomic) NetworkingViewController *owner;
 
 -(id) init;

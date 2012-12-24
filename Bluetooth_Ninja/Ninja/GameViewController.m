@@ -13,7 +13,7 @@
 BOOL lightOn = NO;
 int lightFlashes;
 
-@synthesize minAccel, currentMagAccel, maxAccel, animationDuration, motionManager, playerNumber, playerColorHue, playerColorBrightness, shouldPulse, isAnimating, initialBrightness, lightFlashes, idleTimerInitiallyDisabled, myAudioPlayer, tempMusicPlayer;
+@synthesize minAccel, currentMagAccel, maxAccel, animationDuration, motionManager, playerNumber, playerColorHue, playerColorBrightness, shouldPulse, isAnimating, initialBrightness, lightFlashes, idleTimerInitiallyDisabled, myAudioPlayer, tempMusicPlayer, alert;
 
 - (id)init
 {
@@ -68,7 +68,8 @@ int lightFlashes;
 -(void) pulse{
     if([[BluetoothServices sharedBluetoothSession] getHasNoPeers]){
         [timer invalidate];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"No Other Players" message: @"All other players have left the game. Please press continue to start or join a new group." delegate: self cancelButtonTitle: nil otherButtonTitles: @"Continue", nil];
+        [alert dismissWithClickedButtonIndex:0 animated:YES];
+        alert = [[UIAlertView alloc] initWithTitle: @"No Other Players" message: @"All other players have left the game. Please press continue to start or join a new group." delegate: self cancelButtonTitle: nil otherButtonTitles: @"Continue", nil];
         
         [alert show];
     }
@@ -204,7 +205,7 @@ int lightFlashes;
 
 - (void) hasLostGame{
     
-    [timer invalidate];
+    //[timer invalidate];
     
     [[UIScreen mainScreen] setBrightness:self.initialBrightness];
     
@@ -220,18 +221,20 @@ int lightFlashes;
     NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
     [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Nice Try" message: @"You've Lost!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Leave", @"Play Again", nil];
+    alert = [[UIAlertView alloc] initWithTitle: @"Nice Try" message: @"You've Lost!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Leave", @"Play Again", nil];
 	
 	[alert show];
    // [self showMediaPicker];
 }
 
 - (void) hasWonGame{
-    [timer invalidate];
+   // [timer invalidate];
+    
+    self.shouldPulse = NO;
     
     [[UIScreen mainScreen] setBrightness:self.initialBrightness];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Good Job" message: @"You've Won!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Leave", @"Play Again", nil];
+    alert = [[UIAlertView alloc] initWithTitle: @"Good Job" message: @"You've Won!" delegate: self cancelButtonTitle: nil otherButtonTitles: @"Leave", @"Play Again", nil];
 	
 	[alert show];
 }
@@ -239,15 +242,13 @@ int lightFlashes;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	NSString *title = [alertView title];
     NSLog(@"%@", title);
+    NSLog(@"%d", buttonIndex);
     
     if([title isEqualToString:@"Nice Try"]) {
         
-            if (buttonIndex == 0) {
-          NSLog(@"User pressed Leave %d", buttonIndex);
-                [self exit];
-         }
+        if (buttonIndex == 0) [self exit];
         else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Please Wait" message: @"Please wait for the game to end." delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+            alert = [[UIAlertView alloc] initWithTitle: @"Please Wait" message: @"Please wait for the game to end." delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
             
             [alert show];
          }
@@ -255,10 +256,7 @@ int lightFlashes;
     
     if([title isEqualToString:@"Good Job"]) {
         
-        if (buttonIndex == 0) {
-          NSLog(@"User pressed Leave %d", buttonIndex);
-            [self exit];
-         }
+        if (buttonIndex == 0) [self exit];
         else {
             int i = NEWGAME;
             NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];

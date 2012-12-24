@@ -19,6 +19,7 @@
 		ADFB6B871644CAFA00E00CBF /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFB6B851644CAFA00E00CBF /* NetworkingViewController.m */; };
 		ADFB6B881644CAFA00E00CBF /* NetworkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFB6B861644CAFA00E00CBF /* NetworkingViewController.xib */; };
 		DD1933EC16659DC1004C41A7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD1933EB16659DC1004C41A7 /* MediaPlayer.framework */; };
+		DD388C8616881150006EE98C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD388C8516881150006EE98C /* CoreBluetooth.framework */; };
 		DDBDDBB81644A70B00006DD0 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */; };
 		DDBDDBB91644A70B00006DD0 /* UIButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */; };
 		DDC47F3E163B05DA00D91401 /* BluetoothServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC47F3D163B05DA00D91401 /* BluetoothServices.m */; };
@@ -63,6 +64,7 @@
 		ADFB6B851644CAFA00E00CBF /* NetworkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkingViewController.m; sourceTree = "<group>"; };
 		ADFB6B861644CAFA00E00CBF /* NetworkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkingViewController.xib; sourceTree = "<group>"; };
 		DD1933EB16659DC1004C41A7 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		DD388C8516881150006EE98C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		DDBDDBB61644A70B00006DD0 /* UIButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
 		DDBDDBB71644A70B00006DD0 /* UIButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarRefresh.png; sourceTree = "<group>"; };
 		DDC47F3C163B05DA00D91401 /* BluetoothServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothServices.h; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD388C8616881150006EE98C /* CoreBluetooth.framework in Frameworks */,
 				DD1933EC16659DC1004C41A7 /* MediaPlayer.framework in Frameworks */,
 				AD21EE621632D849009A9D4F /* GameKit.framework in Frameworks */,
 				DDCEF7EB163296620003EEB2 /* AVFoundation.framework in Frameworks */,
@@ -193,6 +196,7 @@
 		DDCEF7791632556B0003EEB2 = {
 			isa = PBXGroup;
 			children = (
+				DD388C8516881150006EE98C /* CoreBluetooth.framework */,
 				DD1933EB16659DC1004C41A7 /* MediaPlayer.framework */,
 				AD21EE611632D849009A9D4F /* GameKit.framework */,
 				DDCEF7EA163296620003EEB2 /* AVFoundation.framework */,

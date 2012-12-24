@@ -58,19 +58,28 @@
      */
     //ColorSelector *tempColor = [[ColorSelector alloc] initWithFrame:self.view.frame];
     //[self.view addSubview:tempColor];
-    //NewUIExampleViewController *test = [[NewUIExampleViewController alloc] init];//WithNibName:@"NetworkViewController" bundle:nil];
+   //   NewUIExampleViewController *test = [[NewUIExampleViewController alloc] init];//WithNibName:@"NetworkViewController" bundle:nil];
+    
     [AppModel sharedAppModel].isFirstUse = YES; //FIND BETTER PLACE FOR THIS
+    
     test = [[NetworkingViewController alloc] initWithNibName:@"NetworkingViewController" bundle:nil];
     test.delegate = self;
     [self presentViewController:test animated:YES completion:nil];
-}
-
-- (void)refreshLobby
-{
-  //  CellData *test1 = [[CellData alloc] initWithColor:2 name:@"Michael" score:1337 andIcon:0];
-   // CellData *test2 = [[CellData alloc] initWithColor:7 name:@"Jacob" score:8008 andIcon:1];
     
-   // [test updatePeersList:[NSArray arrayWithObjects:test1, test2, nil]];
+ /*   PeerData *personalPeerData = [[PeerData alloc] initWithColor:3 name:@"Jacob" peerID:@"7" score:0 andIcon:1];
+    int i = UPDATEPEERDATA;
+    NSMutableData *data = [NSMutableData dataWithBytes: &i length: sizeof(i)];
+    NSData *peerData = [NSKeyedArchiver archivedDataWithRootObject:personalPeerData];
+    [data appendData:peerData];
+ //   [[BluetoothServices sharedBluetoothSession] sendData:data toAll:YES];
+    
+    int new;
+    [data getBytes: &new length: sizeof(new)];
+    NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(new) length:data.length - sizeof(new)];
+    //NSData *rest = [peerData subdataWithRange:NSMakeRange(sizeof(new), peerData.length - sizeof(new))];
+    PeerData *peerDataB = [NSKeyedUnarchiver unarchiveObjectWithData:rest];
+    NSLog(@"%d", peerDataB.colorSelection); */
+    
 }
 
 @end

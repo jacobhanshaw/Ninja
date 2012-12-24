@@ -191,6 +191,9 @@
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error
 {
     NSLog(@"Session Fail with Error: %@", [error localizedDescription]);
+    if ([[error domain] isEqual:GKSessionErrorDomain] &&([error code] == GKSessionCannotEnableError)){
+        // Bluetooth disabled, prompt the user to turn it on
+    }
 }
 
 

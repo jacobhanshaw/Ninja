@@ -116,6 +116,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(peerDisconnected:) name:@"PeerDisconnected" object:nil];
 }
 
+-(void) viewDidAppear:(BOOL)animated {
+    if([AppModel sharedAppModel].isFirstUse){
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Turn On Bluetooth" message: @"All games require bluetooth. Please ensure bluetooth is turned on in the settings menu." delegate: self cancelButtonTitle: nil otherButtonTitles: @"Continue", nil];
+    
+    [alert show];
+    }
+}
+
 -(void) viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -369,8 +377,7 @@
     NSData *data = [BluetoothServices sharedBluetoothSession].dataReceived;
     int i;
     [data getBytes: &i length: sizeof(i)];
-  //  NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
-    NSData *rest = [data subdataWithRange:NSMakeRange(sizeof(i), data.length - sizeof(i))];
+    NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
     
     if(i == GAMESTARTED){
         if (refreshIndicator.isAnimating) {
@@ -412,6 +419,7 @@
 - (void) newPeer:(NSNotification *) sender {
     if(playerNumber == -1){
         playerNumber = [[[BluetoothServices sharedBluetoothSession] getPeersInSession] count];
+        [personalPeerData setColorSelection:playerNumber];
         int i = UPDATEPEERDATA;
         NSMutableData *data = [NSMutableData dataWithBytes: &i length: sizeof(i)];
         NSData *peerData = [NSKeyedArchiver archivedDataWithRootObject:personalPeerData];
