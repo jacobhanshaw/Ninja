@@ -50,6 +50,9 @@ int lightFlashes;
 }
 
 - (void) viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
     [self exit];
 }
 
@@ -68,7 +71,7 @@ int lightFlashes;
 -(void) pulse{
     if([[BluetoothServices sharedBluetoothSession] getHasNoPeers]){
         [timer invalidate];
-        [alert dismissWithClickedButtonIndex:0 animated:YES];
+        if(!alert.hidden) [alert dismissWithClickedButtonIndex:7 animated:YES];
         alert = [[UIAlertView alloc] initWithTitle: @"No Other Players" message: @"All other players have left the game. Please press continue to start or join a new group." delegate: self cancelButtonTitle: nil otherButtonTitles: @"Continue", nil];
         
         [alert show];
@@ -165,6 +168,7 @@ int lightFlashes;
 }
 
 -(void) newGameWithPlayerId: (int) playerId {
+    if(!alert.hidden) [alert dismissWithClickedButtonIndex:7 animated:YES];
     self.shouldPulse = YES;
     self.playerNumber = playerId;
     
@@ -272,6 +276,12 @@ int lightFlashes;
     }
 }
 
+//Implemented so I can dismiss things
+- (void) alertView:(UIAlertView*)alert didDismissWithButtonIndex:(NSInteger)index{
+    NSLog(@"Whatever");
+}
+
+
 //Vibrate
 - (void) vibrate{
 	AudioServicesPlayAlertSound(kSystemSoundID_Vibrate); 
@@ -303,6 +313,7 @@ int lightFlashes;
     mediaPicker.allowsPickingMultipleItems = NO;
     mediaPicker.prompt = @"Select a song to play";
     
+  //  [self.view addSubview:mediaPicker.view];
     [self presentViewController:mediaPicker animated:YES completion:nil];
 }
 

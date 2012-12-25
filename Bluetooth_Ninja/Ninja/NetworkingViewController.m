@@ -98,6 +98,9 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
     [startView setHidden:NO];
     
     [startGroupButton addTarget:self action:@selector(startGroupSelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -114,9 +117,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReceived:) name:@"NewDataReceived" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPeer:) name:@"NewPeerConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(peerDisconnected:) name:@"PeerDisconnected" object:nil];
+    
+    [self reset];  //NEWLY ADDED. WILL CAUSE PROBLEMS?
 }
 
 -(void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
     if([AppModel sharedAppModel].isFirstUse){
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Turn On Bluetooth" message: @"All games require bluetooth. Please ensure bluetooth is turned on in the settings menu." delegate: self cancelButtonTitle: nil otherButtonTitles: @"Continue", nil];
     
@@ -125,6 +133,9 @@
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -155,6 +166,8 @@
     [clientGo setTitle:@"Save" forState:UIControlStateNormal];
     [self showPopOver:NO];
 }
+
+//IMPORTANT NOTE: DEVICE WILL REMEMBER LAST GROUP NAME IT JOINED AND USE IT FOR NEXT GROUP FORMED
 
 - (IBAction)hostGoSelected:(UIButton *)sender{
     [hostPopOver setHidden:YES];
@@ -219,6 +232,7 @@
     [hostPopOver setHidden:YES];
     [clientPopOver setHidden:YES];
     [self stopTimer];
+    [self reset];  //NEWLY ADDED. WILL CAUSE PROBLEMS?
 }
 
 - (IBAction)startSelected:(UIButton *)sender{
@@ -320,9 +334,12 @@
 
 - (void)refresh
 {
+    NSLog(@"Session is available: %d",[BluetoothServices sharedBluetoothSession].bluetoothSession.isAvailable);
     //recommend fetching data from appModel to populate peerData. Can also expand peer data beyond this.
     if(!personalPeerData) personalPeerData = [[PeerData alloc] initWithColor:playerNumber name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
 
+    NSLog(@"Refresh player number: %d", playerNumber);
+    
     if(playerNumber != -1) personalPeerData.colorSelection = playerNumber;
     else personalPeerData.colorSelection = RED;
     
@@ -412,13 +429,14 @@
     
     if(i >= 100){
         i -= 100;
-        if(i < playerNumber) playerNumber--;
+        if(i < playerNumber && i != -1) playerNumber--;
     }
 }
 
 - (void) newPeer:(NSNotification *) sender {
     if(playerNumber == -1){
         playerNumber = [[[BluetoothServices sharedBluetoothSession] getPeersInSession] count];
+        NSLog(@"New Peer player number: %d", playerNumber);
         [personalPeerData setColorSelection:playerNumber];
         int i = UPDATEPEERDATA;
         NSMutableData *data = [NSMutableData dataWithBytes: &i length: sizeof(i)];

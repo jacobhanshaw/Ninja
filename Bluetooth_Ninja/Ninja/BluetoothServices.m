@@ -65,6 +65,7 @@
 		[self.bluetoothSession setAvailable: NO];
 		[self.bluetoothSession setDataReceiveHandler: nil withContext: nil];
 		self.bluetoothSession.delegate = nil;
+        self.bluetoothSession = nil;
 	}
 }
 
@@ -81,7 +82,7 @@
     }
     else{
         if(![self.bluetoothSession sendData: data toPeers:self.peersInGroup withDataMode:GKSendDataReliable error:&dataSendingError])
-            NSLog(@"BluetoothServices: SendingDataToAllPeers Failed with Error Message: %@", [dataSendingError localizedDescription]);
+            NSLog(@"BluetoothServices: SendingDataToMostPeers Failed with Error Message: %@", [dataSendingError localizedDescription]);
     }
 }
 
