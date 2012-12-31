@@ -23,7 +23,8 @@ enum colors {
     CYAN,
     BLUE,
     PURPLE,
-    MAGENTA
+    MAGENTA,
+    NUMBEROFCOLORS
 }colors;
 
 @interface PeerData : NSObject <NSCoding>

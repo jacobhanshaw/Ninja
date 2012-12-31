@@ -31,7 +31,8 @@
         [self.view addSubview:hostPopOver];
         
         [clientPopOver.layer setCornerRadius:9.0];
-        [hostPopOver.layer setCornerRadius: 9.0];
+        [hostPopOver.layer setCornerRadius:9.0];
+        [peerTable.layer setCornerRadius:9.0];
         
         [startView setHidden:NO];
         [semiTransparentOverlay setHidden:YES];
@@ -44,7 +45,6 @@
         
         playerNumber = -1;
         
-        peerTable.layer.cornerRadius = 9.0;
         manualRefreshCounter = -1; //-1 means that the button is ready to be pressed
         
         appIdentifier = [[NSBundle mainBundle] bundleIdentifier];
@@ -54,54 +54,14 @@
     return self;
 }
 
-- (void) reset {
-    [startView setHidden:NO];
-    [semiTransparentOverlay setHidden:YES];
-    [clientPopOver setHidden:YES];
-    [hostPopOver setHidden:YES];
-    
-    isInGroup = NO;
-    isHost = NO;
-    playerNumber = -1;
-    [[BluetoothServices sharedBluetoothSession] invalidateSession];
-}
-
-#pragma mark Refresh Set-up Methods
-
-- (IBAction)refreshRequest:(id)sender
-{
-    if (manualRefreshCounter == -1) {
-        [refreshTimer invalidate];
-        refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(refreshRequest:) userInfo:nil repeats:YES];
-        [refreshIcon setHidden:YES];
-        [refreshIndicator startAnimating];
-    }
-    if (manualRefreshCounter < 2) {
-        [self refresh];
-        ++manualRefreshCounter;
-    }
-    else {
-        [refreshTimer invalidate];
-        manualRefreshCounter = -1;
-        [self startTimer];
-        [refreshIndicator stopAnimating];
-        [refreshIcon setHidden:NO];
-    }
-}
-
-- (void)abortRefresh
-{
-    [refreshTimer invalidate];
-    manualRefreshCounter = -1;
-    [refreshIndicator stopAnimating];
-    [refreshIcon setHidden:FALSE];
-}
-
 -(void) viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
     [startView setHidden:NO];
+    [semiTransparentOverlay setHidden:YES];
+    [clientPopOver setHidden:YES];
+    [hostPopOver setHidden:YES];
     
     [startGroupButton addTarget:self action:@selector(startGroupSelected:) forControlEvents:UIControlEventTouchUpInside];
     [joinGroupButton addTarget:self action:@selector(joinGroupSelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -113,7 +73,7 @@
     [leave addTarget:self action:@selector(leaveSelected:) forControlEvents:UIControlEventTouchUpInside];
     [start addTarget:self action:@selector(startSelected:) forControlEvents:UIControlEventTouchUpInside];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset:) name:@"UIApplicationDidEnterBackgroundNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset) name:@"UIApplicationDidEnterBackgroundNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReceived:) name:@"NewDataReceived" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPeer:) name:@"NewPeerConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(peerDisconnected:) name:@"PeerDisconnected" object:nil];
@@ -137,6 +97,21 @@
     [super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) reset {
+    
+    [[BluetoothServices sharedBluetoothSession] invalidateSession];
+    
+    [startView setHidden:NO];
+    [semiTransparentOverlay setHidden:YES];
+    [clientPopOver setHidden:YES];
+    [hostPopOver setHidden:YES];
+    
+    isInGroup = NO;
+    playerNumber = -1;
+    tableViewInfo = [[NSArray alloc] init];
+    [peerTable reloadData];
 }
 
 #pragma mark Button Methods
@@ -212,7 +187,7 @@
     
     [nameInputClient resignFirstResponder];
     
-    if (startView.hidden == YES) { //If this is false then the person was editing their profile, not starting a game
+    if (startView.hidden) { //If this is false then the person was editing their profile, not starting a game
         [[BluetoothServices sharedBluetoothSession] setUpWithSessionID:appIdentifier displayName:personalName sessionMode:GKSessionModePeer andContext:nil];
         [self startTimer];
         [self refresh];
@@ -220,9 +195,8 @@
 }
 
 - (IBAction)leaveSelected:(UIButton *)sender{
-    if (refreshIndicator.isAnimating) {
-        [self abortRefresh];
-    }
+    if (refreshIndicator.isAnimating) [self abortRefresh];
+    
     if(self.isHost){
         int i = REJECTEDFROMSESSION;
         NSData *data = [NSData dataWithBytes: &i length: sizeof(i)];
@@ -236,9 +210,8 @@
 }
 
 - (IBAction)startSelected:(UIButton *)sender{
-    if (refreshIndicator.isAnimating) {
-        [self abortRefresh];
-    }
+    if (refreshIndicator.isAnimating) [self abortRefresh];
+    
     [self stopTimer];
     
     [[BluetoothServices sharedBluetoothSession].bluetoothSession setAvailable: NO];
@@ -250,7 +223,7 @@
     
     //Put your code to start here
     GameViewController *game = [[GameViewController alloc] init];
-    if(self.isHost) game.playerNumber = playerNumber;
+    game.playerNumber = playerNumber; //if(self.isHost) 
     [self presentViewController:game animated:YES completion:nil];
 }
 
@@ -264,15 +237,16 @@
 }
 
 // YES to show host popOver, No to show client popOver
-- (void)showPopOver:(BOOL)host
+- (void)showPopOver:(BOOL)hostBool
 {
     [semiTransparentOverlay setHidden:NO];
-    if (host) {
+    if (hostBool) {
         [hostPopOver setHidden:NO];
-        if([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil){
+        if([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil)
             nameInputHost.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
-        }
+        
         else nameInputHost.placeholder = [[BluetoothServices sharedBluetoothSession] getPersonalName];
+        
         if([[[BluetoothServices sharedBluetoothSession] getGroupName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getGroupName] == nil){
             groupNameInput.placeholder = [[UIDevice currentDevice] name];
             groupNameInput.placeholder = [groupNameInput.placeholder stringByReplacingOccurrencesOfString:@"iPhone" withString:@"Group"];
@@ -283,9 +257,9 @@
     }
     else {
         [clientPopOver setHidden:NO];
-        if([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil){
+        if([[[BluetoothServices sharedBluetoothSession] getPersonalName] isEqualToString:@""] || [[BluetoothServices sharedBluetoothSession] getPersonalName] == nil)
             nameInputClient.placeholder = [[[[UIDevice currentDevice] name] componentsSeparatedByString:@"’"] objectAtIndex:0];
-        }
+        
         else nameInputClient.placeholder = [[BluetoothServices sharedBluetoothSession] getPersonalName];
         [screenTitle setText:@"Groups:"];
         [start setHidden:YES];
@@ -330,10 +304,42 @@
         [nameLabelClient resignFirstResponder];
 }
 
+#pragma mark Refresh Set-up Methods
+
+- (IBAction)refreshRequest:(id)sender
+{
+    if (manualRefreshCounter == -1) {
+        [refreshTimer invalidate];
+        refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(refreshRequest:) userInfo:nil repeats:YES];
+        [refreshIcon setHidden:YES];
+        [refreshIndicator startAnimating];
+    }
+    if (manualRefreshCounter < 2) {
+        [self refresh];
+        ++manualRefreshCounter;
+    }
+    else {
+        [refreshTimer invalidate];
+        manualRefreshCounter = -1;
+        [self startTimer];
+        [refreshIndicator stopAnimating];
+        [refreshIcon setHidden:NO];
+    }
+}
+
+- (void)abortRefresh
+{
+    [refreshTimer invalidate];
+    manualRefreshCounter = -1;
+    [refreshIndicator stopAnimating];
+    [refreshIcon setHidden:FALSE];
+}
+
 #pragma mark Table Update Methods
 
 - (void)refresh
 {
+    
     NSLog(@"Session is available: %d",[BluetoothServices sharedBluetoothSession].bluetoothSession.isAvailable);
     //recommend fetching data from appModel to populate peerData. Can also expand peer data beyond this.
     if(!personalPeerData) personalPeerData = [[PeerData alloc] initWithColor:playerNumber name:[[BluetoothServices sharedBluetoothSession] getPersonalName] peerID:[BluetoothServices sharedBluetoothSession].bluetoothSession.peerID score:0 andIcon:1];
@@ -385,6 +391,7 @@
     }
     tableViewInfo = [NSArray arrayWithArray:peersList];
     [peerTable reloadData];
+    
 }
 
 #pragma mark Bluetooth Notification Methods
@@ -397,9 +404,8 @@
     NSData *rest = [NSData dataWithBytes:(void*)[data bytes] + sizeof(i) length:data.length - sizeof(i)];
     
     if(i == GAMESTARTED){
-        if (refreshIndicator.isAnimating) {
-            [self abortRefresh];
-        }
+        if (refreshIndicator.isAnimating) [self abortRefresh];
+        
         [self stopTimer];
         
         [[BluetoothServices sharedBluetoothSession].bluetoothSession setAvailable: NO];
@@ -435,6 +441,18 @@
 
 - (void) newPeer:(NSNotification *) sender {
     if(playerNumber == -1){
+        
+        //MOVE INTO GROUP VIEW
+        isInGroup = YES;
+        NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer: host];
+        unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
+        NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
+        NSString *groupName = [[peerDisplayName componentsSeparatedByString:newLineCharacterString] objectAtIndex:1];
+        [[BluetoothServices sharedBluetoothSession] setGroupName:groupName];
+        groupName = [groupName stringByAppendingString:@":"];
+        [screenTitle setText:groupName];
+        
+        
         playerNumber = [[[BluetoothServices sharedBluetoothSession] getPeersInSession] count];
         NSLog(@"New Peer player number: %d", playerNumber);
         [personalPeerData setColorSelection:playerNumber];
@@ -562,19 +580,9 @@
     }
     else if(!isInGroup){
         //JOIN SESSION
-        //MAY NEED TO DO SOMETHING SPECIAL HERE AS THE HOST PEERID IS DIFFERENT
         NSString *peerToConnectWith = ((PeerData *)[tableViewInfo objectAtIndex:indexPath.row]).peerID;
+        host = peerToConnectWith;
         [[BluetoothServices sharedBluetoothSession].bluetoothSession connectToPeer:peerToConnectWith withTimeout:5.0];
-        
-        //MOVE INTO GROUP VIEW
-        isInGroup = YES;
-        NSString *peerDisplayName = [[BluetoothServices sharedBluetoothSession].bluetoothSession displayNameForPeer: peerToConnectWith];
-        unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
-        NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
-        NSString *groupName = [[peerDisplayName componentsSeparatedByString:newLineCharacterString] objectAtIndex:1];
-        [[BluetoothServices sharedBluetoothSession] setGroupName:groupName];
-        groupName = [groupName stringByAppendingString:@":"];
-        [screenTitle setText:groupName];
     }
 }
 

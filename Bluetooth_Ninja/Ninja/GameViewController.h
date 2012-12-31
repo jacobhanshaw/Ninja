@@ -27,6 +27,11 @@ enum dataMessagesGame {
     PLAYSONG
 }dataMessagesGame;
 
+enum alerts {
+    WAIT,
+    NOOTHERPLAYERS
+}alerts;
+
 @interface GameViewController : UIViewController <MPMediaPickerControllerDelegate> {
     int playerNumber;
     int lightFlashes;

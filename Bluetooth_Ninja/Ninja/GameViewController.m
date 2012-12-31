@@ -29,8 +29,14 @@ int lightFlashes;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
     lightOn = false;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset:) name:@"UIApplicationDidEnterBackgroundNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset) name:@"UIApplicationDidEnterBackgroundNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReceived:) name:@"NewDataReceived" object:nil];
     
     self.minAccel = 1.2;
@@ -44,7 +50,7 @@ int lightFlashes;
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     [self startMyMotionDetect];
     
-     tempMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+    tempMusicPlayer = [MPMusicPlayerController iPodMusicPlayer];
     [self newGameWithPlayerId:self.playerNumber];
     
 }
@@ -69,12 +75,17 @@ int lightFlashes;
 }
 
 -(void) pulse{
+    
     if([[BluetoothServices sharedBluetoothSession] getHasNoPeers]){
-        [timer invalidate];
-        if(!alert.hidden) [alert dismissWithClickedButtonIndex:7 animated:YES];
-        alert = [[UIAlertView alloc] initWithTitle: @"No Other Players" message: @"All other players have left the game. Please press continue to start or join a new group." delegate: self cancelButtonTitle: nil otherButtonTitles: @"Continue", nil];
         
-        [alert show];
+        if(timer.isValid) [timer invalidate];
+        if(timer) timer = nil;
+        
+        if(!(alert.hidden || [alert.title isEqualToString:@"No Other Players"])) {
+        [alert dismissWithClickedButtonIndex:7 animated:YES];
+        [self performSelector:@selector(displayAlertFunction:) withObject:[NSNumber numberWithInt:NOOTHERPLAYERS] afterDelay:0.01];
+        }
+        self.shouldPulse = NO;
     }
     if(self.shouldPulse){
         
@@ -203,6 +214,9 @@ int lightFlashes;
     UIColor *backgroundColor = [[UIColor alloc] initWithHue:self.playerColorHue saturation: 1 brightness:1 alpha:1];
     self.view.backgroundColor = backgroundColor;
     
+    if(timer.isValid) [timer invalidate];
+    if(timer) timer = nil;
+    
     timer = [NSTimer scheduledTimerWithTimeInterval:(0.02) target:self selector:@selector(pulse) userInfo:nil repeats:TRUE];
     
 }
@@ -252,10 +266,8 @@ int lightFlashes;
         
         if (buttonIndex == 0) [self exit];
         else {
-            alert = [[UIAlertView alloc] initWithTitle: @"Please Wait" message: @"Please wait for the game to end." delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
-            
-            [alert show];
-         }
+            [self performSelector:@selector(displayAlertFunction:) withObject:[NSNumber numberWithInt:WAIT] afterDelay:0.01];
+        }
     }
     
     if([title isEqualToString:@"Good Job"]) {
@@ -281,6 +293,15 @@ int lightFlashes;
     NSLog(@"Whatever");
 }
 
+//Alert
+
+- (void) displayAlertFunction: (NSNumber *) alertsNumber {
+    alerts = [alertsNumber intValue];
+    if(alerts == WAIT) alert = [[UIAlertView alloc] initWithTitle: @"Please Wait" message: @"Please wait for the game to end." delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+    else if(alerts == NOOTHERPLAYERS) alert = [[UIAlertView alloc] initWithTitle: @"No Other Players" message: @"All other players have left the game. Please press continue to start or join a new group." delegate: self cancelButtonTitle: nil otherButtonTitles: @"Continue", nil];
+    [alert show];
+}
+
 
 //Vibrate
 - (void) vibrate{
@@ -295,6 +316,7 @@ int lightFlashes;
 - (void) exit {
     if(self.view.subviews)  [self dismissViewControllerAnimated:YES completion:nil];
     if(timer.isValid) [timer invalidate];
+    if(timer) timer = nil;
     
     [[UIScreen mainScreen] setBrightness:self.initialBrightness];
     [UIApplication sharedApplication].idleTimerDisabled = self.idleTimerInitiallyDisabled;
@@ -334,12 +356,14 @@ int lightFlashes;
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
+  //  [mediaPicker.view removeFromSuperview];
 }
 
 
 - (void) mediaPickerDidCancel: (MPMediaPickerController *) mediaPicker
 {
-	[self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  //  [mediaPicker.view removeFromSuperview];
 }
 
 

@@ -59,6 +59,7 @@ enum dataMessages {
     id delegate;
     NSArray *tableViewInfo;
     NSString *appIdentifier;                      //bundle identifier, used as sessionID, unique to each app
+    NSString *host;                               //display name of host
     BOOL isInGroup;                               //used only for peers other than the host, indicates if the peer has joined a group
     BOOL isHost;
     int  rowOfPeerToRemove;                       //if host decides to remove a peer, save the row in this variable

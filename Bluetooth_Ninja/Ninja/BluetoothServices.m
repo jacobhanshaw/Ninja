@@ -12,7 +12,7 @@
 
 @synthesize bluetoothSession, dataReceived, originOfData, sessionReceived, context, peersInGroup;
 
-+ (id)sharedBluetoothSession
++(id) sharedBluetoothSession
 {
     static dispatch_once_t pred = 0;
     __strong static id _sharedObject = nil;
@@ -34,11 +34,13 @@
     //if the inputName contains the newline character then the host is calling this function, so we should parse out the
     //personalName and groupName
     
+    if(self.bluetoothSession != nil) [self invalidateSession];
+    
     unichar newline = '\n'; //separates the personal name from group name, so that the other players can parse and view both
     NSString *newLineCharacterString = [NSString stringWithCharacters:&newline length:1];
     if([inputName rangeOfString:newLineCharacterString].location != NSNotFound){
         personalName = [[inputName componentsSeparatedByString:newLineCharacterString] objectAtIndex:0];
-        groupName = [[inputName componentsSeparatedByString:newLineCharacterString] objectAtIndex:0];
+        groupName = [[inputName componentsSeparatedByString:newLineCharacterString] objectAtIndex:1];
     }
     else personalName = inputName;
     
@@ -59,7 +61,7 @@
 //
 // invalidate session
 //
-- (void)invalidateSession {
+-(void) invalidateSession {
 	if(self.bluetoothSession != nil) {
 		[self.bluetoothSession disconnectFromAllPeers];
 		[self.bluetoothSession setAvailable: NO];
@@ -72,8 +74,7 @@
 //send data using this method
 //will send either to all peers or the peers specified in peersInGroup, so set that value (using a subset of peersInSession) beforehand
 
-- (void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll
-{
+-(void) sendData:(NSData *)data toAll:(BOOL)shouldSendToAll {
     NSError *dataSendingError;
     
     if(shouldSendToAll){
@@ -151,23 +152,22 @@
 // implement the methods below to observe changes in count of players
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInPeerCount:) name:@"NewPeerConnected" object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInPeerCount:) name:@"PeerDisconnected" object:nil];
-- (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
+-(void) session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
     
     if (state == GKPeerStateConnected) {
         hasNoPeers = NO;
+        connectionStateChangePeerID = peerID;
         NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"NewPeerConnected" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
-        connectionStateChangePeerID = peerID;
         //[peersInSession addObject:peerID];
     }
     
     else if (state == GKPeerStateDisconnected) {
-        if([[self getPeersInSession] count] == 0){
-            hasNoPeers = YES;
-        }
+        if([[self getPeersInSession] count] == 0) hasNoPeers = YES;
+        
+        connectionStateChangePeerID = peerID;
         NSNotification *receivedDataNotice = [NSNotification notificationWithName:@"PeerDisconnected" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:receivedDataNotice];
-        connectionStateChangePeerID = peerID;
         //[peersInSession removeObject:peerID];
         //  if ([peersInSession count] < MAX_PLAYERS) [self.bluetoothSession setAvailable:YES];
     }
@@ -176,7 +176,7 @@
 
 
 //Called when a client tries to connect to a server
-- (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
+-(void) session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
     if(![peersBlocked containsObject:peerID]){
         NSError *acceptConnectionError;
@@ -189,7 +189,7 @@
     //     else [self.bluetoothSession denyConnectionFromPeer:peerID];
 }
 
-- (void)session:(GKSession *)session didFailWithError:(NSError *)error
+-(void) session:(GKSession *)session didFailWithError:(NSError *)error
 {
     NSLog(@"Session Fail with Error: %@", [error localizedDescription]);
     if ([[error domain] isEqual:GKSessionErrorDomain] &&([error code] == GKSessionCannotEnableError)){
@@ -201,7 +201,7 @@
 //reattempts connection with peer 10 times. Note: the failedConnections count is not tied to an individual,
 //so if it failed to connect to a peerA 9 times before connecting, it would only reattempt to connect to peerB once before doing nothing
 //from then on
-- (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
+-(void) session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
 {
     NSLog(@"Connection with Peer Failed with Error: %@", [error localizedDescription]);
     if(failedConnections < 10){
